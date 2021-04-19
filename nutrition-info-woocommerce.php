@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Woocommerce Nutrition Info
+Plugin Name: Nutrition Info for WooCommerce
 Plugin URI:  https://jurs.me
 Description: Display nutritional information on you woocommerce product pages.
 Version:     0.0.1
@@ -8,21 +8,23 @@ Author:      Rasmus Jürs
 Author URI:  https://jurs.me/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: nutritional_info_domain
+Text Domain: nutrition-info-woocommerce
 Domain Path: /languages
 */
 
 function wni_load_textdomain() {
-    load_plugin_textdomain( 'nutritional_info_domain', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain( 'nutrition-info-woocommerce', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'plugins_loaded', 'wni_load_textdomain' );
 
-define('WNI_BUNDLE_VERSION', '0.0.1');
-define('WNI_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('WNI_PLUGIN_URL', plugin_dir_url(__FILE__));
+define( 'WNI_BUNDLE_VERSION' , '0.0.1');
+define( 'NIW_PLUGIN_PREFIX', 'niw_');
+define( 'WNI_PLUGIN_PATH' , plugin_dir_path(__FILE__));
+define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
 
 include WNI_PLUGIN_PATH . 'inc/general-settings.php'; // Set up general settings tab in woocommerce settings.
 include WNI_PLUGIN_PATH . 'inc/product-single-settings.php'; // Add nutrients tab to woocommerce product pages.
+include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add nutrients tab to woocommerce product pages.
 include WNI_PLUGIN_PATH . 'inc/template.php'; // Nutrients display function
 include WNI_PLUGIN_PATH . 'inc/product-tab.php'; // Nutrients display function
 

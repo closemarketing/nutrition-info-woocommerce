@@ -1,17 +1,17 @@
 <?php function nutritionInfo() {
-    $energy              = get_post_meta(get_the_ID(), 'energy', true  );
-    $fat                 = get_post_meta(get_the_ID(), 'fat', true  );
-    $saturated_fat       = get_post_meta(get_the_ID(), 'saturated_fat', true  );
-    $monounsaturated_fat = get_post_meta(get_the_ID(), 'monounsaturated_fat', true  );
-    $polyunsaturated_fat = get_post_meta(get_the_ID(), 'polyunsaturated_fat', true  );
-    $carb                = get_post_meta(get_the_ID(), 'carb', true  );
-    $sugar               = get_post_meta(get_the_ID(), 'sugar', true  );
-    $polyol              = get_post_meta(get_the_ID(), 'polyol', true  );
-    $starch              = get_post_meta(get_the_ID(), 'starch', true  );
-    $fiber               = get_post_meta(get_the_ID(), 'fiber', true  );
-    $protein             = get_post_meta(get_the_ID(), 'protein', true  );
-    $salt                = get_post_meta(get_the_ID(), 'salt', true  );
-    $vitamin_mineral     = get_post_meta(get_the_ID(), 'vitamin_mineral', true  );
+    $energy              = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'energy', true  );
+    $fat                 = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'fat', true  );
+    $saturated_fat       = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'saturated_fat', true  );
+    $monounsaturated_fat = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'monounsaturated_fat', true  );
+    $polyunsaturated_fat = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'polyunsaturated_fat', true  );
+    $carb                = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'carb', true  );
+    $sugar               = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'sugar', true  );
+    $polyol              = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'polyol', true  );
+    $starch              = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'starch', true  );
+    $fiber               = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'fiber', true  );
+    $protein             = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'protein', true  );
+    $salt                = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'salt', true  );
+    $vitamin_mineral     = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'vitamin_mineral', true  );
 
     ?>
 
@@ -87,6 +87,37 @@
             <tr>
                 <td class="nutrition-table nutrition-table__nutrient-name"><?= __('Vitamins and minerals', 'nutritional_info_domain'); ?></td>
                 <td class="nutrition-table nutrition-table__nutrient-amount"><?= $vitamin_mineral; ?></td>
+            </tr>
+        <?php }; ?>
+    </tbody>
+</table>
+
+<?php } ?>
+
+
+<?php function compositionInfo() {
+    $ingredients              = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'ingredients', true  );
+    $allergens              = get_post_meta(get_the_ID(), NIW_PLUGIN_PREFIX . 'allergens', true  );
+
+    ?>
+
+    <table id="nutrition-table">
+    <thead>
+        <tr>
+            <th class="nutrition-table nutrition-table__nutrient-name"><?= __('Composition Information', 'nutritional_info_domain'); ?></th>
+            <th class="nutrition-table nutrition-table__nutrient-amount"><?= __('Values', 'nutritional_info_domain'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if ($ingredients) { ?>
+            <tr>
+                <td class="nutrition-table nutrition-table__nutrient-name"><?= __('Ingredientes', 'nutritional_info_domain'); ?></td>
+                <td class="nutrition-table nutrition-table__nutrient-amount"><?= $ingredients; ?></td>
+            </tr>
+        <?php } if ($allergens) { ?>
+            <tr>
+                <td class="nutrition-table nutrition-table__nutrient-name"><?= __('Allergens', 'nutritional_info_domain'); ?></td>
+                <td class="nutrition-table nutrition-table__nutrient-amount"><?= $allergens; ?></td>
             </tr>
         <?php }; ?>
     </tbody>

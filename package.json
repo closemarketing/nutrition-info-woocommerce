@@ -1,5 +1,5 @@
 {
-  "name": "woocommerce-nutrition-info",
+  "name": "nutrition-info-woocommerce",
   "version": "0.0.1",
   "description": "Display nutritional information on you woocommerce product pages.",
   "main": "index.js",
