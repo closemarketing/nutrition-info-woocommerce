@@ -22,6 +22,9 @@ define( 'NIW_PLUGIN_PREFIX', 'niw_');
 define( 'WNI_PLUGIN_PATH' , plugin_dir_path(__FILE__));
 define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
 
+$products = wc_get_products();
+echo "<script>console.log('hola $products')</script>";
+
 include WNI_PLUGIN_PATH . 'inc/general-settings.php'; // Set up general settings tab in woocommerce settings.
 include WNI_PLUGIN_PATH . 'inc/product-single-settings.php'; // Add nutrients tab to woocommerce product pages.
 include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add nutrients tab to woocommerce product pages.
