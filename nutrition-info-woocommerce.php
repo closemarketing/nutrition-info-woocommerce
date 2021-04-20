@@ -24,7 +24,7 @@ define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
 
 include WNI_PLUGIN_PATH . 'inc/general-settings.php'; // Set up general settings tab in woocommerce settings.
 include WNI_PLUGIN_PATH . 'inc/product-single-settings.php'; // Add nutrients tab to woocommerce product pages.
-include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add nutrients tab to woocommerce product pages.
+include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add composition tab to woocommerce product pages.
 include WNI_PLUGIN_PATH . 'inc/template.php'; // Nutrients display function
 include WNI_PLUGIN_PATH . 'inc/product-tab.php'; // Nutrients display function
 
@@ -32,18 +32,22 @@ wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css',false,'1.1','all'
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '45');
+    add_action('woocommerce_single_product_summary', 'compositionInfo', '45');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_add_to_cart') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '35');
+    add_action('woocommerce_single_product_summary', 'compositionInfo', '35');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_excerpt') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '25');
+    add_action('woocommerce_single_product_summary', 'compositionInfo', '25');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_price') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '15');
+    add_action('woocommerce_single_product_summary', 'compositionInfo', '15');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'in_description_tab') {
@@ -67,4 +71,5 @@ function woo_custom_description_tab_content() {
 
     <?php the_content();
 	nutritionInfo();
+	compositionInfo();
 }
