@@ -14,47 +14,47 @@ function nutritionInfo() {
 		),
 		array(
 			'key'   => 'saturated_fat',
-			'label' => __( '- Of which Saturated fatty acids (g)' ),
+			'label' => __( '- Of which Saturated fatty acids (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'monounsaturated_fat',
-			'label' => __( '- Of which monounsaturated fatty acids (g)' ),
+			'label' => __( '- Of which monounsaturated fatty acids (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'polyunsaturated_fat',
-			'label' => __( '- Of which polyunsaturated fatty acids (g)' ),
+			'label' => __( '- Of which polyunsaturated fatty acids (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'carb',
-			'label' => __( 'Carbohydrate (g)' ),
+			'label' => __( 'Carbohydrate (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'sugar',
-			'label' => __( '- Of which sugars (g)' ),
+			'label' => __( '- Of which sugars (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'polyol',
-			'label' => __( '- Of which Polyols (g)' ),
+			'label' => __( '- Of which Polyols (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'starch',
-			'label' => __( '- Of which Starch (g)' ),
+			'label' => __( '- Of which Starch (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'fiber',
-			'label' => __( 'Dietary Fiber (g)' ),
+			'label' => __( 'Dietary Fiber (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'protein',
-			'label' => __( 'Protein (g)' ),
+			'label' => __( 'Protein (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'salt',
-			'label' => __( 'Salt (g)' ),
+			'label' => __( 'Salt (g)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'vitamin_mineral',
-			'label' => __( 'Vitamins and minerals' ),
+			'label' => __( 'Vitamins and minerals', 'nutrition-info-woocommerce' ),
 		),
 
 	);
