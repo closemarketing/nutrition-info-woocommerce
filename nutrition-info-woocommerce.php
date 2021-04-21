@@ -73,3 +73,21 @@ function woo_custom_description_tab_content() {
 	nutritionInfo();
 	compositionInfo();
 }
+
+/**
+ * Function that adds icons of allergens in the view of the products
+ */
+add_action("woocommerce_after_shop_loop_item_title", "niw_add_allergens_icon", 5);
+function niw_add_allergens_icon()
+{
+	echo "<div class='niw_icon_allergen_product'>" . wp_get_attachment_image( 26, '', false, '') . "</div>";
+}
+
+/**
+ * Function that adds icons of allergens in the view of each product
+ */
+add_action("woocommerce_single_product_summary", "niw_add_allergens_icon_single_product", 5);
+function niw_add_allergens_icon_single_product()
+{
+	echo "<div class='niw_icon_allergen_product'>" . wp_get_attachment_image( 26, '', false, '') . "</div>";
+}
