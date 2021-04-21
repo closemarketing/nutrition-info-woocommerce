@@ -27,6 +27,7 @@ include WNI_PLUGIN_PATH . 'inc/product-single-settings.php'; // Add nutrients ta
 include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add composition tab to woocommerce product pages.
 include WNI_PLUGIN_PATH . 'inc/template.php'; // Nutrients display function
 include WNI_PLUGIN_PATH . 'inc/product-tab.php'; // Nutrients display function
+include WNI_PLUGIN_PATH . 'inc/allergens.php'; // Allergens
 
 wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css',false,'1.1','all');
 
@@ -80,14 +81,36 @@ function woo_custom_description_tab_content() {
 add_action("woocommerce_after_shop_loop_item_title", "niw_add_allergens_icon", 5);
 function niw_add_allergens_icon()
 {
-	echo "<div class='niw_icon_allergen_product'>" . wp_get_attachment_image( 26, '', false, '') . "</div>";
+	$all_allergens = new Allergens();
+	echo "<div class='niw_icon_allergen_product'>";
+	// Show activated allergens
+	foreach ($all_allergens->show_allergens_name() as $key => $value) {
+		
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
+		if( $allergens_active == "yes" )
+		{
+			echo $all_allergens->show_allergen_svg($value);
+		}
+	}
+	echo "</div>";
 }
 
 /**
  * Function that adds icons of allergens in the view of each product
  */
-add_action("woocommerce_single_product_summary", "niw_add_allergens_icon_single_product", 5);
+add_action("woocommerce_single_product_summary", "niw_add_allergens_icon_single_product", 10);
 function niw_add_allergens_icon_single_product()
 {
-	echo "<div class='niw_icon_allergen_product'>" . wp_get_attachment_image( 26, '', false, '') . "</div>";
+	$all_allergens = new Allergens();
+	echo "<div class='niw_icon_allergen_product'>";
+	// Show activated allergens
+	foreach ($all_allergens->show_allergens_name() as $key => $value) {
+		
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
+		if( $allergens_active == "yes" )
+		{
+			echo $all_allergens->show_allergen_svg($value);
+		}
+	}
+	echo "</div>";
 }
