@@ -60,19 +60,19 @@ function nutritionInfo() {
 	);
 	?>
 	<details class="niw_nutritional_information">
-		<summary class="niw_tittle_nutritional_information">Nutritional Information</summary>
+		<summary class="niw_tittle_nutritional_information"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></summary>
 		<table id="nutrition-table">
 			<thead>
 				<tr>
-					<th class="nutrition-table nutrition-table__nutrient-name"><?= __('Nutritional Information', 'nutritional_info_domain'); ?></th>
-					<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutritional_info_domain'); ?></th>
+					<th class="nutrition-table nutrition-table__nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
+					<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutrition-info-woocommerce'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
 				$post_id = get_the_ID();
 				foreach ( $attr_products_nutrition as $attr_nutrition ) {
-					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true  );
+					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
 					if ( $value_meta ) {
 						echo '<tr>';
 						echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
@@ -102,12 +102,12 @@ function compositionInfo() {
 	?>
 
 	<details class="niw_additional_information">
-		<summary class="niw_tittle_additional_information"><?= __('Additional Information', 'nutritional_info_domain'); ?></summary>
+		<summary class="niw_tittle_additional_information"><?= __('Additional Information', 'nutrition-info-woocommerce'); ?></summary>
 		<tbody>
 			<?php 
 			$post_id = get_the_ID();
 			foreach ( $attr_products_nutrition as $attr_nutrition ) {
-				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true  );
+				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
 				if ( $value_meta ) {
 					echo '<br>';
 					echo '<p class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
