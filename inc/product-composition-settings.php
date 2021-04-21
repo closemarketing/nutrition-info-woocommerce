@@ -3,7 +3,7 @@
 add_filter( 'woocommerce_product_data_tabs', 'add_my_custom_product_data_tab2' , 98 , 1 );
 function add_my_custom_product_data_tab2( $product_composition_tabs ) {
     $product_composition_tabs['composition-tab'] = array(
-        'label' => __( 'Composition', 'composition_info' ),
+        'label' => __( 'Composition & Allergens', 'composition_info' ),
         'target' => 'ingredients_composition',
     );
     return $product_composition_tabs;
