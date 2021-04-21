@@ -59,27 +59,30 @@ function nutritionInfo() {
 
 	);
 	?>
-	<table id="nutrition-table">
-		<thead>
-			<tr>
-				<th class="nutrition-table nutrition-table__nutrient-name"><?= __('Nutritional Information', 'nutritional_info_domain'); ?></th>
-				<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutritional_info_domain'); ?></th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php 
-			$post_id = get_the_ID();
-			foreach ( $attr_products_nutrition as $attr_nutrition ) {
-				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true  );
-				if ( $value_meta ) {
-					echo '<tr>';
-					echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
-					echo '<td class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</td>';
-					echo '</tr>';
-				}
-			} ?>
-		</tbody>
-	</table>
+	<details class="niw_nutritional_information">
+		<summary class="niw_tittle_nutritional_information">Nutritional Information</summary>
+		<table id="nutrition-table">
+			<thead>
+				<tr>
+					<th class="nutrition-table nutrition-table__nutrient-name"><?= __('Nutritional Information', 'nutritional_info_domain'); ?></th>
+					<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutritional_info_domain'); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+				$post_id = get_the_ID();
+				foreach ( $attr_products_nutrition as $attr_nutrition ) {
+					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true  );
+					if ( $value_meta ) {
+						echo '<tr>';
+						echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
+						echo '<td class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</td>';
+						echo '</tr>';
+					}
+				} ?>
+			</tbody>
+		</table>
+	</details>
 <?php }
 
 
@@ -98,37 +101,31 @@ function compositionInfo() {
 
 	?>
 
-	<table id="nutrition-table">
-		<thead>
-			<tr>
-				<th class="nutrition-table nutrition-table__nutrient-name"><?= __('Nutritional Information', 'nutritional_info_domain'); ?></th>
-				<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutritional_info_domain'); ?></th>
-			</tr>
-		</thead>
+	<details class="niw_additional_information">
+		<summary class="niw_tittle_additional_information"><?= __('Additional Information', 'nutritional_info_domain'); ?></summary>
 		<tbody>
 			<?php 
 			$post_id = get_the_ID();
 			foreach ( $attr_products_nutrition as $attr_nutrition ) {
 				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true  );
 				if ( $value_meta ) {
-					echo '<tr>';
-					echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
+					echo '<br>';
+					echo '<p class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
 					if( $attr_nutrition['key'] == 'allergens' )
 					{
-						echo '<td class="nutrition-table nutrition-table__nutrient-amount">';
+						echo '<p class="nutrition-table nutrition-table__nutrient-amount">';
 						foreach (explode(" ", $value_meta) as $key => $value) 
 						{
 							echo "<input type='checkbox' checked disabled>" . esc_html( $value ) . "<br>";
 						}
-						echo "</td>";
+						echo "</p>";
 					}
 					else {
-						echo '<td class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</td>';
+						echo '<p class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</p>';
 					}
-					echo '</tr>';
+					echo '</br>';
 				}
 			} ?>
 		</tbody>
-	</table>
-
+	</details>
 <?php } ?>
