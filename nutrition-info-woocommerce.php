@@ -95,16 +95,6 @@ function niw_add_allergens_icon()
 	echo "</div>";
 }
 
-// Add description in the hook after summary 
-add_action( 'woocommerce_single_product_summary', 'zod_product_full_description', 10);
-function zod_product_full_description () {
-    if(is_product()) {
-    $product = wc_get_product( get_the_ID() );
-    $description = $product->get_description();
-    echo "hola ".$description;
-    }
-}
-
 /**
  * Function that adds icons of allergens in the view of each product
  */
