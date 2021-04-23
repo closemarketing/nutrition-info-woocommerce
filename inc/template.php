@@ -92,17 +92,13 @@ function compositionInfo() {
 		array(
 			'key'   => 'ingredients',
 			'label' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
-		),
-		array(
-			'key'   => 'allergens',
-			'label' => __( 'Allergens', 'nutrition-info-woocommerce' ),
 		)
 	);
 
 	?>
 
 	<details class="niw_additional_information">
-		<summary class="niw_tittle_additional_information"><?= __('Additional Information', 'nutrition-info-woocommerce'); ?></summary>
+		<summary class="niw_tittle_additional_information"><?= __('Ingredients', 'nutrition-info-woocommerce'); ?></summary>
 		<tbody>
 			<?php 
 			$post_id = get_the_ID();
@@ -113,12 +109,6 @@ function compositionInfo() {
 					echo '<p class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
 					if( $attr_nutrition['key'] == 'allergens' )
 					{
-						echo '<p class="nutrition-table nutrition-table__nutrient-amount">';
-						foreach (explode(" ", $value_meta) as $key => $value) 
-						{
-							echo "<input type='checkbox' checked disabled>" . esc_html( $value ) . "<br>";
-						}
-						echo "</p>";
 					}
 					else {
 						echo '<p class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</p>';

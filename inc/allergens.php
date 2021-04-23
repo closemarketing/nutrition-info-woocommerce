@@ -307,7 +307,7 @@ class Allergens
 		$allergens_svg = array();
 
 		foreach ( $this->all_allergens as $key => $item ) {
-			arrya_push($allergens_svg, $item["svg"]);
+			array_push($allergens_svg, $item["svg"]);
 		}
 
 		return $allergens_svg;
