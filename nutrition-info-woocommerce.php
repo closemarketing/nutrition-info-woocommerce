@@ -114,7 +114,7 @@ function niw_add_special_allergens_icon_single_product()
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
 		if( $allergens_active == "yes" )
 		{
-			echo $all_allergens->show_special_allergen_svg($key);
+			echo $all_allergens->show_special_allergen_svg($value);
 		}
 	}
 	echo "</div>";

@@ -383,13 +383,13 @@ class Allergens {
 	 *
 	 * @return allergen_svg
 	 */
-	public function show_special_allergen_svg($key)
+	public function show_special_allergen_svg($name)
 	{
 		global $special_allergens;
 		$allergen_svg = '';
 
-		foreach ( $special_allergens as $key => $value ) {
-			if( $value['key'] == $key )
+		foreach ( $special_allergens as $value ) {
+			if( $value['key'] == $name )
 			{
 				$allergen_svg = $value['svg'];
 			}
