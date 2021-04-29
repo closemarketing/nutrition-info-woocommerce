@@ -110,8 +110,8 @@ function niw_add_special_allergens_icon_single_product()
 	$all_allergens = new Allergens();
 	echo "<div class='niw_icon_allergen_product'>";
 	// Show activated allergens
-	foreach ($all_allergens->show_special_allergens_name() as $key) {
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
+	foreach ($all_allergens->show_special_allergens_name() as $value) {
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
 		if( $allergens_active == "yes" )
 		{
 			echo $all_allergens->show_special_allergen_svg($key);
