@@ -92,10 +92,10 @@ function niw_add_allergens_icon()
 	// Show activated allergens
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
 		if( $allergens_active == "yes" )
 		{
-			echo $all_allergens->show_allergen_svg($value);
+			echo $all_allergens->show_allergen_svg($key);
 		}
 	}
 	echo "</div>";
@@ -112,10 +112,10 @@ function niw_add_allergens_icon_single_product()
 	// Show activated allergens
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
 		if( $allergens_active == "yes" )
 		{
-			echo $all_allergens->show_allergen_svg($value);
+			echo $all_allergens->show_allergen_svg($key);
 		}
 	}
 	echo "</div>";

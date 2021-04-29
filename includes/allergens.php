@@ -308,9 +308,10 @@ class Allergens {
 	 */
 	public function show_allergens_svg()
 	{
+		global $all_allergens;
 		$allergens_svg = array();
 
-		foreach ( $this->all_allergens as $key => $item ) {
+		foreach ( $all_allergens as $key => $item ) {
 			array_push($allergens_svg, $item['svg']);
 		}
 
@@ -324,10 +325,11 @@ class Allergens {
 	 */
 	public function show_allergen_svg($name)
 	{
+		global $all_allergens;
 		$allergen_svg = '';
 
-		foreach ( $this->all_allergens as $key => $value ) {
-			if( $value['name'] == $name )
+		foreach ( $all_allergens as $key => $value ) {
+			if( $value['key'] == $name )
 			{
 				$allergen_svg = $value['svg'];
 			}
