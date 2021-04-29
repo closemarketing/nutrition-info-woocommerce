@@ -86,7 +86,7 @@ $all_allergens = array(
 	),
 	array(
 		'key'   => 'gluten',
-		'label' => __( 'Gluten', 'nutrition-info-woocommerce' ),
+		'label' => __( 'Without Gluten', 'nutrition-info-woocommerce' ),
 		'svg' => '<svg class="niw_svg_allergen" width="95" height="176" viewBox="0 0 95 176" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M94.01 23.42V43.67C93.96 55.15 90.44 63.99 83.55 69.97C75.58 76.88 65.15 78.04 59.05 78.04H58.57V88.76C64.19 83.97 73.75 79.92 90.01 79.92H94.01V83.92C94.01 95.52 90.49 104.45 83.55 110.47C75.58 117.38 65.15 118.54 59.05 118.54H58.57V129.26C64.19 124.47 73.75 120.42 90.01 120.42H94.01V124.42C94.01 136.02 90.49 144.95 83.55 150.97C75.58 157.88 65.15 159.04 59.05 159.04H58.57V175.29H50.57V159.04H50.09C43.99 159.04 33.56 157.88 25.59 150.97C18.65 144.95 15.13 136.02 15.13 124.42V120.42H19.13C35.39 120.42 44.95 124.47 50.57 129.26V118.54H50.09C43.99 118.54 33.56 117.38 25.59 110.47C18.65 104.45 15.13 95.52 15.13 83.92V79.92H19.13C35.39 79.92 44.95 83.97 50.57 88.76V78.04H50.09C43.99 78.04 33.56 76.88 25.59 69.97C18.7 63.99 15.18 55.15 15.13 43.67V23.42H23.13V39.51C36.99 40.11 45.43 43.87 50.57 48.26V13.29H58.57V48.26C63.71 43.87 72.15 40.11 86.01 39.51V23.42H94.01Z" fill="#C9A951"/>
 		<path d="M39.57 162.3V0.300049" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
@@ -111,7 +111,7 @@ $all_allergens = array(
 	),
 	array(
 		'key'   => 'lacteal',
-		'label' => __( 'Lacteal', 'nutrition-info-woocommerce' ),
+		'label' => __( 'Dairy free', 'nutrition-info-woocommerce' ),
 		'svg' => '<svg class="niw_svg_allergen" width="125" height="174" viewBox="0 0 125 174" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M124.38 77.1649V173.435H15.13V77.1649L40.44 36.6649V13.5649H99.06V36.6649L124.38 77.1649Z" fill="#678FCD"/>
 		<path d="M105.37 156.445H4.12V65.3149L29.44 24.8149H80.06L105.37 65.3149V156.445Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
