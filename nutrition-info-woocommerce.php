@@ -17,7 +17,7 @@ function wni_load_textdomain() {
 }
 add_action( 'plugins_loaded', 'wni_load_textdomain' );
 
-define( 'WNI_BUNDLE_VERSION' , '0.0.1');
+define( 'WNI_BUNDLE_VERSION' , '0.5');
 define( 'NIW_PLUGIN_PREFIX', 'niw_');
 define( 'WNI_PLUGIN_PATH' , plugin_dir_path(__FILE__));
 define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
@@ -28,7 +28,14 @@ include WNI_PLUGIN_PATH . 'includes/template.php'; // Nutrients display function
 include WNI_PLUGIN_PATH . 'includes/product-tab.php'; // Nutrients display function
 include WNI_PLUGIN_PATH . 'includes/allergens.php'; // Allergens
 
-wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css',false,'1.1','all');
+
+add_action( 'wp_enqueue_scripts', 'niw_styles_frontend' );
+/**
+ * Proper way to enqueue scripts and styles
+ */
+function niw_styles_frontend() {
+	wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css', false, WNI_BUNDLE_VERSION , 'all' );
+}
 
 if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary' ) {
 	add_action( 'woocommerce_single_product_summary', 'nutritionInfo', '45' );

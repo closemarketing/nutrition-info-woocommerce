@@ -9,7 +9,7 @@ function composition_content_tab( $tabs ) {
 
 	// Adds the new tab
 	$tabs['composition_tab'] = array(
-		'title' 	=> __( 'Composition', 'nutritional_info_domain' ),
+		'title' 	=> __( 'Composition', 'nutrition-info-woocommerce' ),
 		'priority' 	=> 50,
 		'callback' 	=> 'composition_content_tab_content'
 	);
@@ -28,7 +28,7 @@ function nutritional_content_tab( $tabs ) {
 
 	// Adds the new tab
 	$tabs['nutrient_tab'] = array(
-		'title' 	=> __( 'Nutrients', 'nutritional_info_domain' ),
+		'title' 	=> __( 'Nutrients', 'nutrition-info-woocommerce' ),
 		'priority' 	=> 50,
 		'callback' 	=> 'nutritional_content_tab_content'
 	);
@@ -37,9 +37,8 @@ function nutritional_content_tab( $tabs ) {
 
 }
 function nutritional_content_tab_content() {
-
 	// The new tab content
-	echo '<h2>' . __('New Product Tab', 'nutritional_info_domain') . '</h2>';
+	echo '<h2>' . __('New Product Tab', 'nutrition-info-woocommerce') . '</h2>';
 	nutritionInfo();
+}
 
-} ?>

@@ -24,9 +24,15 @@ class NIW_MetaProducts {
 	 */
 	public function __construct() {
 
-		add_filter( 'woocommerce_product_data_tabs', 'add_my_custom_product_data_tab2' , 98 , 1 );
-		add_action( 'woocommerce_product_data_panels', 'add_custom_fields_to_product_composition' );
-		add_action( 'woocommerce_process_product_meta', 'woocommerce_process_product_meta_fields_save_composition' );
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab2' ) , 98 , 1 );
+		add_action( 'woocommerce_product_data_panels', array( $this, 'add_custom_fields_to_product_composition' ) );
+		add_action( 'woocommerce_process_product_meta', array( $this, 'woocommerce_process_product_meta_fields_save' ) );
+
+		// Meta Info.
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab' ) , 99 , 1 );
+
+		// This action will add custom fields to the added custom tabs under Products Data metabox
+		add_action( 'woocommerce_product_data_panels', array( $this, 'add_my_custom_product_data_fields' ) );
 	}
 
 	/**
@@ -38,9 +44,8 @@ class NIW_MetaProducts {
 			'label' => __( 'Composition & Allergens', 'nutrition-info-woocommerce' ),
 			'target' => 'ingredients_composition',
 		);
-	return $product_composition_tabs;
+		return $product_composition_tabs;
 	}
-
 
 	function add_custom_fields_to_product_composition() {
 		global $woocommerce, $post;
@@ -53,79 +58,197 @@ class NIW_MetaProducts {
 				array(
 					'id'          => NIW_PLUGIN_PREFIX . 'ingredients',
 					'class'       => '',
-					'label'       => __('Ingredients separated by commas', 'nutrition-info-woocommerce'),
-					'description' => __('Ingredients', 'nutrition-info-woocommerce'),
+					'label'       => __( 'Ingredients separated by commas', 'nutrition-info-woocommerce' ),
+					'description' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
 					'desc_tip'    => false,
-					'placeholder' => __('ingredient, ingreditent', 'nutrition-info-woocommerce')
+					'placeholder' => __( 'ingredient, ingreditent', 'nutrition-info-woocommerce') 
 				)
 			);
 
-			foreach ($array_allergens_name as $key => $value) {
+			echo '<h2>Allergens</h2>';
+			foreach ( $array_allergens_name as $key => $value ) {
 				woocommerce_wp_checkbox( 
 					array( 
-						'id'            => NIW_PLUGIN_PREFIX . $value, 
-						'wrapper_class' => '', 
-						'label'         => __( $value, 'woocommerce' ), 
-						'description'   => __( '', 'woocommerce' ) 
+						'id'            => NIW_PLUGIN_PREFIX . $key,
+						'wrapper_class' => '',
+						'label'         => '',
+						'description'   => $value,
 					)
 				);
 			}
-			
-			$gluten  = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Gluten', true );
-			$vegan   = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Lacteal', true );
-			$lacteal = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Vegan', true );
-
-			$gluten_activated = '';
-			$vegan_activated = '';
-			$lacteal_activated = '';
-
-			$number_allergens_actived = array();
-
-			if( $gluten != 'yes' )
-			{
-				$gluten_activated = 'Gluten';
-				array_push( $number_allergens_actived, 'Gluten' );
-			}
-			if( $vegan != 'yes' )
-			{
-				$vegan_activated = 'Vegan';
-				array_push( $number_allergens_actived, 'Vegan' );
-			}
-			if( $lacteal != 'yes' )
-			{
-				$lacteal_activated = 'Lacteal';
-				array_push( $number_allergens_actived, 'Lacteal' );
-			}
-
-			
-			$select_field = array(
-				'id' => NIW_PLUGIN_PREFIX . 'activated_allergens',
-				'label' => __( 'Activated allergens', 'woocommerce' ),
-				'options' => array(
-					'Gluten' => __( $gluten_activated, 'woocommerce' ),
-					'Lacteal' => __( $lacteal_activated, 'woocommerce' ),
-					'Vegan' => __( $vegan_activated, 'woocommerce' )
-					)
-			);
-			woocommerce_wp_select( $select_field );
-			
-
 			?>
 		</div>
 		<?php
 	} 
 
-	function woocommerce_process_product_meta_fields_save_composition( $post_id ){
+	/**
+	 * # Meta info
+	 * ---------------------------------------------------------------------------------------------------- */
+
+	function add_my_custom_product_data_tab( $product_data_tabs ) {
+		$product_data_tabs['my-custom-tab'] = array(
+			'label' => __( 'Nutritional Info', 'nutrition-info-woocommerce' ),
+			'target' => 'my_custom_product_data',
+		);
+		return $product_data_tabs;
+	}
+
+	function add_my_custom_product_data_fields() {
+		global $woocommerce, $post;
+		?>
+		<!-- id below must match target registered in above add_my_custom_product_data_tab function -->
+		<div id="my_custom_product_data" class="panel woocommerce_options_panel">
+			<?php
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'energy',
+				'class'       => '',
+				'label'       => __('Energy', 'nutritional_info_domain'),
+				'description' => __('(KJ/kcal)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 Kj / 0 kcal', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'fat',
+				'class'       => '',
+				'label'       => __('Fat', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'saturated_fat',
+				'class'       => '',
+				'label'       => __('Saturated fatty acids', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'monounsaturated_fat',
+				'class'       => '',
+				'label'       => __('Monounsaturated fatty acids', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'polyunsaturated_fat',
+				'class'       => '',
+				'label'       => __('Polyunsaturated fatty acids', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'carb',
+				'class'       => '',
+				'label'       => __('Carbohydrate', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'sugar',
+				'class'       => '',
+				'label'       => __('Sugar', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'polyol',
+				'class'       => '',
+				'label'       => __('Polyols', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'starch',
+				'class'       => '',
+				'label'       => __('Starch', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'fiber',
+				'class'       => '',
+				'label'       => __('Dietary fiber', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'protein',
+				'class'       => '',
+				'label'       => __('Protein', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'salt',
+				'class'       => '',
+				'label'       => __('Salt', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('0 g', 'nutritional_info_domain')
+			) );
+			woocommerce_wp_text_input( array(
+				'id'          => NIW_PLUGIN_PREFIX . 'vitamin_mineral',
+				'class'       => '',
+				'label'       => __('Vitamins and minerals', 'nutritional_info_domain'),
+				'description' => __('(gram)', 'nutritional_info_domain'),
+				'desc_tip'    => false,
+				'placeholder' => __('none', 'nutritional_info_domain')
+			) );
+
+			?>
+		</div>
+		<?php
+	}
+
+	function woocommerce_process_product_meta_fields_save( $post_id ){
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'energy', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'energy'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'fat'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'saturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'saturated_fat'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'monounsaturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'monounsaturated_fat'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'polyunsaturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'polyunsaturated_fat'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'carb', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'carb'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'sugar', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'sugar'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'polyol', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'polyol'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'starch', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'starch'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'fiber', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'fiber'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'protein', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'protein'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'salt', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'salt'] ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'vitamin_mineral', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'vitamin_mineral'] ) );
+
+		// Other tab.
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'ingredients', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'ingredients'] ) );
 		$allergens = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
 
-		foreach ($array_allergens_name as $key => $value) {
-			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $value, stripslashes( $_POST[NIW_PLUGIN_PREFIX . $value] ) );
+		$allergens_especial_actived = array();
+		foreach ( $array_allergens_name as $key => $value ) {
+
+			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
+			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
+
+			error_log( 'key: ' . $post_meta );
+			if ( 'yes' == $post_meta && 'gluten' == $key ) {
+				$allergens_especial_actived[] = $value;
+			}
+			if ( 'yes' == $post_meta && 'vegan' == $key ) {
+				$allergens_especial_actived[] = $value;
+			}
+			if ( 'yes' == $post_meta && 'lacteal' == $key ) {
+				$allergens_especial_actived[] = $value;
+			}
 		}
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'activated_allergens', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'activated_allergens'] ) );
-		
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'activated_special_allergens', $allergens_especial_actived );
 	}
+
 }
 
 new NIW_MetaProducts();
