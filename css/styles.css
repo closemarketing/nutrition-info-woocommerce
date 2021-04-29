@@ -36,6 +36,18 @@
   border-color: #3f9842;
 }
 
+.niw-icons-product {
+	position:absolute;
+	top: 10px;
+	right: 10px;
+	width: auto;
+	height: auto;
+	z-index: 1;
+}
+.niw-icons-product svg {
+	margin-left: 10px;
+}
+
 .niw_svg_allergen {
 	width: 20px;
 	height: 20px;
