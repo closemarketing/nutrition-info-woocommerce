@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Nutrition Info for WooCommerce
-Plugin URI:  https://jurs.me
+Plugin URI:  https://www.closemarketing.es
 Description: Display nutritional information on you woocommerce product pages.
-Version:     0.0.1
-Author:      Rasmus Jürs
-Author URI:  https://jurs.me/
+Version:     0.5
+Author:      Closemarketing
+Author URI:  https://www.closemarketing.es
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: nutrition-info-woocommerce
@@ -22,21 +22,20 @@ define( 'NIW_PLUGIN_PREFIX', 'niw_');
 define( 'WNI_PLUGIN_PATH' , plugin_dir_path(__FILE__));
 define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
 
-include WNI_PLUGIN_PATH . 'inc/general-settings.php'; // Set up general settings tab in woocommerce settings.
-include WNI_PLUGIN_PATH . 'inc/product-single-settings.php'; // Add nutrients tab to woocommerce product pages.
-include WNI_PLUGIN_PATH . 'inc/product-composition-settings.php'; // Add composition tab to woocommerce product pages.
-include WNI_PLUGIN_PATH . 'inc/template.php'; // Nutrients display function
-include WNI_PLUGIN_PATH . 'inc/product-tab.php'; // Nutrients display function
-include WNI_PLUGIN_PATH . 'inc/allergens.php'; // Allergens
+include WNI_PLUGIN_PATH . 'includes/class-woo-settings.php';
+include WNI_PLUGIN_PATH . 'includes/class-woo-metaproducts.php';
+include WNI_PLUGIN_PATH . 'includes/template.php'; // Nutrients display function
+include WNI_PLUGIN_PATH . 'includes/product-tab.php'; // Nutrients display function
+include WNI_PLUGIN_PATH . 'includes/allergens.php'; // Allergens
 
 wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css',false,'1.1','all');
 
-if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary') {
-    add_action('woocommerce_single_product_summary', 'nutritionInfo', '45');
-    add_action('woocommerce_single_product_summary', 'compositionInfo', '45');
+if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary' ) {
+	add_action( 'woocommerce_single_product_summary', 'nutritionInfo', '45' );
+	add_action( 'woocommerce_single_product_summary', 'compositionInfo', '45' );
 }
 
-if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_add_to_cart') {
+if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_add_to_cart' ) {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '35');
     add_action('woocommerce_single_product_summary', 'compositionInfo', '35');
 }
@@ -136,7 +135,7 @@ function replacing_template_loop_product_thumbnail() {
 			$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
 			
 
-			if( $allergens_active == "yes" && $value == "Lacteal" )
+			if( $allergens_active == 'yes' && $value == 'Lacteal' )
 			{
 				echo '<svg style="position:absolute;
 				top: 10px;
@@ -197,13 +196,3 @@ function replacing_template_loop_product_thumbnail() {
 	add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
 }
 add_action( 'woocommerce_init', 'replacing_template_loop_product_thumbnail');
-
-
-// Remove all tabs
-add_filter( 'woocommerce_product_tabs', 'zod_remove_product_tabs', 98 );
-function zod_remove_product_tabs( $tabs ) {
-    unset( $tabs['description'] );          // Remove the description tab
-    unset( $tabs['reviews'] );          // Remove the reviews tab
-    unset( $tabs['additional_information'] );   // Remove the additional information tab
-    return $tabs;
-}
