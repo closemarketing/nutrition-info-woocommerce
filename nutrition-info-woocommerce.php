@@ -3,7 +3,7 @@
 Plugin Name: Nutrition Info for WooCommerce
 Plugin URI:  https://www.closemarketing.es
 Description: Display nutritional information on you woocommerce product pages.
-Version:     0.5
+Version:     0.1
 Author:      Closemarketing
 Author URI:  https://www.closemarketing.es
 License:     GPL2
