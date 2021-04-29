@@ -136,7 +136,7 @@ function replacing_template_loop_product_thumbnail() {
 			$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $value, true  );
 			
 
-			if( $allergens_active == "yes" && $value == "lacteos" )
+			if( $allergens_active == "yes" && $value == "Lacteal" )
 			{
 				echo '<svg style="position:absolute;
 				top: 10px;
@@ -155,7 +155,7 @@ function replacing_template_loop_product_thumbnail() {
 				</svg>';
 				$position_icon=$position_icon-30;
 			}
-			else if( $allergens_active == "yes" && $value == "gluten" )
+			else if( $allergens_active == "yes" && $value == "Gluten" )
 			{
 				echo '<svg style="position:absolute;
 				top: 10px;
@@ -175,7 +175,7 @@ function replacing_template_loop_product_thumbnail() {
 				</svg>';
 				$position_icon=$position_icon-30;
 			}
-			else if( $allergens_active == "yes" && $value == "vegetales" )
+			else if( $allergens_active == "yes" && $value == "Vegan" )
 			{
 				echo '<svg style="position:absolute;
 				top: 10px;

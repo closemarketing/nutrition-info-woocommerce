@@ -39,6 +39,44 @@ function add_custom_fields_to_product_composition() {
 			);
 		}
 		
+		$gluten = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Gluten', true  );
+		$vegan = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Lacteal', true  );
+		$lacteal = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'Vegan', true  );
+
+		$gluten_activated = '';
+		$vegan_activated = '';
+		$lacteal_activated = '';
+
+		$number_allergens_actived = array();
+
+		if( $gluten != 'yes' )
+		{
+			$gluten_activated = 'Gluten';
+			array_push( $number_allergens_actived, 'Gluten' );
+		}
+		if( $vegan != 'yes' )
+		{
+			$vegan_activated = 'Vegan';
+			array_push( $number_allergens_actived, 'Vegan' );
+		}
+		if( $lacteal != 'yes' )
+		{
+			$lacteal_activated = 'Lacteal';
+			array_push( $number_allergens_actived, 'Lacteal' );
+		}
+
+		
+		$select_field = array(
+			'id' => NIW_PLUGIN_PREFIX . 'activated_allergens',
+			'label' => __( 'Activated allergens', 'woocommerce' ),
+			'options' => array(
+				'Gluten' => __( $gluten_activated, 'woocommerce' ),
+				'Lacteal' => __( $lacteal_activated, 'woocommerce' ),
+				'Vegan' => __( $vegan_activated, 'woocommerce' )
+				)
+		);
+		woocommerce_wp_select( $select_field );
+		
 
 		?>
 	</div>
@@ -55,5 +93,6 @@ function woocommerce_process_product_meta_fields_save_composition( $post_id ){
 	foreach ($array_allergens_name as $key => $value) {
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $value, stripslashes( $_POST[NIW_PLUGIN_PREFIX . $value] ) );
 	}
+	update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'activated_allergens', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'activated_allergens'] ) );
 	
 } ?>
