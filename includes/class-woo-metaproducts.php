@@ -54,14 +54,14 @@ class NIW_MetaProducts {
 			<?php
 			$allergens = new Allergens();
 			$array_allergens_name = $allergens->show_allergens_name();
-			woocommerce_wp_text_input(
+			woocommerce_wp_textarea_input(
 				array(
 					'id'          => NIW_PLUGIN_PREFIX . 'ingredients',
 					'class'       => '',
-					'label'       => __( 'Ingredients separated by commas', 'nutrition-info-woocommerce' ),
-					'description' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
+					'label'       => __( 'Ingredients', 'nutrition-info-woocommerce' ),
+					'description' => '',
 					'desc_tip'    => false,
-					'placeholder' => __( 'ingredient, ingreditent', 'nutrition-info-woocommerce') 
+					'placeholder' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
 				)
 			);
 
