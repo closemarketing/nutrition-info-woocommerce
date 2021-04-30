@@ -17,10 +17,10 @@ function wni_load_textdomain() {
 }
 add_action( 'plugins_loaded', 'wni_load_textdomain' );
 
-define( 'WNI_BUNDLE_VERSION' , '0.5');
+define( 'WNI_BUNDLE_VERSION' , '0.1');
 define( 'NIW_PLUGIN_PREFIX', 'niw_');
-define( 'WNI_PLUGIN_PATH' , plugin_dir_path(__FILE__));
-define( 'WNI_PLUGIN_URL' , plugin_dir_url(__FILE__));
+define( 'WNI_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+define( 'WNI_PLUGIN_URL', plugin_dir_url(__FILE__) );
 
 include WNI_PLUGIN_PATH . 'includes/class-woo-settings.php';
 include WNI_PLUGIN_PATH . 'includes/class-woo-metaproducts.php';
@@ -167,41 +167,25 @@ function niw_add_allergens_icon_single_product()
 }
 
 
+add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
 
-
-
-/**
- * Feature that overlays product icons on featured image
- */
-function replacing_template_loop_product_thumbnail() {
-	// Adding something instead
-	function wc_template_loop_product_replaced_thumb() {
-		// Get outstanding image
-		global $post;
-		$thumbID = get_post_thumbnail_id( $post->ID );
-		$img = wp_get_attachment_url( $thumbID );
-		//*********************** */
-
-		echo '<div class="niw-icons-product">';
-		// Show activated allergens
-		$all_allergens = new Allergens();
-		$position_icon=180;
-		foreach ($all_allergens->show_allergens_name() as $key => $value) {
-			
-			$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-			if ( $allergens_active == 'yes' && $key == 'lacteal' ) {
-				echo $all_allergens->show_special_allergen_svg('lacteal');
-			}
-			else if( $allergens_active == "yes" && $key == "gluten" ) {
-				echo $all_allergens->show_special_allergen_svg('gluten');
-			}
-			else if( $allergens_active == "yes" && $key == "vegan" )
-			{
-				echo $all_allergens->show_special_allergen_svg('vegan');
-			}
+function wc_template_loop_product_replaced_thumb() {
+	echo '<div class="niw-icons-product">';
+	// Show activated allergens
+	$all_allergens = new Allergens();
+	foreach ($all_allergens->show_allergens_name() as $key => $value) {
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
+		if ( $allergens_active == 'yes' && $key == 'lacteal' ) {
+			echo $all_allergens->show_special_allergen_svg( 'lacteal' );
 		}
-		echo "</div>";
+		else if( $allergens_active == 'yes' && $key == 'gluten' ) {
+			echo $all_allergens->show_special_allergen_svg( 'gluten' );
+		}
+		else if( $allergens_active == 'yes' && $key == 'vegan' )
+		{
+			echo $all_allergens->show_special_allergen_svg('vegan');
+		}
 	}
-	add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
+	echo '</div>';
 }
-add_action( 'woocommerce_init', 'replacing_template_loop_product_thumbnail');
+
