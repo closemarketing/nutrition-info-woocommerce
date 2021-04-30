@@ -93,7 +93,19 @@ function niw_add_allergens_icon()
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if( $allergens_active == "yes" )
+		if( $allergens_active == "yes" && $key != 'lacteal' && $key != 'gluten' && $key != 'vegan' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'lacteal' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'gluten' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'vegan' )
 		{
 			echo $all_allergens->show_allergen_svg($key);
 		}
@@ -133,7 +145,20 @@ function niw_add_allergens_icon_single_product()
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if( $allergens_active == "yes" )
+		
+		if( $allergens_active == "yes" && $key != 'lacteal' && $key != 'gluten' && $key != 'vegan' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'lacteal' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'gluten' )
+		{
+			echo $all_allergens->show_allergen_svg($key);
+		}
+		else if( $allergens_active != "yes" && $key == 'vegan' )
 		{
 			echo $all_allergens->show_allergen_svg($key);
 		}
