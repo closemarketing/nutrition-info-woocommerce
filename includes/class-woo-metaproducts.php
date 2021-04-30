@@ -65,14 +65,14 @@ class NIW_MetaProducts {
 				)
 			);
 
-			echo '<h2>Allergens</h2>';
+			echo '<h2>' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</h2>';
 			foreach ( $array_allergens_name as $key => $value ) {
 				woocommerce_wp_checkbox( 
 					array( 
 						'id'            => NIW_PLUGIN_PREFIX . $key,
 						'wrapper_class' => '',
 						'label'         => '',
-						'description'   => $value,
+						'description'   => __( $value, 'nutrition-info-woocommerce' ),
 					)
 				);
 			}
@@ -102,106 +102,106 @@ class NIW_MetaProducts {
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'energy',
 				'class'       => '',
-				'label'       => __('Energy', 'nutritional_info_domain'),
-				'description' => __('(KJ/kcal)', 'nutritional_info_domain'),
+				'label'       => __('Energy', 'nutrition-info-woocommerce'),
+				'description' => __('(KJ/kcal)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 Kj / 0 kcal', 'nutritional_info_domain')
+				'placeholder' => __('0 Kj / 0 kcal', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'fat',
 				'class'       => '',
-				'label'       => __('Fat', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Fat', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'saturated_fat',
 				'class'       => '',
-				'label'       => __('Saturated fatty acids', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Saturated fatty acids', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'monounsaturated_fat',
 				'class'       => '',
-				'label'       => __('Monounsaturated fatty acids', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Monounsaturated fatty acids', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'polyunsaturated_fat',
 				'class'       => '',
-				'label'       => __('Polyunsaturated fatty acids', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Polyunsaturated fatty acids', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'carb',
 				'class'       => '',
-				'label'       => __('Carbohydrate', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Carbohydrate', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'sugar',
 				'class'       => '',
-				'label'       => __('Sugar', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Sugar', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'polyol',
 				'class'       => '',
-				'label'       => __('Polyols', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Polyols', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'starch',
 				'class'       => '',
-				'label'       => __('Starch', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Starch', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'fiber',
 				'class'       => '',
-				'label'       => __('Dietary fiber', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Dietary fiber', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'protein',
 				'class'       => '',
-				'label'       => __('Protein', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Protein', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'salt',
 				'class'       => '',
-				'label'       => __('Salt', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Salt', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('0 g', 'nutritional_info_domain')
+				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
 			woocommerce_wp_text_input( array(
 				'id'          => NIW_PLUGIN_PREFIX . 'vitamin_mineral',
 				'class'       => '',
-				'label'       => __('Vitamins and minerals', 'nutritional_info_domain'),
-				'description' => __('(gram)', 'nutritional_info_domain'),
+				'label'       => __('Vitamins and minerals', 'nutrition-info-woocommerce'),
+				'description' => __('(gram)', 'nutrition-info-woocommerce'),
 				'desc_tip'    => false,
-				'placeholder' => __('none', 'nutritional_info_domain')
+				'placeholder' => __('none', 'nutrition-info-woocommerce')
 			) );
 
 			?>

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Nutrition Info for WooCommerce\n"
-"POT-Creation-Date: 2021-04-29 10:17+0200\n"
+"POT-Creation-Date: 2021-04-30 11:26+0200\n"
 "PO-Revision-Date: 2021-04-29 10:17+0200\n"
 "Last-Translator: David <david@closemarketing.es>\n"
 "Language-Team: David <david@closemarketing.es>\n"
@@ -16,30 +16,211 @@ msgstr ""
 "X-Poedit-WPHeader: nutrition-info-woocommerce.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: includes/class-woo-metaproducts.php:38
+#: includes/allergens.php:5
+msgid "Alcohol"
+msgstr ""
+
+#: includes/allergens.php:16
+msgid "Almonds"
+msgstr ""
+
+#: includes/allergens.php:28
+msgid "Lupins"
+msgstr ""
+
+#: includes/allergens.php:41
+msgid "Celery"
+msgstr ""
+
+#: includes/allergens.php:53 includes/class-woo-metaproducts.php:153
+msgid "Sugar"
+msgstr ""
+
+#: includes/allergens.php:69
+msgid "Peanuts"
+msgstr ""
+
+#: includes/allergens.php:79
+msgid "Spices"
+msgstr ""
+
+#: includes/allergens.php:89
+msgid "Without Gluten"
+msgstr ""
+
+#: includes/allergens.php:105
+msgid "Egg"
+msgstr ""
+
+#: includes/allergens.php:114
+msgid "Dairy free"
+msgstr ""
+
+#: includes/allergens.php:126
+msgid "Corn"
+msgstr ""
+
+#: includes/allergens.php:140
+msgid "Shellfish"
+msgstr ""
+
+#: includes/allergens.php:154
+msgid "Honey"
+msgstr ""
+
+#: includes/allergens.php:170
+msgid "Mollusks"
+msgstr ""
+
+#: includes/allergens.php:181
+msgid "Mustard"
+msgstr ""
+
+#: includes/allergens.php:193
+msgid "Organic"
+msgstr ""
+
+#: includes/allergens.php:204
+msgid "Fish"
+msgstr ""
+
+#: includes/allergens.php:214
+msgid "Sesame"
+msgstr ""
+
+#: includes/allergens.php:228
+msgid "Mushrooms"
+msgstr ""
+
+#: includes/allergens.php:243
+msgid "Soy"
+msgstr ""
+
+#: includes/allergens.php:255
+msgid "Sulfates"
+msgstr ""
+
+#: includes/allergens.php:270
+msgid "Vegan"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:44
 msgid "Composition & Allergens"
 msgstr ""
 
-#: includes/class-woo-metaproducts.php:56
+#: includes/class-woo-metaproducts.php:61
 msgid "Ingredients separated by commas"
 msgstr ""
 
-#: includes/class-woo-metaproducts.php:57 includes/template.php:94
+#: includes/class-woo-metaproducts.php:62 includes/template.php:94
 #: includes/template.php:101
 msgid "Ingredients"
 msgstr ""
 
-#: includes/class-woo-metaproducts.php:59
+#: includes/class-woo-metaproducts.php:64
 msgid "ingredient, ingreditent"
 msgstr ""
 
-#: includes/class-woo-metaproducts.php:103
-msgid "Activated allergens"
+#: includes/class-woo-metaproducts.php:68
+msgid "Allergens"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:90
+msgid "Nutritional Info"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:105
+msgid "Energy"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:106
+msgid "(KJ/kcal)"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:108
+msgid "0 Kj / 0 kcal"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:113
+msgid "Fat"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:114
+#: includes/class-woo-metaproducts.php:122
+#: includes/class-woo-metaproducts.php:130
+#: includes/class-woo-metaproducts.php:138
+#: includes/class-woo-metaproducts.php:146
+#: includes/class-woo-metaproducts.php:154
+#: includes/class-woo-metaproducts.php:162
+#: includes/class-woo-metaproducts.php:170
+#: includes/class-woo-metaproducts.php:178
+#: includes/class-woo-metaproducts.php:186
+#: includes/class-woo-metaproducts.php:194
+#: includes/class-woo-metaproducts.php:202
+msgid "(gram)"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:116
+#: includes/class-woo-metaproducts.php:124
+#: includes/class-woo-metaproducts.php:132
+#: includes/class-woo-metaproducts.php:140
+#: includes/class-woo-metaproducts.php:148
+#: includes/class-woo-metaproducts.php:156
+#: includes/class-woo-metaproducts.php:164
+#: includes/class-woo-metaproducts.php:172
+#: includes/class-woo-metaproducts.php:180
+#: includes/class-woo-metaproducts.php:188
+#: includes/class-woo-metaproducts.php:196
+msgid "0 g"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:121
+msgid "Saturated fatty acids"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:129
+msgid "Monounsaturated fatty acids"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:137
+msgid "Polyunsaturated fatty acids"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:145
+msgid "Carbohydrate"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:161
+msgid "Polyols"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:169
+msgid "Starch"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:177
+msgid "Dietary fiber"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:185
+msgid "Protein"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:193
+msgid "Salt"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:201 includes/template.php:57
+msgid "Vitamins and minerals"
+msgstr ""
+
+#: includes/class-woo-metaproducts.php:204
+msgid "none"
 msgstr ""
 
 #: includes/class-woo-settings.php:35 includes/product-tab.php:31
@@ -115,108 +296,11 @@ msgstr ""
 msgid "Include stylesheet."
 msgstr ""
 
-#: includes/product-single-settings.php:5
-msgid "Nutritional Info"
-msgstr ""
-
-#: includes/product-single-settings.php:22
-msgid "Energy"
-msgstr ""
-
-#: includes/product-single-settings.php:23
-msgid "(KJ/kcal)"
-msgstr ""
-
-#: includes/product-single-settings.php:25
-msgid "0 Kj / 0 kcal"
-msgstr ""
-
-#: includes/product-single-settings.php:30
-msgid "Fat"
-msgstr ""
-
-#: includes/product-single-settings.php:31
-#: includes/product-single-settings.php:39
-#: includes/product-single-settings.php:47
-#: includes/product-single-settings.php:55
-#: includes/product-single-settings.php:63
-#: includes/product-single-settings.php:71
-#: includes/product-single-settings.php:79
-#: includes/product-single-settings.php:87
-#: includes/product-single-settings.php:95
-#: includes/product-single-settings.php:103
-#: includes/product-single-settings.php:111
-#: includes/product-single-settings.php:119
-msgid "(gram)"
-msgstr ""
-
-#: includes/product-single-settings.php:33
-#: includes/product-single-settings.php:41
-#: includes/product-single-settings.php:49
-#: includes/product-single-settings.php:57
-#: includes/product-single-settings.php:65
-#: includes/product-single-settings.php:73
-#: includes/product-single-settings.php:81
-#: includes/product-single-settings.php:89
-#: includes/product-single-settings.php:97
-#: includes/product-single-settings.php:105
-#: includes/product-single-settings.php:113
-msgid "0 g"
-msgstr ""
-
-#: includes/product-single-settings.php:38
-msgid "Saturated fatty acids"
-msgstr ""
-
-#: includes/product-single-settings.php:46
-msgid "Monounsaturated fatty acids"
-msgstr ""
-
-#: includes/product-single-settings.php:54
-msgid "Polyunsaturated fatty acids"
-msgstr ""
-
-#: includes/product-single-settings.php:62
-msgid "Carbohydrate"
-msgstr ""
-
-#: includes/product-single-settings.php:70
-msgid "Sugar"
-msgstr ""
-
-#: includes/product-single-settings.php:78
-msgid "Polyols"
-msgstr ""
-
-#: includes/product-single-settings.php:86
-msgid "Starch"
-msgstr ""
-
-#: includes/product-single-settings.php:94
-msgid "Dietary fiber"
-msgstr ""
-
-#: includes/product-single-settings.php:102
-msgid "Protein"
-msgstr ""
-
-#: includes/product-single-settings.php:110
-msgid "Salt"
-msgstr ""
-
-#: includes/product-single-settings.php:118 includes/template.php:57
-msgid "Vitamins and minerals"
-msgstr ""
-
-#: includes/product-single-settings.php:121
-msgid "none"
-msgstr ""
-
 #: includes/product-tab.php:12
 msgid "Composition"
 msgstr ""
 
-#: includes/product-tab.php:42
+#: includes/product-tab.php:41
 msgid "New Product Tab"
 msgstr ""
 
@@ -272,7 +356,7 @@ msgstr ""
 msgid "pr. 100 g"
 msgstr ""
 
-#: nutrition-info-woocommerce.php:65
+#: nutrition-info-woocommerce.php:72
 msgid "Description"
 msgstr ""
 
