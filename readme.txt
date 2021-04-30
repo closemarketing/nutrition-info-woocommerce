@@ -1,5 +1,5 @@
 === Nutrition Info WooCommerce ===
-Contributors: closemarketing, davidperez, 
+Contributors: closemarketing, davidperez, manolomunoz
 Tags: nutrition, info, allergens
 Donate link: 
 Requires at least: 4.0
