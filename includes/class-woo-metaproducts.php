@@ -242,22 +242,21 @@ class NIW_MetaProducts {
 		$array_allergens_name = $allergens->show_allergens_name();
 		$allergens_especial   = $allergens->show_special_allergens_name();
 
-		$allergens_especial_actived = array();
+		$all_allergens_names = array();
 		foreach ( $array_allergens_name as $key => $value ) {
 
 			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
 			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
+			$all_allergens_names[] = $value;
 		}
 
 		foreach ( $allergens_especial as $key => $value ) {
 			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
 			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
-			if ( 'yes' == $post_meta ) {
-				$allergens_especial_actived[] = $value;
-			}
+			$all_allergens_names[] = $value;
 		}
 
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'activated_special_allergens', $allergens_especial_actived );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_names', $all_allergens_names );
 	}
 
 }
