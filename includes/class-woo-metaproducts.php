@@ -76,6 +76,18 @@ class NIW_MetaProducts {
 					)
 				);
 			}
+
+			$array_special_allergens_name = $allergens->show_special_allergens_name();
+			foreach ( $array_special_allergens_name as $key => $value ) {
+				woocommerce_wp_checkbox( 
+					array( 
+						'id'            => NIW_PLUGIN_PREFIX . $key,
+						'wrapper_class' => '',
+						'label'         => '',
+						'description'   => __( $value, 'nutrition-info-woocommerce' ),
+					)
+				);
+			}
 			?>
 		</div>
 		<?php
@@ -228,24 +240,23 @@ class NIW_MetaProducts {
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'ingredients', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'ingredients'] ) );
 		$allergens = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
+		$allergens_especial   = $allergens->show_special_allergens_name();
 
 		$allergens_especial_actived = array();
 		foreach ( $array_allergens_name as $key => $value ) {
 
 			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
 			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
+		}
 
-			error_log( 'key: ' . $post_meta );
-			if ( 'yes' == $post_meta && 'gluten' == $key ) {
-				$allergens_especial_actived[] = $value;
-			}
-			if ( 'yes' == $post_meta && 'vegan' == $key ) {
-				$allergens_especial_actived[] = $value;
-			}
-			if ( 'yes' == $post_meta && 'lacteal' == $key ) {
+		foreach ( $allergens_especial as $key => $value ) {
+			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
+			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
+			if ( 'yes' == $post_meta ) {
 				$allergens_especial_actived[] = $value;
 			}
 		}
+
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'activated_special_allergens', $allergens_especial_actived );
 	}
 
