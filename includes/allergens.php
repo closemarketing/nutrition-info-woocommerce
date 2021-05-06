@@ -408,7 +408,7 @@ class Allergens {
 	 *
 	 * @return allergen_svg
 	 */
-	public function show_special_allergen_svg($name)
+	public function show_special_allergen_svg( $name )
 	{
 		global $special_allergens;
 		$allergen_svg = '';
