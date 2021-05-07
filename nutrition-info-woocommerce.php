@@ -88,14 +88,18 @@ add_action("woocommerce_after_shop_loop_item_title", "niw_add_allergens_icon", 5
 function niw_add_allergens_icon()
 {
 	$all_allergens = new Allergens();
+	$contador = 0;
 	echo "<div class='niw_icon_allergen_product'>";
 	// Show activated allergens
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
-		
+		if( $contador == 5 ) {
+			echo '<br>';
+		}
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
 		if( $allergens_active == "yes" )
 		{
 			echo $all_allergens->show_allergen_svg( $key );
+			$contador = $contador + 1;
 		}
 	}
 	
