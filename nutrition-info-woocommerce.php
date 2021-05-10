@@ -95,7 +95,7 @@ function niw_add_allergens_icon()
 		if( $contador == 5 ) {
 			echo '<br>';
 		}
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . $key, true  );
 		if( $allergens_active == "yes" ) {
 			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
 			echo $all_allergens->show_allergen_svg( $key );
@@ -115,12 +115,10 @@ function niw_add_special_allergens_icon_single_product()
 {
 	$all_allergens = new Allergens();
 	echo "<div class='niw_icon_allergen_product'>";
-	// Show activated allergens
-	foreach ($all_allergens->show_special_allergens_name() as $key => $value) {
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if( $allergens_active == "yes" ) {
-			echo $all_allergens->show_special_allergen_svg( $key );
-		}
+	$allergen_vegan = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . 'vegan', true  );
+	if( $allergen_vegan == "yes" ) {
+		echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
+		echo $all_allergens->show_allergen_svg_vegan();
 	}
 	echo "</div>";
 
@@ -137,31 +135,30 @@ function niw_add_allergens_icon_single_product()
 	// Show activated allergens
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
+		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . $key, true  );
 		
 		if( $allergens_active == "yes" )
 		{
-			echo $all_allergens->show_allergen_svg($key);
+			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
+			echo $all_allergens->show_allergen_svg( $key );
 		}
 	}
 	
 	echo "</div>";
 }
 
-/*
+
 add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
 
 function wc_template_loop_product_replaced_thumb() {
 	echo '<div class="niw-icons-product">';
 	// Show activated allergens
 	$all_allergens = new Allergens();
-	foreach ($all_allergens->show_special_allergens_name() as $key => $value) {
-		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if ( $allergens_active == 'yes' ) {
-			echo $all_allergens->show_special_allergen_svg( $key );
-		}
+	$allergen_vegan = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . 'vegan', true  );
+	if ( $allergen_vegan == 'yes' ) {
+		echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( 'Vegan', 'nutrition-info-woocommerce' ) . '</div>';
+		echo $all_allergens->show_allergen_svg_vegan();
 	}
+	
 	echo '</div>';
 }
-
-*/

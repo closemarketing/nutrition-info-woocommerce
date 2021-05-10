@@ -76,6 +76,14 @@ class NIW_MetaProducts {
 					)
 				);
 			}
+			woocommerce_wp_checkbox( 
+				array( 
+					'id'            => NIW_PLUGIN_PREFIX . 'all_' . 'vegan',
+					'wrapper_class' => '',
+					'label'         => '',
+					'description'   => __( 'Vegan', 'nutrition-info-woocommerce' ),
+				)
+			);
 			?>
 		</div>
 		<?php
@@ -244,11 +252,10 @@ class NIW_MetaProducts {
 			}
 		}
 
-		foreach ( $allergens_especial as $key => $value ) {
-			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
-			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
-			$all_allergens_names[] = $value;
-		}
+		$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . 'vegan' ] ) ? $_POST[ NIW_PLUGIN_PREFIX . 'all_' . 'vegan' ] : '';
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . 'vegan', stripslashes( $post_meta ) );
+		//$all_allergens_names[] = $value;
+		
 
 		// Not allergens
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_names', $all_allergens_names );
