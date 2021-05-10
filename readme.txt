@@ -8,6 +8,8 @@ WC tested up to: 5.1
 Tested up to: 5.0
 Stable tag: 0.1
 Version: 0.1
+License: GPL2
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds nutrition information for products in WooCommerce.
 
