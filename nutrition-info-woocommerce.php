@@ -96,9 +96,10 @@ function niw_add_allergens_icon()
 			echo '<br>';
 		}
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if( $allergens_active == "yes" )
-		{
+		if( $allergens_active == "yes" ) {
+			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
 			echo $all_allergens->show_allergen_svg( $key );
+			echo '</div>';
 			$contador = $contador + 1;
 		}
 	}
@@ -117,8 +118,7 @@ function niw_add_special_allergens_icon_single_product()
 	// Show activated allergens
 	foreach ($all_allergens->show_special_allergens_name() as $key => $value) {
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . $key, true  );
-		if( $allergens_active == "yes" )
-		{
+		if( $allergens_active == "yes" ) {
 			echo $all_allergens->show_special_allergen_svg( $key );
 		}
 	}
@@ -148,7 +148,7 @@ function niw_add_allergens_icon_single_product()
 	echo "</div>";
 }
 
-
+/*
 add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
 
 function wc_template_loop_product_replaced_thumb() {
@@ -164,3 +164,4 @@ function wc_template_loop_product_replaced_thumb() {
 	echo '</div>';
 }
 
+*/

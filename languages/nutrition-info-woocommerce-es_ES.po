@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Nutrition Info for WooCommerce\n"
-"POT-Creation-Date: 2021-04-30 11:26+0200\n"
-"PO-Revision-Date: 2021-04-30 11:28+0200\n"
+"POT-Creation-Date: 2021-05-10 14:04+0200\n"
+"PO-Revision-Date: 2021-05-10 14:05+0200\n"
 "Last-Translator: David <david@closemarketing.es>\n"
 "Language-Team: David <david@closemarketing.es>\n"
 "Language: es\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: nutrition-info-woocommerce.php\n"
@@ -37,75 +37,84 @@ msgstr "Altramuces"
 msgid "Celery"
 msgstr "Apio"
 
-#: includes/allergens.php:53 includes/class-woo-metaproducts.php:153
+#: includes/allergens.php:53 includes/allergens.php:55
+#: includes/class-woo-metaproducts.php:153
 msgid "Sugar"
 msgstr "Azúcar"
 
-#: includes/allergens.php:69
+#: includes/allergens.php:72 includes/allergens.php:74
 msgid "Peanuts"
 msgstr "Cacahuetes"
 
-#: includes/allergens.php:79
+#: includes/allergens.php:85 includes/allergens.php:87
 msgid "Spices"
 msgstr "Especias"
 
-#: includes/allergens.php:89
-msgid "Without Gluten"
-msgstr "Sin gluten"
+#: includes/allergens.php:98 includes/allergens.php:100
+msgid "Gluten"
+msgstr "Gluten"
 
-#: includes/allergens.php:105
+#: includes/allergens.php:117 includes/allergens.php:119
 msgid "Egg"
 msgstr "Huevo"
 
-#: includes/allergens.php:114
-msgid "Dairy free"
-msgstr "Sin lácteos"
+#: includes/allergens.php:129 includes/allergens.php:131
+msgid "Milk"
+msgstr "Leche"
 
-#: includes/allergens.php:126
+#: includes/allergens.php:144 includes/allergens.php:146
 msgid "Corn"
 msgstr "Maíz"
 
-#: includes/allergens.php:140
-msgid "Shellfish"
-msgstr "Marisco"
+#: includes/allergens.php:161 includes/allergens.php:163
+msgid "Crustaceans"
+msgstr "Crustáceos"
 
-#: includes/allergens.php:154
+#: includes/allergens.php:178 includes/allergens.php:180
 msgid "Honey"
 msgstr "Miel"
 
-#: includes/allergens.php:170
+#: includes/allergens.php:197 includes/allergens.php:199
 msgid "Mollusks"
 msgstr "Moluscos"
 
-#: includes/allergens.php:181
+#: includes/allergens.php:217 includes/allergens.php:219
 msgid "Mustard"
 msgstr "Mostaza"
 
-#: includes/allergens.php:193
+#: includes/allergens.php:232 includes/allergens.php:234
 msgid "Organic"
 msgstr "Orgánico"
 
-#: includes/allergens.php:204
+#: includes/allergens.php:246 includes/allergens.php:248
 msgid "Fish"
 msgstr "Pescado"
 
-#: includes/allergens.php:214
+#: includes/allergens.php:259 includes/allergens.php:261
 msgid "Sesame"
 msgstr "Sésamo"
 
-#: includes/allergens.php:228
+#: includes/allergens.php:276 includes/allergens.php:278
 msgid "Mushrooms"
 msgstr "Champiñones"
 
-#: includes/allergens.php:243
+#: includes/allergens.php:294 includes/allergens.php:296
 msgid "Soy"
 msgstr "Soja"
 
-#: includes/allergens.php:255
+#: includes/allergens.php:309 includes/allergens.php:311
 msgid "Sulfates"
 msgstr "Sulfatos"
 
-#: includes/allergens.php:270
+#: includes/allergens.php:327 includes/allergens.php:329
+msgid "Vegetables"
+msgstr "Verduras"
+
+#: includes/allergens.php:347 includes/allergens.php:349
+msgid "Nuts"
+msgstr "Frutos secos"
+
+#: includes/allergens.php:366 includes/allergens.php:368
 msgid "Vegan"
 msgstr "Vegano"
 
@@ -114,17 +123,10 @@ msgid "Composition & Allergens"
 msgstr "Composición y Alérgenos"
 
 #: includes/class-woo-metaproducts.php:61
-msgid "Ingredients separated by commas"
-msgstr "Ingredientes separados por comas"
-
-#: includes/class-woo-metaproducts.php:62 includes/template.php:94
+#: includes/class-woo-metaproducts.php:64 includes/template.php:94
 #: includes/template.php:101
 msgid "Ingredients"
 msgstr "Ingredientes"
-
-#: includes/class-woo-metaproducts.php:64
-msgid "ingredient, ingreditent"
-msgstr "ingrediente, ingreditente"
 
 #: includes/class-woo-metaproducts.php:68
 msgid "Allergens"
@@ -222,6 +224,10 @@ msgstr "Vitaminas y minerales"
 #: includes/class-woo-metaproducts.php:204
 msgid "none"
 msgstr "ninguno"
+
+#: includes/class-woo-metaproducts.php:243
+msgid "Without"
+msgstr "Sin"
 
 #: includes/class-woo-settings.php:35 includes/product-tab.php:31
 msgid "Nutrients"
@@ -377,3 +383,15 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Closemarketing"
 msgstr "Closemarketing"
+
+#~ msgid "Dairy free"
+#~ msgstr "Sin lácteos"
+
+#~ msgid "Shellfish"
+#~ msgstr "Marisco"
+
+#~ msgid "Ingredients separated by commas"
+#~ msgstr "Ingredientes separados por comas"
+
+#~ msgid "ingredient, ingreditent"
+#~ msgstr "ingrediente, ingreditente"

@@ -3,38 +3,30 @@ $all_allergens = array(
 	array (
 		'key'   => 'alcohol',
 		'label' => __( 'Alcohol', 'nutrition-info-woocommerce' ),
-		'svg'   => '<div class="niw_svg_container">
-		<div class="niw_svg_container_span"><span>' . __( 'Alcohol', 'nutrition-info-woocommerce' ) . '</span></div>
-		<svg class="niw_svg_allergen" width="88" height="174" viewBox="0 0 88 174" fill="none" xmlns="http://www.w3.org/2000/svg">
+		'svg'   => '<svg class="niw_svg_allergen" width="88" height="174" viewBox="0 0 88 174" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M55.46 102.07V165.11H76.7701V173.11H26.1501V165.11H47.46V102.07C37.37 101.23 29.5401 97.09 24.1401 89.74C6.90007 66.3 21.69 18.08 22.33 16.04L23.21 13.24H79.71L80.59 16.04C81.23 18.08 96.0101 66.3 78.7801 89.74C73.3701 97.09 65.54 101.23 55.46 102.07Z" fill="#CF6E6E"/>
 		<path d="M11.14 156.11H61.77" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M36.46 85.24V156.11" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M11.14 4.23999H61.76C61.76 4.23999 87.07 85.24 36.45 85.24C-14.17 85.24 11.14 4.23999 11.14 4.23999Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M6.07996 29.55H69.21" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
-		</svg>
-		</div>'
+		</svg>'
 	),
 	array(
 		'key'   => 'almonds',
 		'label' => __( 'Almonds', 'nutrition-info-woocommerce' ),
-		'svg' => '<div class="niw_svg_container">
-		<div class="niw_svg_container_span"><span>' . __( 'Almonds', 'nutrition-info-woocommerce' ) . '</span></div>
-		<svg class="niw_svg_allergen" width="115" height="176" viewBox="0 0 115 176" fill="none" xmlns="http://www.w3.org/2000/svg">
+		'svg' => '<svg class="niw_svg_allergen" width="115" height="176" viewBox="0 0 115 176" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M114.13 120.475C114.13 141.215 109.34 155.615 99.4601 164.495C91.4101 171.735 80.3301 175.105 64.5701 175.105C48.8201 175.105 37.7301 171.735 29.6801 164.495C19.8101 155.615 15.01 141.215 15.01 120.475C15.01 63.7849 59.8401 18.3048 61.7401 16.4048L64.5701 13.5748L67.4 16.4048C69.31 18.3048 114.13 63.7849 114.13 120.475Z" fill="#C2A379"/>
 		<path d="M95.13 107.485C95.13 51.7949 49.5701 6.23486 49.5701 6.23486C49.5701 6.23486 4.01001 51.7949 4.01001 107.485C4.01001 149.425 24.4101 158.105 49.5701 158.105C74.7401 158.105 95.13 149.425 95.13 107.485Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M58.8401 133.135C61.4201 135.785 64.2501 138.285 67.3501 140.585" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M36.4301 67.9348C36.4301 98.4648 45.8001 116.965 53.7301 127.235" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M23.78 112.265C26.94 123.815 32.03 134.985 39.9 144.445" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M20.41 95.0049C20.85 98.4749 21.42 101.955 22.14 105.435" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
-		</svg>
-		</div>'
+		</svg>'
 	),
 	array(
 		'key'   => 'lupins',
 		'label' => __( 'Lupins', 'nutrition-info-woocommerce' ),
-		'svg' => '<div class="niw_svg_container">
-		<div class="niw_svg_container_span"><span>' . __( 'Lupins', 'nutrition-info-woocommerce' ) . '</span></div>
-		<svg class="niw_svg_allergen" width="169" height="130" viewBox="0 0 169 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+		'svg' => '<svg class="niw_svg_allergen" width="169" height="130" viewBox="0 0 169 130" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M167.321 92.7651C162.531 116.735 145.061 129.935 118.131 129.935C109.671 129.935 98.8807 127.015 92.3407 119.015C84.6707 126.215 73.0307 129.335 54.6507 129.335C31.3407 129.335 22.0607 121.155 18.3907 114.285C13.8307 105.775 15.4807 94.8451 23.0307 83.5151C31.9307 70.1651 38.0107 63.2251 52.4907 60.4951C49.8207 54.4951 49.9407 47.2851 52.8407 38.6251C61.3507 13.0851 77.9007 13.1751 88.8707 13.2551H90.5807C105.801 13.2551 117.751 17.8251 124.231 26.1351C129.531 32.9151 130.971 41.9151 128.411 52.1751C127.811 54.5551 127.091 56.7851 126.251 58.8751C129.451 58.1351 132.961 57.7151 136.551 57.7151C144.811 57.7151 153.491 59.9151 159.821 65.5051C164.841 69.9451 170.221 78.2651 167.321 92.7651Z" fill="#BDA885"/>
 		<path d="M85.6407 65.0052C82.6007 56.3352 73.7607 50.1052 56.6307 50.1052C28.3407 50.1052 22.6907 55.7652 11.3607 72.7352C-2.66927 93.7952 5.70071 112.345 39.6507 112.345C61.2107 112.345 71.3607 107.775 77.3407 100.105" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M108.791 50.6952C125.761 45.0352 154.061 50.6952 148.401 78.9852C142.741 107.275 120.111 112.935 103.131 112.935C86.1607 112.935 66.8707 100.585 80.5107 73.3352C86.1607 62.0152 91.8207 56.3552 108.791 50.6952Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
@@ -42,30 +34,24 @@ $all_allergens = array(
 		<path d="M131.431 77.4952C131.431 77.4952 131.431 92.6852 106.121 97.7452" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M58.5307 31.9352C58.5307 31.9352 60.7907 23.3452 65.6207 21.8152C79.0707 17.5452 92.3607 25.2052 92.3607 25.2052" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M23.1207 92.3052C23.1207 92.3052 29.4507 94.9152 37.6707 94.9052C53.0407 94.8852 60.5507 93.1652 60.5507 93.1652" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
-		</svg>
-		</div>'
+		</svg>'
 	),
 	array(
 		'key'   => 'celery',
 		'label' => __( 'Celery', 'nutrition-info-woocommerce' ),
-		'svg' => '<div class="niw_svg_container">
-		<div class="niw_svg_container_span"><span>' . __( 'Celery', 'nutrition-info-woocommerce' ) . '</span></div>
-		<svg class="niw_svg_allergen" width="167" height="165" viewBox="0 0 167 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+		'svg' => '<svg class="niw_svg_allergen" width="167" height="165" viewBox="0 0 167 165" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M166.54 103.85L163.44 105.4C158.42 107.91 153.23 109.16 147.94 109.16C138.49 109.16 128.74 105.18 119.1 97.2999C117.32 95.8399 115.65 94.3399 114.1 92.8399C107.1 105.2 90.67 132.74 74.42 148.99C64.24 159.17 54.9501 164.12 46.0301 164.12H45.67C36.33 163.98 29.67 158.38 25.48 154.18C10.75 139.45 12.45 123.44 30.67 105.23C46.91 88.9899 74.45 72.5499 86.82 65.5699C85.32 64.0099 83.81 62.3299 82.35 60.5399C70.06 45.5199 67.26 30.1899 74.25 16.2199L75.81 13.1099L79.1 14.2099C87.76 17.0999 94.35 21.9899 97.56 24.6899C100.62 20.0699 103.39 17.2699 103.58 17.0799L106.41 14.2499L109.23 17.0799C109.58 17.4299 116.35 24.2899 118.4 32.8199C131.6 29.6399 143.21 33.0699 143.75 33.2299L145.8 33.8499L146.42 35.8999C146.59 36.4399 150.01 48.0599 146.84 61.2499C155.37 63.3099 162.23 70.0799 162.57 70.4299L165.4 73.2499L162.57 76.0799C162.38 76.2699 159.58 79.0399 154.97 82.0999C157.68 85.3099 162.55 91.9099 165.44 100.56L166.54 103.85Z" fill="#A0C78C"/>
 		<path d="M126.64 51.68C131.72 37.71 127.59 24.06 127.59 24.06C127.59 24.06 113.94 19.93 99.96 25.01C100.29 15.8 91.4 6.91003 91.4 6.91003C91.4 6.91003 62.82 35.48 89.48 62.16C116.16 88.83 144.73 60.26 144.73 60.26C144.73 60.26 135.85 51.36 126.64 51.68Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M79.97 52.63C79.97 52.63 39.27 74.27 18.49 95.06C-2.29002 115.84 3.77998 128.83 13.3 138.36C22.82 147.88 35.81 153.94 56.59 133.16C77.38 112.38 99.03 71.68 99.03 71.68" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M89.49 62.16C89.49 62.16 7.53001 118.73 13.31 138.36" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M89.49 62.16C89.49 62.16 47.59 35.49 62.83 5.01001C74.26 8.83001 81.87 16.45 81.87 16.45" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M89.49 62.16C89.49 62.16 116.17 104.06 146.65 88.83C142.83 77.4 135.21 69.78 135.21 69.78" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
-		</svg>
-		</div>'
+		</svg>'
 	),
 	array(
 		'key'   => 'sugar',
 		'label' => __( 'Sugar', 'nutrition-info-woocommerce' ),
-		'svg' => '<div class="niw_svg_container">
-		<div class="niw_svg_container_span"><span>' . __( 'Sugar', 'nutrition-info-woocommerce' ) . '</span></div>
-		<svg class="niw_svg_allergen" width="146" height="150" viewBox="0 0 146 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+		'svg' => '<svg class="niw_svg_allergen" width="146" height="150" viewBox="0 0 146 150" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M145.005 86.3749V131.815L110.635 149.005L80.255 133.815L49.885 149.005L15.505 131.815V86.3749L45.885 71.1849V30.6849L80.255 13.4949L114.635 30.6849V71.1849L145.005 86.3749Z" fill="#C9C2BE"/>
 		<path d="M95.635 60.665V20.165L65.255 4.9751L34.885 20.165V60.665L65.255 75.8451L95.635 60.665Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M34.885 20.165L65.255 35.3451L95.635 20.165" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
@@ -76,8 +62,7 @@ $all_allergens = array(
 		<path d="M65.255 116.345V75.8451L34.885 60.665L4.505 75.8451V116.345L34.885 131.535L65.255 116.345Z" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M4.505 75.8451L34.885 91.035L65.255 75.8451" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
 		<path d="M34.885 127.505V91.035" stroke="#3E3E3D" stroke-width="8" stroke-miterlimit="10"/>
-		</svg>
-		</div>'
+		</svg>'
 	),
 	array(
 		'key'   => 'peanuts',
@@ -428,8 +413,7 @@ class Allergens {
 	 *
 	 * @return allergen_svg
 	 */
-	public function show_allergen_svg($name)
-	{
+	public function show_allergen_svg( $name ) {
 		global $all_allergens;
 		$allergen_svg = '';
 
