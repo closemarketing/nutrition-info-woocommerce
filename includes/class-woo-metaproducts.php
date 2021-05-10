@@ -69,19 +69,7 @@ class NIW_MetaProducts {
 			foreach ( $array_allergens_name as $key => $value ) {
 				woocommerce_wp_checkbox( 
 					array( 
-						'id'            => NIW_PLUGIN_PREFIX . $key,
-						'wrapper_class' => '',
-						'label'         => '',
-						'description'   => __( $value, 'nutrition-info-woocommerce' ),
-					)
-				);
-			}
-
-			$array_special_allergens_name = $allergens->show_special_allergens_name();
-			foreach ( $array_special_allergens_name as $key => $value ) {
-				woocommerce_wp_checkbox( 
-					array( 
-						'id'            => NIW_PLUGIN_PREFIX . $key,
+						'id'            => NIW_PLUGIN_PREFIX . 'all_' . $key,
 						'wrapper_class' => '',
 						'label'         => '',
 						'description'   => __( $value, 'nutrition-info-woocommerce' ),
@@ -240,14 +228,20 @@ class NIW_MetaProducts {
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'ingredients', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'ingredients'] ) );
 		$allergens = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
-		$allergens_especial   = $allergens->show_special_allergens_name();
 
 		$all_allergens_names = array();
+		$all_allergens_not   = array();
 		foreach ( $array_allergens_name as $key => $value ) {
 
-			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . $key ] : '';
-			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . $key, stripslashes( $post_meta ) );
-			$all_allergens_names[] = $value;
+			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] : '';
+			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . $key, stripslashes( $post_meta ) );
+			
+			if ( $post_meta ) {
+				$all_allergens_names[] = $value;
+			}
+			if ( ! isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] ) ) {
+				$all_allergens_not[] = __( 'Without', 'nutrition-info-woocommerce' ) . ' ' . $value;
+			}
 		}
 
 		foreach ( $allergens_especial as $key => $value ) {
@@ -256,7 +250,9 @@ class NIW_MetaProducts {
 			$all_allergens_names[] = $value;
 		}
 
+		// Not allergens
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_names', $all_allergens_names );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_not', $all_allergens_not );
 	}
 
 }
