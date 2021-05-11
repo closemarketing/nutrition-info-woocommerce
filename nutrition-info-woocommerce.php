@@ -119,6 +119,7 @@ function niw_add_special_allergens_icon_single_product()
 	if( $allergen_vegan == "yes" ) {
 		echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( 'Vegan', 'nutrition-info-woocommerce' ) . '</div>';
 		echo $all_allergens->show_allergen_svg_vegan();
+		echo '</div>';
 	}
 	echo "</div>";
 
@@ -141,6 +142,7 @@ function niw_add_allergens_icon_single_product()
 		{
 			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
 			echo $all_allergens->show_allergen_svg( $key );
+			echo '</div>';
 		}
 	}
 	
