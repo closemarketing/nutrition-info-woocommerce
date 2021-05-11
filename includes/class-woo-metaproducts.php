@@ -248,7 +248,7 @@ class NIW_MetaProducts {
 				$all_allergens_names[] = $value;
 			}
 			if ( ! isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] ) ) {
-				$all_allergens_not[] = __( 'Without', 'nutrition-info-woocommerce' ) . ' ' . $value;
+				$all_allergens_not[] = __( 'Without', 'nutrition-info-woocommerce' ) . ' ' . __( $value, 'nutrition-info-woocommerce' );
 			}
 		}
 
