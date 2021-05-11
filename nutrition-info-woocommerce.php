@@ -117,7 +117,7 @@ function niw_add_special_allergens_icon_single_product()
 	echo "<div class='niw_icon_allergen_product'>";
 	$allergen_vegan = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . 'vegan', true  );
 	if( $allergen_vegan == "yes" ) {
-		echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
+		echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( 'Vegan', 'nutrition-info-woocommerce' ) . '</div>';
 		echo $all_allergens->show_allergen_svg_vegan();
 	}
 	echo "</div>";
@@ -151,7 +151,7 @@ function niw_add_allergens_icon_single_product()
 add_action( 'woocommerce_before_shop_loop_item_title', 'wc_template_loop_product_replaced_thumb', 10 );
 
 function wc_template_loop_product_replaced_thumb() {
-	echo '<div class="niw-icons-product">';
+	echo '<div class="niw_icons_product">';
 	// Show activated allergens
 	$all_allergens = new Allergens();
 	$allergen_vegan = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . 'vegan', true  );
