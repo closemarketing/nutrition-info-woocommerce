@@ -94,6 +94,7 @@ function niw_add_allergens_icon()
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
 		if( $contador == 5 ) {
 			echo '<br>';
+			$contador = 0;
 		}
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . $key, true  );
 		if( $allergens_active == "yes" ) {
