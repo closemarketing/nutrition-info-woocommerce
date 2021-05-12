@@ -88,20 +88,14 @@ add_action("woocommerce_after_shop_loop_item_title", "niw_add_allergens_icon", 5
 function niw_add_allergens_icon()
 {
 	$all_allergens = new Allergens();
-	$contador = 0;
 	echo "<div class='niw_icon_allergen_product'>";
 	// Show activated allergens
 	foreach ($all_allergens->show_allergens_name() as $key => $value) {
-		if( $contador == 5 ) {
-			echo '<br>';
-			$contador = 0;
-		}
 		$allergens_active = get_post_meta( get_the_ID(), NIW_PLUGIN_PREFIX . 'all_' . $key, true  );
 		if( $allergens_active == "yes" ) {
 			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . __( $value, 'nutrition-info-woocommerce' ) . '</div>';
 			echo $all_allergens->show_allergen_svg( $key );
 			echo '</div>';
-			$contador = $contador + 1;
 		}
 	}
 	
