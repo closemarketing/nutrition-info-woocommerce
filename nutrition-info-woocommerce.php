@@ -12,21 +12,21 @@ Text Domain: nutrition-info-woocommerce
 Domain Path: /languages
 */
 
-function wni_load_textdomain() {
+function niw_load_textdomain() {
     load_plugin_textdomain( 'nutrition-info-woocommerce', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'plugins_loaded', 'wni_load_textdomain' );
+add_action( 'plugins_loaded', 'niw_load_textdomain' );
 
-define( 'WNI_BUNDLE_VERSION' , '0.1');
+define( 'NIW_BUNDLE_VERSION' , '0.1');
 define( 'NIW_PLUGIN_PREFIX', 'niw_');
-define( 'WNI_PLUGIN_PATH', plugin_dir_path(__FILE__) );
-define( 'WNI_PLUGIN_URL', plugin_dir_url(__FILE__) );
+define( 'NIW_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+define( 'NIW_PLUGIN_URL', plugin_dir_url(__FILE__) );
 
-include WNI_PLUGIN_PATH . 'includes/class-woo-settings.php';
-include WNI_PLUGIN_PATH . 'includes/class-woo-metaproducts.php';
-include WNI_PLUGIN_PATH . 'includes/template.php'; // Nutrients display function
-include WNI_PLUGIN_PATH . 'includes/product-tab.php'; // Nutrients display function
-include WNI_PLUGIN_PATH . 'includes/allergens.php'; // Allergens
+include NIW_PLUGIN_PATH . 'includes/class-woo-settings.php';
+include NIW_PLUGIN_PATH . 'includes/class-woo-metaproducts.php';
+include NIW_PLUGIN_PATH . 'includes/template.php'; // Nutrients display function
+include NIW_PLUGIN_PATH . 'includes/product-tab.php'; // Nutrients display function
+include NIW_PLUGIN_PATH . 'includes/allergens.php'; // Allergens
 
 
 add_action( 'wp_enqueue_scripts', 'niw_styles_frontend' );
@@ -34,7 +34,7 @@ add_action( 'wp_enqueue_scripts', 'niw_styles_frontend' );
  * Proper way to enqueue scripts and styles
  */
 function niw_styles_frontend() {
-	wp_enqueue_style( 'slider', WNI_PLUGIN_URL . '/css/styles.css', false, WNI_BUNDLE_VERSION , 'all' );
+	wp_enqueue_style( 'slider', NIW_PLUGIN_URL . '/css/styles.css', false, NIW_BUNDLE_VERSION , 'all' );
 }
 
 if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary' ) {
@@ -58,18 +58,18 @@ if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_price') {
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'in_description_tab') {
-    add_filter( 'woocommerce_product_tabs', 'woo_custom_description_tab', 98 );
+    add_filter( 'woocommerce_product_tabs', 'niw_custom_description_tab', 98 );
 }
 
-function woo_custom_description_tab( $tabs ) {
+function niw_custom_description_tab( $tabs ) {
 
-	$tabs['description']['callback'] = 'woo_custom_description_tab_content';	// Custom description callback
+	$tabs['description']['callback'] = 'niw_custom_description_tab_content';	// Custom description callback
 
 	return $tabs;
 }
 
-function woo_custom_description_tab_content() {
-    $heading = esc_html( apply_filters( 'woocommerce_product_description_heading', __( 'Description', 'woocommerce' ) ) );
+function niw_custom_description_tab_content() {
+    $heading = esc_html( apply_filters( 'niwcommerce_product_description_heading', __( 'Description', 'woocommerce' ) ) );
     ?>
 
     <?php if ( $heading ) : ?>
