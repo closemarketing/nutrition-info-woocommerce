@@ -64,8 +64,8 @@ function nutritionInfo() {
 		<table id="nutrition-table">
 			<thead>
 				<tr>
-					<th class="nutrition-table nutrition-table__nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
-					<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutrition-info-woocommerce'); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-amount"><?= __('pr. 100 g', 'nutrition-info-woocommerce'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -75,8 +75,8 @@ function nutritionInfo() {
 					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
 					if ( $value_meta ) {
 						echo '<tr>';
-						echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
-						echo '<td class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</td>';
+						echo '<td class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
+						echo '<td class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</td>';
 						echo '</tr>';
 					}
 				} ?>
@@ -106,12 +106,12 @@ function compositionInfo() {
 				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
 				if ( $value_meta ) {
 					echo '<br>';
-					echo '<p class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
+					echo '<p class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
 					if( $attr_nutrition['key'] == 'allergens' )
 					{
 					}
 					else {
-						echo '<p class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</p>';
+						echo '<p class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</p>';
 					}
 					echo '</br>';
 				}
