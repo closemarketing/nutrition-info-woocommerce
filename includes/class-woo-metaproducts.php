@@ -222,12 +222,16 @@ class NIW_MetaProducts {
 			'niw_energy',
 			'niw_fat',
 			'niw_saturated_fat',
-			'niw_',
-			'niw_',
-			'niw_',
-			'niw_',
-			'niw_',
-			'niw_',
+			'niw_monounsaturated_fat',
+			'niw_polyunsaturated_fat',
+			'niw_carb',
+			'niw_sugar',
+			'niw_polyol',
+			'niw_starch',
+			'niw_fiber',
+			'niw_protein',
+			'niw_salt',
+			'niw_vitamin_mineral',
 			'niw_ingredients',
 		);
 
@@ -237,22 +241,6 @@ class NIW_MetaProducts {
 			}
 		}
 
-		/*
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'energy', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'energy'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'fat'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'saturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'saturated_fat'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'monounsaturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'monounsaturated_fat'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'polyunsaturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'polyunsaturated_fat'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'carb', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'carb'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'sugar', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'sugar'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'polyol', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'polyol'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'starch', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'starch'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'fiber', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'fiber'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'protein', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'protein'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'salt', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'salt'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'vitamin_mineral', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'vitamin_mineral'] ) );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'ingredients', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'ingredients'] ) );
-		*/
 		// Other tab.
 		$allergens = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
