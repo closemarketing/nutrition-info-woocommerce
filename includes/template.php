@@ -65,7 +65,7 @@ function nutritionInfo() {
 			<thead>
 				<tr>
 					<th class="nutrition-table nutrition-table_nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
-					<th class="nutrition-table nutrition-table_nutrient-amount"><?= __('pr. 100 g', 'nutrition-info-woocommerce'); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-amount"><?php esc_html_e( 'pr. 100 g', 'nutrition-info-woocommerce' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -86,19 +86,21 @@ function nutritionInfo() {
 <?php }
 
 
-
-function compositionInfo() {
+/**
+ * Show in tab the ingredients.
+ *
+ * @return void
+ */
+function niw_composition_info() {
 	$attr_products_nutrition = array(
 		array(
 			'key'   => 'ingredients',
 			'label' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
 		)
 	);
-
 	?>
-
 	<details class="niw_additional_information">
-		<summary class="niw_tittle_additional_information"><?= __('Ingredients', 'nutrition-info-woocommerce'); ?></summary>
+		<summary class="niw_tittle_additional_information"><?php esc_html_e( 'Ingredients', 'nutrition-info-woocommerce' ); ?></summary>
 		<tbody>
 			<?php 
 			$post_id = get_the_ID();

@@ -39,22 +39,22 @@ function niw_styles_frontend() {
 
 if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_product_summary' ) {
 	add_action( 'woocommerce_single_product_summary', 'nutritionInfo', '45' );
-	add_action( 'woocommerce_single_product_summary', 'compositionInfo', '45' );
+	add_action( 'woocommerce_single_product_summary', 'niw_composition_info', '45' );
 }
 
 if ( get_option( 'wc_nutrients_settings_tab_position' ) == 'after_add_to_cart' ) {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '35');
-    add_action('woocommerce_single_product_summary', 'compositionInfo', '35');
+    add_action('woocommerce_single_product_summary', 'niw_composition_info', '35');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_excerpt') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '25');
-    add_action('woocommerce_single_product_summary', 'compositionInfo', '25');
+    add_action('woocommerce_single_product_summary', 'niw_composition_info', '25');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'after_price') {
     add_action('woocommerce_single_product_summary', 'nutritionInfo', '15');
-    add_action('woocommerce_single_product_summary', 'compositionInfo', '15');
+    add_action('woocommerce_single_product_summary', 'niw_composition_info', '15');
 }
 
 if (get_option( 'wc_nutrients_settings_tab_position' ) == 'in_description_tab') {
@@ -69,24 +69,20 @@ function niw_custom_description_tab( $tabs ) {
 }
 
 function niw_custom_description_tab_content() {
-    $heading = esc_html( apply_filters( 'niwcommerce_product_description_heading', __( 'Description', 'woocommerce' ) ) );
-    ?>
-
-    <?php if ( $heading ) : ?>
-      <h2><?php echo $heading; ?></h2>
-    <?php endif; ?>
-
-    <?php the_content();
+	$heading = esc_html( apply_filters( 'niwcommerce_product_description_heading', __( 'Description', 'woocommerce' ) ) );
+	if ( $heading ) {
+		echo '<h2>' . esc_html( $heading ) . '</h2>';
+	}
+	the_content();
 	nutritionInfo();
-	compositionInfo();
+	niw_composition_info();
 }
 
 /**
  * Function that adds icons of allergens in the view of the products
  */
-add_action("woocommerce_after_shop_loop_item_title", "niw_add_allergens_icon", 5);
-function niw_add_allergens_icon()
-{
+add_action( 'woocommerce_after_shop_loop_item_title', 'niw_add_allergens_icon', 5);
+function niw_add_allergens_icon() {
 	$all_allergens = new Allergens();
 	echo "<div class='niw_icon_allergen_product'>";
 	// Show activated allergens

@@ -217,7 +217,27 @@ class NIW_MetaProducts {
 		<?php
 	}
 
-	function woocommerce_process_product_meta_fields_save( $post_id ){
+	function woocommerce_process_product_meta_fields_save( $post_id ) {
+		$metas_composition = array(
+			'niw_energy',
+			'niw_fat',
+			'niw_saturated_fat',
+			'niw_',
+			'niw_',
+			'niw_',
+			'niw_',
+			'niw_',
+			'niw_',
+			'niw_ingredients',
+		);
+
+		foreach ( $metas_composition as $composition ) {
+			if ( isset( $_POST[ $composition ] ) ) {
+				update_post_meta( $post_id, $composition, sanitize_text_field( $_POST[ $composition ] ) );
+			}
+		}
+
+		/*
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'energy', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'energy'] ) );
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'fat'] ) );
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'saturated_fat', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'saturated_fat'] ) );
@@ -231,9 +251,9 @@ class NIW_MetaProducts {
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'protein', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'protein'] ) );
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'salt', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'salt'] ) );
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'vitamin_mineral', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'vitamin_mineral'] ) );
-
-		// Other tab.
 		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'ingredients', stripslashes( $_POST[NIW_PLUGIN_PREFIX . 'ingredients'] ) );
+		*/
+		// Other tab.
 		$allergens = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
 
