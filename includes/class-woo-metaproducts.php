@@ -24,14 +24,14 @@ class NIW_MetaProducts {
 	 */
 	public function __construct() {
 
-		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab2' ) , 98 , 1 );
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab2' ), 98, 1 );
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_custom_fields_to_product_composition' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'woocommerce_process_product_meta_fields_save' ) );
 
 		// Meta Info.
-		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab' ) , 99 , 1 );
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab' ), 99, 1 );
 
-		// This action will add custom fields to the added custom tabs under Products Data metabox
+		// This action will add custom fields to the added custom tabs under Products Data metabox.
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_my_custom_product_data_fields' ) );
 	}
 
@@ -52,7 +52,7 @@ class NIW_MetaProducts {
 		?>
 		<div id="ingredients_composition" class="panel woocommerce_options_panel">
 			<?php
-			$allergens = new Allergens();
+			$allergens = new NIW_Allergens();
 			$array_allergens_name = $allergens->show_allergens_name();
 			woocommerce_wp_textarea_input(
 				array(
@@ -67,8 +67,8 @@ class NIW_MetaProducts {
 
 			echo '<h2>' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</h2>';
 			foreach ( $array_allergens_name as $key => $value ) {
-				woocommerce_wp_checkbox( 
-					array( 
+				woocommerce_wp_checkbox(
+					array(
 						'id'            => NIW_PLUGIN_PREFIX . 'all_' . $key,
 						'wrapper_class' => '',
 						'label'         => '',
@@ -76,8 +76,8 @@ class NIW_MetaProducts {
 					)
 				);
 			}
-			woocommerce_wp_checkbox( 
-				array( 
+			woocommerce_wp_checkbox(
+				array(
 					'id'            => NIW_PLUGIN_PREFIX . 'all_' . 'vegan',
 					'wrapper_class' => '',
 					'label'         => '',
@@ -87,7 +87,7 @@ class NIW_MetaProducts {
 			?>
 		</div>
 		<?php
-	} 
+	}
 
 	/**
 	 * # Meta info
@@ -242,7 +242,7 @@ class NIW_MetaProducts {
 		}
 
 		// Other tab.
-		$allergens = new Allergens();
+		$allergens = new NIW_Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
 
 		$all_allergens_names = array();
@@ -250,8 +250,8 @@ class NIW_MetaProducts {
 		foreach ( $array_allergens_name as $key => $value ) {
 
 			$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] ) ? $_POST[ NIW_PLUGIN_PREFIX . 'all_' . $key ] : '';
-			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . $key, stripslashes( $post_meta ) );
-			
+			update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . $key, sanitize_text_field( $post_meta ) );
+	
 			if ( $post_meta ) {
 				$all_allergens_names[] = $value;
 			}
@@ -261,13 +261,11 @@ class NIW_MetaProducts {
 		}
 
 		$post_meta = isset( $_POST[ NIW_PLUGIN_PREFIX . 'all_' . 'vegan' ] ) ? $_POST[ NIW_PLUGIN_PREFIX . 'all_' . 'vegan' ] : '';
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . 'vegan', stripslashes( $post_meta ) );
-		//$all_allergens_names[] = $value;
-		
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_' . 'vegan', sanitize_text_field( $post_meta ) );
 
 		// Not allergens
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_names', $all_allergens_names );
-		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_not', $all_allergens_not );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_names', sanitize_text_field( $all_allergens_names ) );
+		update_post_meta( $post_id, NIW_PLUGIN_PREFIX . 'all_allergens_not', sanitize_text_field( $all_allergens_not ) );
 	}
 
 }
