@@ -1,7 +1,7 @@
 <?php
 
 
-function nutritionInfo() {
+function niw_nutrition_info() {
 
 	$attr_products_nutrition = array(
 		array(
@@ -72,7 +72,7 @@ function nutritionInfo() {
 				<?php 
 				$post_id = get_the_ID();
 				foreach ( $attr_products_nutrition as $attr_nutrition ) {
-					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
+					$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
 					if ( $value_meta ) {
 						echo '<tr>';
 						echo '<td class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
@@ -105,7 +105,7 @@ function niw_composition_info() {
 			<?php 
 			$post_id = get_the_ID();
 			foreach ( $attr_products_nutrition as $attr_nutrition ) {
-				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
+				$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
 				if ( $value_meta ) {
 					echo '<br>';
 					echo '<p class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';

@@ -39,6 +39,6 @@ function nutritional_content_tab( $tabs ) {
 function nutritional_content_tab_content() {
 	// The new tab content
 	echo '<h2>' . __('New Product Tab', 'nutrition-info-woocommerce') . '</h2>';
-	nutritionInfo();
+	niw_nutrition_info();
 }
 
