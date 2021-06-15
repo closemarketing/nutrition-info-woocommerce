@@ -118,8 +118,8 @@ class NIW_MetaProducts {
 			woocommerce_wp_text_input( array(
 				'id'          => 'niw_fat',
 				'class'       => '',
-				'label'       => __('Fat', 'nutrition-info-woocommerce'),
-				'description' => __('(gram)', 'nutrition-info-woocommerce'),
+				'label'       => __( 'Fat', 'nutrition-info-woocommerce' ),
+				'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
 				'desc_tip'    => false,
 				'placeholder' => __('0 g', 'nutrition-info-woocommerce')
 			) );
@@ -249,8 +249,8 @@ class NIW_MetaProducts {
 		$all_allergens_not   = array();
 		foreach ( $array_allergens_name as $key => $value ) {
 
-			$post_meta = isset( $_POST[ 'niw_all_' . $key ] ) ? $_POST[ 'niw_all_' . $key ] : '';
-			update_post_meta( $post_id, 'niw_all_' . $key, sanitize_text_field( $post_meta ) );
+			$post_meta = isset( $_POST[ 'niw_all_' . $key ] ) ? sanitize_text_field( $_POST[ 'niw_all_' . $key ] ) : '';
+			update_post_meta( $post_id, 'niw_all_' . $key, $post_meta );
 	
 			if ( $post_meta ) {
 				$all_allergens_names[] = $value;
@@ -260,8 +260,8 @@ class NIW_MetaProducts {
 			}
 		}
 
-		$post_meta = isset( $_POST[ 'niw_all_' . 'vegan' ] ) ? $_POST[ 'niw_all_' . 'vegan' ] : '';
-		update_post_meta( $post_id, 'niw_all_' . 'vegan', sanitize_text_field( $post_meta ) );
+		$post_meta = isset( $_POST[ 'niw_all_' . 'vegan' ] ) ? sanitize_text_field( $_POST[ 'niw_all_' . 'vegan' ] ) : '';
+		update_post_meta( $post_id, 'niw_all_' . 'vegan', $post_meta );
 
 		// Not allergens
 		update_post_meta( $post_id, 'niw_all_allergens_names', sanitize_text_field( $all_allergens_names ) );
