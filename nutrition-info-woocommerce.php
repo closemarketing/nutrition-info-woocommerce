@@ -152,7 +152,7 @@ function niw_add_allergens_icon_single_product() {
 
 		if( 'yes' == $allergens_active ) {
 			echo '<div class="niw_svg_container"><div class="niw_svg_container_span">' . esc_html__( $value, 'nutrition-info-woocommerce' ) . '</div>';
-			echo $all_allergens->show_allergen_svg( $key );
+			echo wp_kses( $all_allergens->show_allergen_svg( $key ), $allowed_tags_svg );
 			echo '</div>';
 		}
 	}
@@ -169,7 +169,7 @@ function wc_template_loop_product_replaced_thumb() {
 	$allergen_vegan = get_post_meta( get_the_ID(), 'niw_all_' . 'vegan', true  );
 	if ( 'yes' == $allergen_vegan ) {
 		echo '<div class="niw_svg_container_span">' . __( 'Vegan', 'nutrition-info-woocommerce' ) . '</div>';
-		echo $all_allergens->show_allergen_svg_vegan();
+		echo wp_kses( $all_allergens->show_allergen_svg_vegan(), $allowed_tags_svg );
 	}
 	echo '</div>';
 }
