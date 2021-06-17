@@ -1,6 +1,6 @@
 <?php
 // [footag foo="bar"]
-function wni_shortcode_func ( $atts ) {
-    nutritionInfo();
+function niw_shortcode_func ( $atts ) {
+	niw_nutrition_info();
 }
-add_shortcode( 'nutritiontable', 'wni_shortcode_func ' ); ?>
+add_shortcode( 'nutritiontable', 'niw_shortcode_func ' ); ?>

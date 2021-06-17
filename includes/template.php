@@ -1,7 +1,7 @@
 <?php
 
 
-function nutritionInfo() {
+function niw_nutrition_info() {
 
 	$attr_products_nutrition = array(
 		array(
@@ -64,19 +64,19 @@ function nutritionInfo() {
 		<table id="nutrition-table">
 			<thead>
 				<tr>
-					<th class="nutrition-table nutrition-table__nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
-					<th class="nutrition-table nutrition-table__nutrient-amount"><?= __('pr. 100 g', 'nutrition-info-woocommerce'); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-amount"><?php esc_html_e( 'pr. 100 g', 'nutrition-info-woocommerce' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
 				$post_id = get_the_ID();
 				foreach ( $attr_products_nutrition as $attr_nutrition ) {
-					$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
+					$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
 					if ( $value_meta ) {
 						echo '<tr>';
-						echo '<td class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
-						echo '<td class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</td>';
+						echo '<td class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</td>';
+						echo '<td class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</td>';
 						echo '</tr>';
 					}
 				} ?>
@@ -86,32 +86,34 @@ function nutritionInfo() {
 <?php }
 
 
-
-function compositionInfo() {
+/**
+ * Show in tab the ingredients.
+ *
+ * @return void
+ */
+function niw_composition_info() {
 	$attr_products_nutrition = array(
 		array(
 			'key'   => 'ingredients',
 			'label' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
 		)
 	);
-
 	?>
-
 	<details class="niw_additional_information">
-		<summary class="niw_tittle_additional_information"><?= __('Ingredients', 'nutrition-info-woocommerce'); ?></summary>
+		<summary class="niw_tittle_additional_information"><?php esc_html_e( 'Ingredients', 'nutrition-info-woocommerce' ); ?></summary>
 		<tbody>
 			<?php 
 			$post_id = get_the_ID();
 			foreach ( $attr_products_nutrition as $attr_nutrition ) {
-				$value_meta = get_post_meta( $post_id, NIW_PLUGIN_PREFIX . $attr_nutrition['key'], true );
+				$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
 				if ( $value_meta ) {
 					echo '<br>';
-					echo '<p class="nutrition-table nutrition-table__nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
+					echo '<p class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
 					if( $attr_nutrition['key'] == 'allergens' )
 					{
 					}
 					else {
-						echo '<p class="nutrition-table nutrition-table__nutrient-amount">' . esc_html( $value_meta ) . '</p>';
+						echo '<p class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</p>';
 					}
 					echo '</br>';
 				}

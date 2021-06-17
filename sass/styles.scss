@@ -3,20 +3,20 @@
 	font-size: .8em;
 
 	height: auto;
-	.nutrition-table__nutrient-name,
-	.nutrition-table__nutrient-amount {
+	.nutrition-table_nutrient-name,
+	.nutrition-table_nutrient-amount {
 		padding: .5em;
 	}
-	.nutrition-table__nutrient-name {
+	.nutrition-table_nutrient-name {
 		&_subnutrient {
 			padding-left: 1.5em;
 		}
 	}
-	.nutrition-table__nutrient-name {
+	.nutrition-table_nutrient-name {
 		text-align: left;
 		width: 60%;
 	}
-	.nutrition-table__nutrient-amount {
+	.nutrition-table_nutrient-amount {
 		text-align: right;
 	}
 
