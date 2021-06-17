@@ -5,7 +5,7 @@ Donate link:
 Requires at least: 4.0
 WC requires at least: 4.0
 WC tested up to: 5.1
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Stable tag: 0.1
 Version: 0.1
 
