@@ -1,7 +1,7 @@
 === Nutrition Info WooCommerce ===
 Contributors: closemarketing, davidperez, manolomunoz
 Tags: nutrition, info, allergens
-Donate link: 
+Donate link: https://www.closemarketing.es/go/donate/
 Requires at least: 4.0
 WC requires at least: 4.0
 WC tested up to: 5.1
