@@ -1,0 +1,21 @@
+name: PHP Code Linting
+on:
+  push:
+    branches: [main, 'release/**']
+    paths: ['.github/workflows/php-lint.yml', '**.php', 'phpcs.xml.dist', 'composer.json']
+  pull_request:
+    branches: [main, 'release/**', 'feature/**']
+    paths: ['.github/workflows/php-lint.yml', '**.php', 'phpcs.xml.dist', 'composer.json']
+jobs:
+  php-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+      - run: composer validate
+      - uses: ramsey/composer-install@a2636af0004d1c0499ffca16ac0b4cc94df70565
+      - run: composer lint
+      - run: composer phpstan

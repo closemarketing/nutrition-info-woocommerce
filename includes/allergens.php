@@ -376,7 +376,7 @@ class NIW_Allergens {
 		$allergen_svg = '';
 
 		foreach ( $all_allergens as $key => $value ) {
-			if ( $value['key'] == $name ) {
+			if ( $value['key'] === $name ) {
 				$allergen_svg = $value['svg'];
 			}
 		}
@@ -399,5 +399,4 @@ class NIW_Allergens {
 		global $allergen_vegano;
 		return $allergen_vegano['key'];
 	}
-
 }

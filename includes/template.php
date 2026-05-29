@@ -1,6 +1,13 @@
 <?php
+/**
+ * Templates for nutrition and composition info.
+ *
+ * @package WordPress
+ */
 
-
+/**
+ * Render nutrition info table.
+ */
 function niw_nutrition_info() {
 
 	$attr_products_nutrition = array(
@@ -69,7 +76,7 @@ function niw_nutrition_info() {
 				</tr>
 			</thead>
 			<tbody>
-				<?php 
+				<?php
 				$post_id = get_the_ID();
 				foreach ( $attr_products_nutrition as $attr_nutrition ) {
 					$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
@@ -79,11 +86,13 @@ function niw_nutrition_info() {
 						echo '<td class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</td>';
 						echo '</tr>';
 					}
-				} ?>
+				}
+				?>
 			</tbody>
 		</table>
 	</details>
-<?php }
+	<?php
+}
 
 
 /**
@@ -96,28 +105,25 @@ function niw_composition_info() {
 		array(
 			'key'   => 'ingredients',
 			'label' => __( 'Ingredients', 'nutrition-info-woocommerce' ),
-		)
+		),
 	);
 	?>
 	<details class="niw_additional_information">
 		<summary class="niw_tittle_additional_information"><?php esc_html_e( 'Ingredients', 'nutrition-info-woocommerce' ); ?></summary>
 		<tbody>
-			<?php 
+			<?php
 			$post_id = get_the_ID();
 			foreach ( $attr_products_nutrition as $attr_nutrition ) {
 				$value_meta = get_post_meta( $post_id, 'niw_' . $attr_nutrition['key'], true );
-				if ( $value_meta ) {
+				if ( $value_meta && 'allergens' !== $attr_nutrition['key'] ) {
 					echo '<br>';
 					echo '<p class="nutrition-table nutrition-table_nutrient-name">' . esc_html( $attr_nutrition['label'] ) . '</p>';
-					if( $attr_nutrition['key'] == 'allergens' )
-					{
-					}
-					else {
-						echo '<p class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</p>';
-					}
+					echo '<p class="nutrition-table nutrition-table_nutrient-amount">' . esc_html( $value_meta ) . '</p>';
 					echo '</br>';
 				}
-			} ?>
+			}
+			?>
 		</tbody>
 	</details>
-<?php } ?>
+	<?php
+}
