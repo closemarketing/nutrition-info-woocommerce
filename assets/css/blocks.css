@@ -1,0 +1,13 @@
+.niw-allergens-block-table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.niw-allergens-block-table td {
+	vertical-align: middle;
+}
+
+.niw-allergens-block-table .niw_svg_allergen {
+	display: inline-block;
+	vertical-align: middle;
+}
