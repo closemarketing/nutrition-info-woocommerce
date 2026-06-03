@@ -60,7 +60,7 @@ class Hooks {
 	 * Enqueue frontend stylesheet.
 	 */
 	public function enqueue_styles(): void {
-		wp_enqueue_style( 'niw-styles', NIW_PLUGIN_URL . 'includes/css/styles.css', array(), NIW_BUNDLE_VERSION, 'all' );
+		wp_enqueue_style( 'niw-styles', NIW_PLUGIN_URL . 'includes/assets/css/styles.css', array(), NIW_BUNDLE_VERSION, 'all' );
 	}
 
 	/**

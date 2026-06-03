@@ -40,7 +40,7 @@ Allergen SVG icons are stored in `includes/assets/allergens/{key}.svg`.
 The `Allergens` class loads them via `file_get_contents()`.
 
 ### CSS
-Frontend stylesheet at `includes/css/styles.css`, enqueued by `Hooks::enqueue_styles()`.
+Frontend stylesheet at `includes/assets/css/styles.css`, enqueued by `Hooks::enqueue_styles()`.
 
 ## Common commands
 
