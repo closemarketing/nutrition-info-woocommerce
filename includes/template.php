@@ -2,8 +2,10 @@
 /**
  * Templates for nutrition and composition info.
  *
- * @package WordPress
+ * @package CLOSE\NutritionInfo
  */
+
+namespace CLOSE\NutritionInfo;
 
 /**
  * Render nutrition info table.

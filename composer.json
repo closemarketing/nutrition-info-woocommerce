@@ -15,6 +15,16 @@
         "lint": "phpcs --standard=phpcs.xml.dist",
         "phpstan": "phpstan analyse --memory-limit=2048M"
     },
+    "autoload": {
+        "psr-4": {
+            "CLOSE\\NutritionInfo\\": "includes/"
+        },
+        "files": [
+            "includes/template.php",
+            "includes/product-tab.php",
+            "includes/shortcode.php"
+        ]
+    },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
