@@ -38,29 +38,98 @@ class Allergens {
 		$this->assets_dir = NIW_PLUGIN_PATH . 'includes/assets/allergens/';
 
 		$this->allergens = array(
-			array( 'key' => 'alcohol',     'label' => __( 'Alcohol', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'almonds',     'label' => __( 'Almonds', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'lupins',      'label' => __( 'Lupins', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'celery',      'label' => __( 'Celery', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'sugar',       'label' => __( 'Sugar', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'peanuts',     'label' => __( 'Peanuts', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'spices',      'label' => __( 'Spices', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'gluten',      'label' => __( 'Gluten', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'egg',         'label' => __( 'Egg', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'milk',        'label' => __( 'Milk', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'corn',        'label' => __( 'Corn', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'crustaceans', 'label' => __( 'Crustaceans', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'honey',       'label' => __( 'Honey', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'mollusks',    'label' => __( 'Mollusks', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'mustard',     'label' => __( 'Mustard', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'organic',     'label' => __( 'Organic', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'fish',        'label' => __( 'Fish', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'sesame',      'label' => __( 'Sesame', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'mushrooms',   'label' => __( 'Mushrooms', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'soy',         'label' => __( 'Soy', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'sulfates',    'label' => __( 'Sulfates', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'vegetables',  'label' => __( 'Vegetables', 'nutrition-info-woocommerce' ) ),
-			array( 'key' => 'nuts',        'label' => __( 'Nuts', 'nutrition-info-woocommerce' ) ),
+			array(
+				'key'   => 'alcohol',
+				'label' => __( 'Alcohol', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'almonds',
+				'label' => __( 'Almonds', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'lupins',
+				'label' => __( 'Lupins', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'celery',
+				'label' => __( 'Celery', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'sugar',
+				'label' => __( 'Sugar', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'peanuts',
+				'label' => __( 'Peanuts', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'spices',
+				'label' => __( 'Spices', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'gluten',
+				'label' => __( 'Gluten', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'egg',
+				'label' => __( 'Egg', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'milk',
+				'label' => __( 'Milk', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'corn',
+				'label' => __( 'Corn', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'crustaceans',
+				'label' => __( 'Crustaceans', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'honey',
+				'label' => __( 'Honey', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'mollusks',
+				'label' => __( 'Mollusks', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'mustard',
+				'label' => __( 'Mustard', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'organic',
+				'label' => __( 'Organic', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'fish',
+				'label' => __( 'Fish', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'sesame',
+				'label' => __( 'Sesame', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'mushrooms',
+				'label' => __( 'Mushrooms', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'soy',
+				'label' => __( 'Soy', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'sulfates',
+				'label' => __( 'Sulfates', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'vegetables',
+				'label' => __( 'Vegetables', 'nutrition-info-woocommerce' ),
+			),
+			array(
+				'key'   => 'nuts',
+				'label' => __( 'Nuts', 'nutrition-info-woocommerce' ),
+			),
 		);
 	}
 
