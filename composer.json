@@ -18,12 +18,7 @@
     "autoload": {
         "psr-4": {
             "CLOSE\\NutritionInfo\\": "includes/"
-        },
-        "files": [
-            "includes/template.php",
-            "includes/product-tab.php",
-            "includes/shortcode.php"
-        ]
+        }
     },
     "config": {
         "allow-plugins": {

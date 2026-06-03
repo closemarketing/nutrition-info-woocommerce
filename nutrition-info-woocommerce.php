@@ -32,6 +32,10 @@ function niw_load_textdomain(): void {
 }
 
 add_action( 'plugins_loaded', function (): void {
+	require_once NIW_PLUGIN_PATH . 'includes/template.php';
+	require_once NIW_PLUGIN_PATH . 'includes/product-tab.php';
+	require_once NIW_PLUGIN_PATH . 'includes/shortcode.php';
+
 	\CLOSE\NutritionInfo\WooSettings::init();
 	new \CLOSE\NutritionInfo\MetaProducts();
 	new \CLOSE\NutritionInfo\Hooks();
