@@ -10,8 +10,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use Close\Plugins\ManageMenus\HELPER;
-
 /**
  * Gutenberg block that displays nutritional info for a WooCommerce product.
  */
@@ -110,15 +108,8 @@ class NIW_Block_Nutrients {
 	}
 
 	private function build_html( $product_id, $opts ) {
-		$nutrients    = HELPER::get_nutrients();
-		$group_labels = array(
-			'energy'   => __( 'Energía', 'nutrition-info-woocommerce' ),
-			'fat'      => __( 'Grasas', 'nutrition-info-woocommerce' ),
-			'carbs'    => __( 'Hidratos de carbono', 'nutrition-info-woocommerce' ),
-			'protein'  => __( 'Proteínas y sal', 'nutrition-info-woocommerce' ),
-			'vitamins' => __( 'Vitaminas', 'nutrition-info-woocommerce' ),
-			'minerals' => __( 'Minerales', 'nutrition-info-woocommerce' ),
-		);
+		$nutrients    = NIW_Data::get_nutrients();
+		$group_labels = NIW_Data::get_group_labels();
 
 		$rows_by_group = array();
 		foreach ( $nutrients as $key => $def ) {

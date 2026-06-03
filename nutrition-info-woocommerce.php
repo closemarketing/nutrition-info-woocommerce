@@ -33,9 +33,12 @@ require_once NIW_PLUGIN_PATH . 'includes/class-woo-metaproducts.php';
 require_once NIW_PLUGIN_PATH . 'includes/template.php';
 require_once NIW_PLUGIN_PATH . 'includes/product-tab.php';
 require_once NIW_PLUGIN_PATH . 'includes/allergens.php';
+require_once NIW_PLUGIN_PATH . 'includes/class-niw-data.php';
+require_once NIW_PLUGIN_PATH . 'includes/class-niw-woocommerce.php';
 require_once NIW_PLUGIN_PATH . 'includes/blocks/class-block-allergens.php';
 require_once NIW_PLUGIN_PATH . 'includes/blocks/class-block-nutrients.php';
 
+new NIW_WooCommerce();
 new NIW_Block_Allergens();
 new NIW_Block_Nutrients();
 

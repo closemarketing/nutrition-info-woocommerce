@@ -10,8 +10,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use Close\Plugins\ManageMenus\HELPER;
-
 /**
  * Gutenberg block that displays allergens for a WooCommerce product.
  */
@@ -111,8 +109,8 @@ class NIW_Block_Allergens {
 	}
 
 	private function build_html( $product_id, $opts ) {
-		$allergens  = HELPER::get_allergens();
-		$icons_url  = MANMEN_PLUGIN_URL . 'includes/assets/icons/';
+		$allergens  = NIW_Data::get_allergens();
+		$icons_url  = NIW_PLUGIN_URL . 'assets/icons/';
 		$active     = array();
 
 		foreach ( $allergens as $key => $label ) {
@@ -157,8 +155,8 @@ class NIW_Block_Allergens {
 		);
 		wp_localize_script( 'niw-block-allergens', 'niwBlockData', array(
 			'products'  => $this->get_product_options(),
-			'iconsUrl'  => MANMEN_PLUGIN_URL . 'includes/assets/icons/',
-			'allergens' => HELPER::get_allergens(),
+			'iconsUrl'  => NIW_PLUGIN_URL . 'assets/icons/',
+			'allergens' => NIW_Data::get_allergens(),
 		) );
 	}
 
