@@ -2,13 +2,15 @@
 /**
  * Product tab filters for nutrition and composition.
  *
- * @package WordPress
+ * @package CLOSE\NutritionInfo
  */
+
+namespace CLOSE\NutritionInfo;
 
 if ( 'tab' === get_option( 'wc_nutrients_settings_tab_position' ) ) {
 	// Add tab to single product pages.
-	add_filter( 'woocommerce_product_tabs', 'niw_nutritional_content_tab' );
-	add_filter( 'woocommerce_product_tabs', 'niw_composition_content_tab' );
+	add_filter( 'woocommerce_product_tabs', __NAMESPACE__ . '\\niw_nutritional_content_tab' );
+	add_filter( 'woocommerce_product_tabs', __NAMESPACE__ . '\\niw_composition_content_tab' );
 }
 
 /**
@@ -22,7 +24,7 @@ function niw_composition_content_tab( $tabs ) {
 	$tabs['composition_tab'] = array(
 		'title'    => __( 'Composition', 'nutrition-info-woocommerce' ),
 		'priority' => 50,
-		'callback' => 'niw_composition_content_tab_content',
+		'callback' => __NAMESPACE__ . '\\niw_composition_content_tab_content',
 	);
 
 	return $tabs;
@@ -47,7 +49,7 @@ function niw_nutritional_content_tab( $tabs ) {
 	$tabs['nutrient_tab'] = array(
 		'title'    => __( 'Nutrients', 'nutrition-info-woocommerce' ),
 		'priority' => 50,
-		'callback' => 'niw_nutritional_content_tab_content',
+		'callback' => __NAMESPACE__ . '\\niw_nutritional_content_tab_content',
 	);
 
 	return $tabs;

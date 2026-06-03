@@ -2,11 +2,13 @@
 /**
  * Product Meta data
  *
- * @package    WordPress
+ * @package    CLOSE\NutritionInfo
  * @author     David Pérez <david@closemarketing.es>
  * @copyright  2021 Closemarketing
  * @version    1.0
  */
+
+namespace CLOSE\NutritionInfo;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0
  */
-class NIW_MetaProducts {
+class MetaProducts {
 
 	/**
 	 * Construct of Class
@@ -57,7 +59,7 @@ class NIW_MetaProducts {
 		?>
 		<div id="ingredients_composition" class="panel woocommerce_options_panel">
 			<?php
-			$allergens            = new NIW_Allergens();
+			$allergens            = new Allergens();
 			$array_allergens_name = $allergens->show_allergens_name();
 			woocommerce_wp_textarea_input(
 				array(
@@ -287,7 +289,7 @@ class NIW_MetaProducts {
 		}
 
 		// Other tab.
-		$allergens            = new NIW_Allergens();
+		$allergens            = new Allergens();
 		$array_allergens_name = $allergens->show_allergens_name();
 
 		$all_allergens_names = array();
@@ -314,5 +316,3 @@ class NIW_MetaProducts {
 		update_post_meta( $post_id, 'niw_all_allergens_not', sanitize_text_field( implode( ', ', $all_allergens_not ) ) );
 	}
 }
-
-new NIW_MetaProducts();

@@ -8,3 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'WPINC' ) ) {
 	define( 'WPINC', 'wp-includes' );
 }
+if ( ! defined( 'NIW_PLUGIN_PATH' ) ) {
+	define( 'NIW_PLUGIN_PATH', __DIR__ . '/../' );
+}
+if ( ! defined( 'NIW_PLUGIN_URL' ) ) {
+	define( 'NIW_PLUGIN_URL', 'http://localhost/' );
+}
+if ( ! defined( 'NIW_BUNDLE_VERSION' ) ) {
+	define( 'NIW_BUNDLE_VERSION', '0.1' );
+}

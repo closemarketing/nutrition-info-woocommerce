@@ -2,27 +2,28 @@
 /**
  * Class Settings
  *
- * @package    WordPress
+ * @package    CLOSE\NutritionInfo
  * @author     David Pérez <david@closemarketing.es>
  * @copyright  2021 Closemarketing
  * @version    1.0
  */
+
+namespace CLOSE\NutritionInfo;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Class Settings
  */
-class WC_Nutrients_Settings_Tab {
+class WooSettings {
 	/**
 	 * Bootstraps the class and hooks required actions & filters.
 	 **/
 	public static function init() {
-		add_filter( 'woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50 );
-		add_action( 'woocommerce_settings_tabs_nutrients_settings_tab', __CLASS__ . '::settings_tab' );
-		add_action( 'woocommerce_update_options_nutrients_settings_tab', __CLASS__ . '::update_settings' );
+		add_filter( 'woocommerce_settings_tabs_array', array( __CLASS__, 'add_settings_tab' ), 50 );
+		add_action( 'woocommerce_settings_tabs_nutrients_settings_tab', array( __CLASS__, 'settings_tab' ) );
+		add_action( 'woocommerce_update_options_nutrients_settings_tab', array( __CLASS__, 'update_settings' ) );
 	}
-
 
 	/**
 	 * Add a new settings tab to the WooCommerce settings tabs array.
@@ -34,6 +35,7 @@ class WC_Nutrients_Settings_Tab {
 		$settings_tabs['nutrients_settings_tab'] = __( 'Nutrients', 'nutrition-info-woocommerce' );
 		return $settings_tabs;
 	}
+
 	/**
 	 * Uses the WooCommerce admin fields API to output settings via the @see woocommerce_admin_fields() function.
 	 *
@@ -43,6 +45,7 @@ class WC_Nutrients_Settings_Tab {
 	public static function settings_tab() {
 		woocommerce_admin_fields( self::get_settings() );
 	}
+
 	/**
 	 * Uses the WooCommerce options API to save settings via the @see woocommerce_update_options() function.
 	 *
@@ -52,6 +55,7 @@ class WC_Nutrients_Settings_Tab {
 	public static function update_settings() {
 		woocommerce_update_options( self::get_settings() );
 	}
+
 	/**
 	 * Get all the settings for this plugin for @see woocommerce_admin_fields() function.
 	 *
@@ -109,4 +113,3 @@ class WC_Nutrients_Settings_Tab {
 		return apply_filters( 'wc_nutrients_settings_tab_settings', $settings );
 	}
 }
-WC_Nutrients_Settings_Tab::init();

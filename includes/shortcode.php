@@ -2,8 +2,10 @@
 /**
  * Shortcode for nutrition info table.
  *
- * @package nutrition-info-woocommerce
+ * @package CLOSE\NutritionInfo
  */
+
+namespace CLOSE\NutritionInfo;
 
 /**
  * Render nutrition info shortcode.
@@ -13,4 +15,4 @@
 function niw_shortcode_func( $atts ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 	niw_nutrition_info();
 }
-add_shortcode( 'nutritiontable', 'niw_shortcode_func ' );
+add_shortcode( 'nutritiontable', __NAMESPACE__ . '\\niw_shortcode_func' );
