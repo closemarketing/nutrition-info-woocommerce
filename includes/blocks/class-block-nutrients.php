@@ -3,33 +3,19 @@
  * Block: Nutritional Info
  *
  * Registers and renders the niw/nutrients Gutenberg block.
+ * Uses the same 48-field nutrient table and meta keys as manage-menus.
  *
  * @package nutrition-info-woocommerce
  */
 
 defined( 'ABSPATH' ) || exit;
 
+use Close\Plugins\ManageMenus\HELPER;
+
 /**
  * Gutenberg block that displays nutritional info for a WooCommerce product.
  */
 class NIW_Block_Nutrients {
-
-	/** Nutrient fields matching meta keys niw_{key}. */
-	const NUTRIENT_FIELDS = array(
-		array( 'key' => 'energy',            'label' => 'Energy (KJ/kcal)' ),
-		array( 'key' => 'fat',               'label' => 'Fat (g)' ),
-		array( 'key' => 'saturated_fat',     'label' => '- Saturated fatty acids (g)',   'sub' => true ),
-		array( 'key' => 'monounsaturated_fat','label' => '- Monounsaturated fat (g)',     'sub' => true ),
-		array( 'key' => 'polyunsaturated_fat','label' => '- Polyunsaturated fat (g)',     'sub' => true ),
-		array( 'key' => 'carb',              'label' => 'Carbohydrate (g)' ),
-		array( 'key' => 'sugar',             'label' => '- Of which sugars (g)',          'sub' => true ),
-		array( 'key' => 'polyol',            'label' => '- Of which Polyols (g)',         'sub' => true ),
-		array( 'key' => 'starch',            'label' => '- Of which Starch (g)',          'sub' => true ),
-		array( 'key' => 'fiber',             'label' => 'Dietary Fiber (g)' ),
-		array( 'key' => 'protein',           'label' => 'Protein (g)' ),
-		array( 'key' => 'salt',              'label' => 'Salt (g)' ),
-		array( 'key' => 'vitamin_mineral',   'label' => 'Vitamins and minerals' ),
-	);
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_block' ) );
@@ -48,10 +34,12 @@ class NIW_Block_Nutrients {
 					'productId'       => array( 'type' => 'number', 'default' => 0 ),
 					'headerBgColor'   => array( 'type' => 'string', 'default' => '#1e1e1e' ),
 					'headerTextColor' => array( 'type' => 'string', 'default' => '#ffffff' ),
+					'groupBgColor'    => array( 'type' => 'string', 'default' => '#f0f0f0' ),
+					'groupTextColor'  => array( 'type' => 'string', 'default' => '#555555' ),
 					'rowBgColor'      => array( 'type' => 'string', 'default' => '#ffffff' ),
 					'rowTextColor'    => array( 'type' => 'string', 'default' => '#1e1e1e' ),
 					'subTextColor'    => array( 'type' => 'string', 'default' => '#666666' ),
-					'borderColor'     => array( 'type' => 'string', 'default' => '#e0e0e0' ),
+					'borderColor'     => array( 'type' => 'string', 'default' => '#e8e8e8' ),
 					'fontSize'        => array( 'type' => 'number', 'default' => 13 ),
 				),
 				'render_callback' => array( $this, 'render' ),
@@ -73,6 +61,8 @@ class NIW_Block_Nutrients {
 					'product_id'   => array( 'required' => true,  'type' => 'integer', 'minimum' => 1, 'sanitize_callback' => 'absint' ),
 					'header_bg'    => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
 					'header_text'  => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
+					'group_bg'     => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
+					'group_text'   => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
 					'row_bg'       => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
 					'row_text'     => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
 					'sub_text'     => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
@@ -87,10 +77,12 @@ class NIW_Block_Nutrients {
 		$opts = array(
 			'header_bg'    => $request->get_param( 'header_bg' )    ?: '#1e1e1e',
 			'header_text'  => $request->get_param( 'header_text' )  ?: '#ffffff',
+			'group_bg'     => $request->get_param( 'group_bg' )     ?: '#f0f0f0',
+			'group_text'   => $request->get_param( 'group_text' )   ?: '#555555',
 			'row_bg'       => $request->get_param( 'row_bg' )       ?: '#ffffff',
 			'row_text'     => $request->get_param( 'row_text' )     ?: '#1e1e1e',
 			'sub_text'     => $request->get_param( 'sub_text' )     ?: '#666666',
-			'border_color' => $request->get_param( 'border_color' ) ?: '#e0e0e0',
+			'border_color' => $request->get_param( 'border_color' ) ?: '#e8e8e8',
 			'font_size'    => absint( $request->get_param( 'font_size' ) ) ?: 13,
 		);
 		return new WP_REST_Response( array(
@@ -101,56 +93,90 @@ class NIW_Block_Nutrients {
 	public function render( $attributes ) {
 		$product_id = intval( $attributes['productId'] ?? 0 );
 		if ( ! $product_id ) {
-			return '<p>' . esc_html__( 'Select a product to show its nutritional info.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'Selecciona un producto para mostrar su información nutricional.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 		$opts = array(
 			'header_bg'    => sanitize_text_field( $attributes['headerBgColor']   ?? '#1e1e1e' ),
 			'header_text'  => sanitize_text_field( $attributes['headerTextColor'] ?? '#ffffff' ),
+			'group_bg'     => sanitize_text_field( $attributes['groupBgColor']    ?? '#f0f0f0' ),
+			'group_text'   => sanitize_text_field( $attributes['groupTextColor']  ?? '#555555' ),
 			'row_bg'       => sanitize_text_field( $attributes['rowBgColor']      ?? '#ffffff' ),
 			'row_text'     => sanitize_text_field( $attributes['rowTextColor']    ?? '#1e1e1e' ),
 			'sub_text'     => sanitize_text_field( $attributes['subTextColor']    ?? '#666666' ),
-			'border_color' => sanitize_text_field( $attributes['borderColor']     ?? '#e0e0e0' ),
+			'border_color' => sanitize_text_field( $attributes['borderColor']     ?? '#e8e8e8' ),
 			'font_size'    => absint( $attributes['fontSize'] ?? 13 ) ?: 13,
 		);
 		return $this->build_html( $product_id, $opts );
 	}
 
 	private function build_html( $product_id, $opts ) {
+		$nutrients    = HELPER::get_nutrients();
+		$group_labels = array(
+			'energy'   => __( 'Energía', 'nutrition-info-woocommerce' ),
+			'fat'      => __( 'Grasas', 'nutrition-info-woocommerce' ),
+			'carbs'    => __( 'Hidratos de carbono', 'nutrition-info-woocommerce' ),
+			'protein'  => __( 'Proteínas y sal', 'nutrition-info-woocommerce' ),
+			'vitamins' => __( 'Vitaminas', 'nutrition-info-woocommerce' ),
+			'minerals' => __( 'Minerales', 'nutrition-info-woocommerce' ),
+		);
+
+		$rows_by_group = array();
+		foreach ( $nutrients as $key => $def ) {
+			$value = get_post_meta( $product_id, 'food_nutrient_' . $key, true );
+			if ( '' === $value || false === $value ) {
+				continue;
+			}
+			$group = $def['group'];
+			if ( ! isset( $rows_by_group[ $group ] ) ) {
+				$rows_by_group[ $group ] = array();
+			}
+			$rows_by_group[ $group ][] = array(
+				'label' => $def['label'],
+				'unit'  => $def['unit'],
+				'value' => $value,
+				'sub'   => ! empty( $def['sub'] ),
+			);
+		}
+
+		if ( empty( $rows_by_group ) ) {
+			return '<p>' . esc_html__( 'Este producto no tiene datos nutricionales registrados.', 'nutrition-info-woocommerce' ) . '</p>';
+		}
+
 		$fs     = absint( $opts['font_size'] );
 		$border = esc_attr( $opts['border_color'] );
 
 		$header_style = 'background:' . esc_attr( $opts['header_bg'] ) . ';color:' . esc_attr( $opts['header_text'] ) . ';padding:10px 12px;text-align:left;font-weight:700;font-size:' . $fs . 'px;';
+		$group_style  = 'background:' . esc_attr( $opts['group_bg'] )  . ';color:' . esc_attr( $opts['group_text'] )  . ';padding:5px 12px;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;';
 		$cell_style   = 'padding:5px 12px;border-bottom:1px solid ' . $border . ';color:' . esc_attr( $opts['row_text'] ) . ';background:' . esc_attr( $opts['row_bg'] ) . ';font-size:' . $fs . 'px;';
 		$sub_style    = 'padding:5px 12px 5px 24px;border-bottom:1px solid ' . $border . ';color:' . esc_attr( $opts['sub_text'] ) . ';background:' . esc_attr( $opts['row_bg'] ) . ';font-size:' . $fs . 'px;';
 		$right_style  = 'padding:5px 12px;border-bottom:1px solid ' . $border . ';text-align:right;color:#888;white-space:nowrap;background:' . esc_attr( $opts['row_bg'] ) . ';font-size:' . $fs . 'px;';
 
-		$rows = array();
-		foreach ( self::NUTRIENT_FIELDS as $field ) {
-			$value = get_post_meta( $product_id, 'niw_' . $field['key'], true );
-			if ( $value ) {
-				$rows[] = array_merge( $field, array( 'value' => $value ) );
+		$serving = get_post_meta( $product_id, 'food_nutrient_serving', true );
+
+		$html  = '<div class="manmen-nutrients-table">';
+		$html .= '<table style="border-collapse:collapse;width:100%;font-size:' . $fs . 'px;">';
+		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">';
+		$html .= esc_html__( 'Información nutricional', 'nutrition-info-woocommerce' );
+		if ( $serving ) {
+			$html .= ' <span style="font-weight:400;">' . esc_html__( 'por', 'nutrition-info-woocommerce' ) . ' ' . esc_html( $serving ) . '</span>';
+		}
+		$html .= '</th></tr></thead><tbody>';
+
+		foreach ( $group_labels as $group => $group_label ) {
+			if ( empty( $rows_by_group[ $group ] ) ) {
+				continue;
+			}
+			$html .= '<tr><td colspan="2" style="' . $group_style . '">' . esc_html( $group_label ) . '</td></tr>';
+			foreach ( $rows_by_group[ $group ] as $row ) {
+				$label = $row['sub'] ? '— ' . esc_html( $row['label'] ) : esc_html( $row['label'] );
+				$html .= '<tr>';
+				$html .= '<td style="' . ( $row['sub'] ? $sub_style : $cell_style ) . '">' . $label . '</td>';
+				$html .= '<td style="' . $right_style . '">' . esc_html( $row['value'] ) . ' ' . esc_html( $row['unit'] ) . '</td>';
+				$html .= '</tr>';
 			}
 		}
 
-		if ( empty( $rows ) ) {
-			return '<p>' . esc_html__( 'This product has no nutritional data.', 'nutrition-info-woocommerce' ) . '</p>';
-		}
-
-		$html  = '<table style="border-collapse:collapse;width:100%;font-size:' . $fs . 'px;">';
-		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">';
-		$html .= esc_html__( 'Nutritional Information', 'nutrition-info-woocommerce' );
-		$html .= ' <span style="font-weight:400;opacity:.75;">' . esc_html__( 'per 100 g', 'nutrition-info-woocommerce' ) . '</span>';
-		$html .= '</th></tr></thead><tbody>';
-
-		foreach ( $rows as $row ) {
-			$is_sub = ! empty( $row['sub'] );
-			$html  .= '<tr>';
-			$html  .= '<td style="' . ( $is_sub ? $sub_style : $cell_style ) . '">' . esc_html( $row['label'] ) . '</td>';
-			$html  .= '<td style="' . $right_style . '">' . esc_html( $row['value'] ) . '</td>';
-			$html  .= '</tr>';
-		}
-
-		$html .= '</tbody></table>';
+		$html .= '</tbody></table></div>';
 		return $html;
 	}
 
@@ -169,7 +195,7 @@ class NIW_Block_Nutrients {
 
 	private function get_product_options() {
 		$posts   = get_posts( array( 'post_type' => 'product', 'posts_per_page' => -1, 'post_status' => 'publish', 'orderby' => 'title', 'order' => 'ASC' ) );
-		$options = array( array( 'value' => 0, 'label' => __( '— Select a product —', 'nutrition-info-woocommerce' ) ) );
+		$options = array( array( 'value' => 0, 'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ) ) );
 		foreach ( $posts as $post ) {
 			$options[] = array( 'value' => $post->ID, 'label' => $post->post_title );
 		}

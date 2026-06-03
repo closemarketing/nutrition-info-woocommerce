@@ -3,11 +3,14 @@
  * Block: Allergens
  *
  * Registers and renders the niw/allergens Gutenberg block.
+ * Uses the same allergen list, PNG icons and meta keys as manage-menus.
  *
  * @package nutrition-info-woocommerce
  */
 
 defined( 'ABSPATH' ) || exit;
+
+use Close\Plugins\ManageMenus\HELPER;
 
 /**
  * Gutenberg block that displays allergens for a WooCommerce product.
@@ -41,13 +44,13 @@ class NIW_Block_Allergens {
 			array(
 				'api_version'     => 3,
 				'attributes'      => array(
-					'productId'      => array( 'type' => 'number',  'default' => 0 ),
-					'headerBgColor'  => array( 'type' => 'string',  'default' => '#1e1e1e' ),
-					'headerTextColor'=> array( 'type' => 'string',  'default' => '#ffffff' ),
-					'rowBgColor'     => array( 'type' => 'string',  'default' => '#ffffff' ),
-					'rowTextColor'   => array( 'type' => 'string',  'default' => '#1e1e1e' ),
-					'iconSize'       => array( 'type' => 'number',  'default' => 40 ),
-					'showIcons'      => array( 'type' => 'boolean', 'default' => true ),
+					'productId'       => array( 'type' => 'number',  'default' => 0 ),
+					'headerBgColor'   => array( 'type' => 'string',  'default' => '#1e1e1e' ),
+					'headerTextColor' => array( 'type' => 'string',  'default' => '#ffffff' ),
+					'rowBgColor'      => array( 'type' => 'string',  'default' => '#ffffff' ),
+					'rowTextColor'    => array( 'type' => 'string',  'default' => '#1e1e1e' ),
+					'iconSize'        => array( 'type' => 'number',  'default' => 32 ),
+					'showIcons'       => array( 'type' => 'boolean', 'default' => true ),
 				),
 				'render_callback' => array( $this, 'render' ),
 				'editor_script'   => 'niw-block-allergens',
@@ -83,7 +86,7 @@ class NIW_Block_Allergens {
 			'header_text' => $request->get_param( 'header_text' ) ?: '#ffffff',
 			'row_bg'      => $request->get_param( 'row_bg' )      ?: '#ffffff',
 			'row_text'    => $request->get_param( 'row_text' )    ?: '#1e1e1e',
-			'icon_size'   => absint( $request->get_param( 'icon_size' ) ) ?: 40,
+			'icon_size'   => absint( $request->get_param( 'icon_size' ) ) ?: 32,
 			'show_icons'  => '0' !== $request->get_param( 'show_icons' ),
 		);
 		return new WP_REST_Response( array(
@@ -94,62 +97,53 @@ class NIW_Block_Allergens {
 	public function render( $attributes ) {
 		$product_id = intval( $attributes['productId'] ?? 0 );
 		if ( ! $product_id ) {
-			return '<p>' . esc_html__( 'Select a product to show its allergens.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'Selecciona un producto para mostrar sus alérgenos.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 		$opts = array(
 			'header_bg'   => sanitize_text_field( $attributes['headerBgColor']   ?? '#1e1e1e' ),
 			'header_text' => sanitize_text_field( $attributes['headerTextColor'] ?? '#ffffff' ),
 			'row_bg'      => sanitize_text_field( $attributes['rowBgColor']      ?? '#ffffff' ),
 			'row_text'    => sanitize_text_field( $attributes['rowTextColor']    ?? '#1e1e1e' ),
-			'icon_size'   => absint( $attributes['iconSize']  ?? 40 ) ?: 40,
+			'icon_size'   => absint( $attributes['iconSize']  ?? 32 ) ?: 32,
 			'show_icons'  => (bool) ( $attributes['showIcons'] ?? true ),
 		);
 		return $this->build_html( $product_id, $opts );
 	}
 
 	private function build_html( $product_id, $opts ) {
-		$allergens_obj = new NIW_Allergens();
-		$all_names     = $allergens_obj->show_allergens_name();
-		$active        = array();
+		$allergens  = HELPER::get_allergens();
+		$icons_url  = MANMEN_PLUGIN_URL . 'includes/assets/icons/';
+		$active     = array();
 
-		foreach ( $all_names as $key => $label ) {
-			if ( 'yes' === get_post_meta( $product_id, 'niw_all_' . $key, true ) ) {
+		foreach ( $allergens as $key => $label ) {
+			if ( get_post_meta( $product_id, 'food_allegerns_' . $key, true ) ) {
 				$active[ $key ] = $label;
 			}
 		}
 
 		if ( empty( $active ) ) {
-			return '<p>' . esc_html__( 'This product has no declared allergens.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'Este producto no tiene alérgenos declarados.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 
 		$icon_size    = absint( $opts['icon_size'] );
 		$header_style = 'background:' . esc_attr( $opts['header_bg'] ) . ';color:' . esc_attr( $opts['header_text'] ) . ';padding:10px 12px;text-align:left;font-weight:700;';
 		$row_style    = 'background:' . esc_attr( $opts['row_bg'] ) . ';color:' . esc_attr( $opts['row_text'] ) . ';';
 
-		$html  = '<table class="niw-allergens-block-table" style="border-collapse:collapse;width:100%;">';
-		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</th></tr></thead>';
+		$html  = '<table class="manmen-allergens-table">';
+		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">' . esc_html__( 'Alérgenos', 'nutrition-info-woocommerce' ) . '</th></tr></thead>';
 		$html .= '<tbody>';
+
 		foreach ( $active as $key => $label ) {
-			$svg = '';
+			$html .= '<tr><td style="' . $row_style . 'padding:8px 12px;border-bottom:1px solid #e8e8e8;vertical-align:middle;">';
 			if ( $opts['show_icons'] ) {
-				$raw_svg = $allergens_obj->show_allergen_svg( $key );
-				if ( $raw_svg ) {
-					// Force width/height on SVG element.
-					$svg = preg_replace(
-						'/(<svg[^>]*)\s+width="[^"]*"\s+height="[^"]*"/i',
-						'$1 width="' . $icon_size . '" height="' . $icon_size . '"',
-						$raw_svg,
-						1
-					);
-					$svg = '<span style="display:inline-flex;align-items:center;margin-right:10px;vertical-align:middle;flex-shrink:0;">' . $svg . '</span>';
-				}
+				$icon  = esc_url( $icons_url . 'icon-' . $key . '.png' );
+				$html .= '<img src="' . $icon . '" alt="" style="width:' . $icon_size . 'px;height:' . $icon_size . 'px;vertical-align:middle;margin-right:8px;">';
 			}
-			$html .= '<tr><td style="' . $row_style . 'padding:8px 12px;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;">';
-			$html .= wp_kses_post( $svg ) . esc_html( $label );
+			$html .= esc_html( $label );
 			$html .= '</td></tr>';
 		}
-		$html .= '</tbody></table>';
 
+		$html .= '</tbody></table>';
 		return $html;
 	}
 
@@ -162,13 +156,15 @@ class NIW_Block_Allergens {
 			true
 		);
 		wp_localize_script( 'niw-block-allergens', 'niwBlockData', array(
-			'products' => $this->get_product_options(),
+			'products'  => $this->get_product_options(),
+			'iconsUrl'  => MANMEN_PLUGIN_URL . 'includes/assets/icons/',
+			'allergens' => HELPER::get_allergens(),
 		) );
 	}
 
 	private function get_product_options() {
 		$posts   = get_posts( array( 'post_type' => 'product', 'posts_per_page' => -1, 'post_status' => 'publish', 'orderby' => 'title', 'order' => 'ASC' ) );
-		$options = array( array( 'value' => 0, 'label' => __( '— Select a product —', 'nutrition-info-woocommerce' ) ) );
+		$options = array( array( 'value' => 0, 'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ) ) );
 		foreach ( $posts as $post ) {
 			$options[] = array( 'value' => $post->ID, 'label' => $post->post_title );
 		}
