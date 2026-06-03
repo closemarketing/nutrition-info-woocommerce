@@ -31,12 +31,15 @@ function niw_load_textdomain(): void {
 	load_plugin_textdomain( 'nutrition-info-woocommerce', false, basename( __DIR__ ) . '/languages/' );
 }
 
-add_action( 'plugins_loaded', function (): void {
-	require_once NIW_PLUGIN_PATH . 'includes/template.php';
-	require_once NIW_PLUGIN_PATH . 'includes/product-tab.php';
-	require_once NIW_PLUGIN_PATH . 'includes/shortcode.php';
+add_action(
+	'plugins_loaded',
+	function (): void {
+		require_once NIW_PLUGIN_PATH . 'includes/template.php';
+		require_once NIW_PLUGIN_PATH . 'includes/product-tab.php';
+		require_once NIW_PLUGIN_PATH . 'includes/shortcode.php';
 
-	\CLOSE\NutritionInfo\WooSettings::init();
-	new \CLOSE\NutritionInfo\MetaProducts();
-	new \CLOSE\NutritionInfo\Hooks();
-} );
+		\CLOSE\NutritionInfo\WooSettings::init();
+		new \CLOSE\NutritionInfo\MetaProducts();
+		new \CLOSE\NutritionInfo\Hooks();
+	}
+);

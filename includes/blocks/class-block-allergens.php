@@ -15,6 +15,9 @@ defined( 'ABSPATH' ) || exit;
  */
 class NIW_Block_Allergens {
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_block' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_assets' ) );
@@ -22,6 +25,12 @@ class NIW_Block_Allergens {
 		add_filter( 'block_categories_all', array( $this, 'register_block_category' ), 10, 2 );
 	}
 
+	/**
+	 * Register custom block category.
+	 *
+	 * @param array $categories Existing block categories.
+	 * @return array
+	 */
 	public function register_block_category( $categories ) {
 		foreach ( $categories as $cat ) {
 			if ( 'niw-nutrition' === $cat['slug'] ) {
@@ -29,11 +38,20 @@ class NIW_Block_Allergens {
 			}
 		}
 		return array_merge(
-			array( array( 'slug' => 'niw-nutrition', 'title' => __( 'Nutrition Info', 'nutrition-info-woocommerce' ), 'icon' => 'carrot' ) ),
+			array(
+				array(
+					'slug'  => 'niw-nutrition',
+					'title' => __( 'Nutrition Info', 'nutrition-info-woocommerce' ),
+					'icon'  => 'carrot',
+				),
+			),
 			$categories
 		);
 	}
 
+	/**
+	 * Register the block type.
+	 */
 	public function register_block() {
 		wp_register_style( 'niw-blocks', NIW_PLUGIN_URL . 'assets/css/blocks.css', array(), NIW_BUNDLE_VERSION );
 
@@ -42,13 +60,34 @@ class NIW_Block_Allergens {
 			array(
 				'api_version'     => 3,
 				'attributes'      => array(
-					'productId'       => array( 'type' => 'number',  'default' => 0 ),
-					'headerBgColor'   => array( 'type' => 'string',  'default' => '#1e1e1e' ),
-					'headerTextColor' => array( 'type' => 'string',  'default' => '#ffffff' ),
-					'rowBgColor'      => array( 'type' => 'string',  'default' => '#ffffff' ),
-					'rowTextColor'    => array( 'type' => 'string',  'default' => '#1e1e1e' ),
-					'iconSize'        => array( 'type' => 'number',  'default' => 32 ),
-					'showIcons'       => array( 'type' => 'boolean', 'default' => true ),
+					'productId'       => array(
+						'type'    => 'number',
+						'default' => 0,
+					),
+					'headerBgColor'   => array(
+						'type'    => 'string',
+						'default' => '#1e1e1e',
+					),
+					'headerTextColor' => array(
+						'type'    => 'string',
+						'default' => '#ffffff',
+					),
+					'rowBgColor'      => array(
+						'type'    => 'string',
+						'default' => '#ffffff',
+					),
+					'rowTextColor'    => array(
+						'type'    => 'string',
+						'default' => '#1e1e1e',
+					),
+					'iconSize'        => array(
+						'type'    => 'number',
+						'default' => 32,
+					),
+					'showIcons'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
 				),
 				'render_callback' => array( $this, 'render' ),
 				'editor_script'   => 'niw-block-allergens',
@@ -57,6 +96,9 @@ class NIW_Block_Allergens {
 		);
 	}
 
+	/**
+	 * Register the REST API route for block preview.
+	 */
 	public function register_rest_route() {
 		register_rest_route(
 			'niw/v1',
@@ -64,54 +106,106 @@ class NIW_Block_Allergens {
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array( $this, 'rest_render' ),
-				'permission_callback' => function () { return current_user_can( 'edit_posts' ); },
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' ); },
 				'args'                => array(
-					'product_id'   => array( 'required' => true,  'type' => 'integer', 'minimum' => 1, 'sanitize_callback' => 'absint' ),
-					'header_bg'    => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
-					'header_text'  => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
-					'row_bg'       => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
-					'row_text'     => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
-					'icon_size'    => array( 'required' => false, 'type' => 'integer', 'sanitize_callback' => 'absint' ),
-					'show_icons'   => array( 'required' => false, 'type' => 'string',  'sanitize_callback' => 'sanitize_text_field' ),
+					'product_id'  => array(
+						'required'          => true,
+						'type'              => 'integer',
+						'minimum'           => 1,
+						'sanitize_callback' => 'absint',
+					),
+					'header_bg'   => array(
+						'required'          => false,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'header_text' => array(
+						'required'          => false,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'row_bg'      => array(
+						'required'          => false,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'row_text'    => array(
+						'required'          => false,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'icon_size'   => array(
+						'required'          => false,
+						'type'              => 'integer',
+						'sanitize_callback' => 'absint',
+					),
+					'show_icons'  => array(
+						'required'          => false,
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
 				),
 			)
 		);
 	}
 
+	/**
+	 * Render the block via REST API for editor preview.
+	 *
+	 * @param WP_REST_Request $request REST request.
+	 * @return WP_REST_Response
+	 */
 	public function rest_render( $request ) {
 		$opts = array(
-			'header_bg'   => $request->get_param( 'header_bg' )   ?: '#1e1e1e',
-			'header_text' => $request->get_param( 'header_text' ) ?: '#ffffff',
-			'row_bg'      => $request->get_param( 'row_bg' )      ?: '#ffffff',
-			'row_text'    => $request->get_param( 'row_text' )    ?: '#1e1e1e',
-			'icon_size'   => absint( $request->get_param( 'icon_size' ) ) ?: 32,
+			'header_bg'   => $request->get_param( 'header_bg' ) ? $request->get_param( 'header_bg' ) : '#1e1e1e',
+			'header_text' => $request->get_param( 'header_text' ) ? $request->get_param( 'header_text' ) : '#ffffff',
+			'row_bg'      => $request->get_param( 'row_bg' ) ? $request->get_param( 'row_bg' ) : '#ffffff',
+			'row_text'    => $request->get_param( 'row_text' ) ? $request->get_param( 'row_text' ) : '#1e1e1e',
+			'icon_size'   => absint( $request->get_param( 'icon_size' ) ) ? absint( $request->get_param( 'icon_size' ) ) : 32,
 			'show_icons'  => '0' !== $request->get_param( 'show_icons' ),
 		);
-		return new WP_REST_Response( array(
-			'html' => $this->build_html( absint( $request->get_param( 'product_id' ) ), $opts ),
-		) );
+		return new WP_REST_Response(
+			array(
+				'html' => $this->build_html( absint( $request->get_param( 'product_id' ) ), $opts ),
+			)
+		);
 	}
 
+	/**
+	 * Render the block on the frontend.
+	 *
+	 * @param array $attributes Block attributes.
+	 * @return string HTML output.
+	 */
 	public function render( $attributes ) {
 		$product_id = intval( $attributes['productId'] ?? 0 );
 		if ( ! $product_id ) {
 			return '<p>' . esc_html__( 'Selecciona un producto para mostrar sus alérgenos.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
-		$opts = array(
-			'header_bg'   => sanitize_text_field( $attributes['headerBgColor']   ?? '#1e1e1e' ),
+		$icon_size_raw = absint( $attributes['iconSize'] ?? 32 );
+		$opts          = array(
+			'header_bg'   => sanitize_text_field( $attributes['headerBgColor'] ?? '#1e1e1e' ),
 			'header_text' => sanitize_text_field( $attributes['headerTextColor'] ?? '#ffffff' ),
-			'row_bg'      => sanitize_text_field( $attributes['rowBgColor']      ?? '#ffffff' ),
-			'row_text'    => sanitize_text_field( $attributes['rowTextColor']    ?? '#1e1e1e' ),
-			'icon_size'   => absint( $attributes['iconSize']  ?? 32 ) ?: 32,
+			'row_bg'      => sanitize_text_field( $attributes['rowBgColor'] ?? '#ffffff' ),
+			'row_text'    => sanitize_text_field( $attributes['rowTextColor'] ?? '#1e1e1e' ),
+			'icon_size'   => $icon_size_raw ? $icon_size_raw : 32,
 			'show_icons'  => (bool) ( $attributes['showIcons'] ?? true ),
 		);
 		return $this->build_html( $product_id, $opts );
 	}
 
+	/**
+	 * Build allergens HTML table.
+	 *
+	 * @param int   $product_id Product ID.
+	 * @param array $opts       Display options.
+	 * @return string
+	 */
 	private function build_html( $product_id, $opts ) {
-		$allergens  = NIW_Data::get_allergens();
-		$icons_url  = NIW_PLUGIN_URL . 'assets/icons/';
-		$active     = array();
+		$allergens = NIW_Data::get_allergens();
+		$icons_url = NIW_PLUGIN_URL . 'assets/icons/';
+		$active    = array();
 
 		foreach ( $allergens as $key => $label ) {
 			if ( get_post_meta( $product_id, 'food_allegerns_' . $key, true ) ) {
@@ -145,6 +239,9 @@ class NIW_Block_Allergens {
 		return $html;
 	}
 
+	/**
+	 * Enqueue block editor assets.
+	 */
 	public function enqueue_editor_assets() {
 		wp_enqueue_script(
 			'niw-block-allergens',
@@ -153,18 +250,43 @@ class NIW_Block_Allergens {
 			NIW_BUNDLE_VERSION,
 			true
 		);
-		wp_localize_script( 'niw-block-allergens', 'niwBlockData', array(
-			'products'  => $this->get_product_options(),
-			'iconsUrl'  => NIW_PLUGIN_URL . 'assets/icons/',
-			'allergens' => NIW_Data::get_allergens(),
-		) );
+		wp_localize_script(
+			'niw-block-allergens',
+			'niwBlockData',
+			array(
+				'products'  => $this->get_product_options(),
+				'iconsUrl'  => NIW_PLUGIN_URL . 'assets/icons/',
+				'allergens' => NIW_Data::get_allergens(),
+			)
+		);
 	}
 
+	/**
+	 * Get list of published products for the block selector.
+	 *
+	 * @return array
+	 */
 	private function get_product_options() {
-		$posts   = get_posts( array( 'post_type' => 'product', 'posts_per_page' => -1, 'post_status' => 'publish', 'orderby' => 'title', 'order' => 'ASC' ) );
-		$options = array( array( 'value' => 0, 'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ) ) );
+		$posts   = get_posts(
+			array(
+				'post_type'      => 'product',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+			)
+		);
+		$options = array(
+			array(
+				'value' => 0,
+				'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ),
+			),
+		);
 		foreach ( $posts as $post ) {
-			$options[] = array( 'value' => $post->ID, 'label' => $post->post_title );
+			$options[] = array(
+				'value' => $post->ID,
+				'label' => $post->post_title,
+			);
 		}
 		return $options;
 	}

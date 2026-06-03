@@ -10,16 +10,27 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * WooCommerce product editor integration for nutrition and allergen data.
+ */
 class NIW_WooCommerce {
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
-		add_filter( 'woocommerce_product_data_tabs',   array( $this, 'add_tab' ) );
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_tab' ) );
 		add_action( 'woocommerce_product_data_panels', array( $this, 'render_panel' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'save_fields' ) );
-		add_action( 'admin_enqueue_scripts',           array( $this, 'enqueue_scripts' ) );
-		add_action( 'wp_enqueue_scripts',              array( $this, 'enqueue_public_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_styles' ) );
 	}
 
+	/**
+	 * Enqueue admin scripts and styles on product edit screens.
+	 *
+	 * @param string $hook Current admin page hook.
+	 */
 	public function enqueue_scripts( string $hook ) {
 		if ( ( 'post.php' !== $hook && 'post-new.php' !== $hook ) || 'product' !== get_post_type() ) {
 			return;
@@ -28,10 +39,19 @@ class NIW_WooCommerce {
 		wp_enqueue_script( 'niw-admin-ingredients', NIW_PLUGIN_URL . 'assets/js/admin-ingredients.js', array( 'jquery' ), NIW_BUNDLE_VERSION, true );
 	}
 
+	/**
+	 * Enqueue public-facing styles.
+	 */
 	public function enqueue_public_styles() {
 		wp_enqueue_style( 'niw-public', NIW_PLUGIN_URL . 'assets/css/blocks.css', array(), NIW_BUNDLE_VERSION );
 	}
 
+	/**
+	 * Add nutrition tab to WooCommerce product data tabs.
+	 *
+	 * @param array $tabs Existing product data tabs.
+	 * @return array
+	 */
 	public function add_tab( $tabs ) {
 		$tabs['niw_nutrition'] = array(
 			'label'    => __( 'Nutrition & Allergens', 'nutrition-info-woocommerce' ),
@@ -42,14 +62,17 @@ class NIW_WooCommerce {
 		return $tabs;
 	}
 
+	/**
+	 * Render the nutrition data panel in the product editor.
+	 */
 	public function render_panel() {
 		global $post;
-		$post_id     = $post->ID;
-		$allergens   = NIW_Data::get_allergens();
-		$nutrients   = NIW_Data::get_nutrients();
+		$post_id      = $post->ID;
+		$allergens    = NIW_Data::get_allergens();
+		$nutrients    = NIW_Data::get_nutrients();
 		$group_labels = NIW_Data::get_group_labels();
-		$icons_url   = NIW_PLUGIN_URL . 'assets/icons/';
-		$ingredients = get_post_meta( $post_id, 'food_ingredients', true );
+		$icons_url    = NIW_PLUGIN_URL . 'assets/icons/';
+		$ingredients  = get_post_meta( $post_id, 'food_ingredients', true );
 		if ( ! is_array( $ingredients ) ) {
 			$ingredients = array();
 		}
@@ -63,9 +86,10 @@ class NIW_WooCommerce {
 			<div class="options_group">
 				<p class="form-field"><label><strong><?php esc_html_e( 'Allergens', 'nutrition-info-woocommerce' ); ?></strong></label></p>
 				<div class="niw-allergens-admin-wrapper">
-					<?php foreach ( $allergens as $key => $label ) :
+					<?php
+					foreach ( $allergens as $key => $label ) :
 						$checked = get_post_meta( $post_id, 'food_allegerns_' . $key, true );
-					?>
+						?>
 					<div class="niw-allergen-item">
 						<input type="checkbox"
 							name="food_allegerns_<?php echo esc_attr( $key ); ?>"
@@ -111,7 +135,7 @@ class NIW_WooCommerce {
 						$value  = get_post_meta( $post_id, 'food_nutrient_' . $key, true );
 						$is_sub = ! empty( $def['sub'] );
 						$label  = $is_sub ? '— ' . $def['label'] : $def['label'];
-					?>
+						?>
 					<tr>
 						<td style="padding:<?php echo $is_sub ? '4px 8px 4px 24px' : '4px 8px'; ?>;border-bottom:1px solid #eee;">
 							<label for="food_nutrient_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label>
@@ -173,6 +197,11 @@ class NIW_WooCommerce {
 		<?php
 	}
 
+	/**
+	 * Save nutrition, allergen and ingredient fields from the product editor.
+	 *
+	 * @param int $post_id Product post ID.
+	 */
 	public function save_fields( $post_id ) {
 		if ( ! isset( $_POST['niw_nutrition_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['niw_nutrition_nonce'] ) ), 'niw_nutrition_metabox' ) ) {
 			return;
@@ -197,13 +226,17 @@ class NIW_WooCommerce {
 		}
 
 		// Ingredients.
-		$ingredients = array();
-		if ( ! empty( $_POST['food_ingredients'] ) && is_array( $_POST['food_ingredients'] ) ) {
-			foreach ( $_POST['food_ingredients'] as $item ) {
-				$name     = sanitize_text_field( wp_unslash( $item['name']     ?? '' ) );
+		$ingredients     = array();
+		$raw_ingredients = isset( $_POST['food_ingredients'] ) ? wp_unslash( $_POST['food_ingredients'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( ! empty( $raw_ingredients ) && is_array( $raw_ingredients ) ) {
+			foreach ( $raw_ingredients as $item ) {
+				$name     = sanitize_text_field( wp_unslash( $item['name'] ?? '' ) );
 				$quantity = sanitize_text_field( wp_unslash( $item['quantity'] ?? '' ) );
 				if ( '' !== $name ) {
-					$ingredients[] = array( 'name' => $name, 'quantity' => $quantity );
+					$ingredients[] = array(
+						'name'     => $name,
+						'quantity' => $quantity,
+					);
 				}
 			}
 		}
