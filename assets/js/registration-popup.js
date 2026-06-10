@@ -148,21 +148,6 @@
 			} );
 		}
 
-		// ------------------------------------------------------------------
-		// Close when clicking on the backdrop (outside the card).
-		// ------------------------------------------------------------------
-		overlay.addEventListener( 'click', function ( event ) {
-			if ( card && ! card.contains( event.target ) ) {
-				const params = new URLSearchParams();
-
-				ajaxPost( 'niw_dismiss_onboarding', params )
-					.then( function () {
-						closeModal( overlay );
-					} )
-					.catch( function () {
-						closeModal( overlay );
-					} );
-			}
-		} );
+		// Backdrop click intentionally disabled — popup only closes on submit or skip.
 	} );
 } )();
