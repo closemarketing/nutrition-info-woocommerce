@@ -256,10 +256,56 @@ class WooSettings {
 							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Se muestra una sola vez tras el primer registro del usuario.', 'nutrition-info-woocommerce' ); ?></p>
 						</div>
 						<label class="relative inline-flex items-center cursor-pointer ml-4">
-							<input type="checkbox" name="wc_nutrients_registration_popup" value="yes" class="sr-only peer" <?php checked( $popup_enabled ); ?> />
+							<input type="checkbox" id="niw_popup_toggle" name="wc_nutrients_registration_popup" value="yes" class="sr-only peer" <?php checked( $popup_enabled ); ?> />
 							<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
 						</label>
 					</div>
+
+					<!-- Preview del popup -->
+					<div id="niw-popup-preview" class="mt-4 <?php echo $popup_enabled ? '' : 'hidden'; ?>">
+						<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3"><?php esc_html_e( 'Vista previa del popup', 'nutrition-info-woocommerce' ); ?></p>
+						<div class="bg-gray-100 rounded-2xl p-6 flex items-center justify-center" style="min-height:340px">
+							<div class="bg-white rounded-2xl shadow-xl p-7 w-full max-w-sm">
+								<h3 class="text-lg font-bold text-gray-900 m-0 mb-1">¡Bienvenido/a! 👋</h3>
+								<p class="text-xs text-gray-400 mb-5 m-0"><?php esc_html_e( 'Completa tu perfil para obtener recomendaciones personalizadas.', 'nutrition-info-woocommerce' ); ?></p>
+								<div class="grid grid-cols-2 gap-3 mb-3">
+									<div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Edad</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">Años</div>
+									</div>
+									<div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Altura</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">cm</div>
+									</div>
+									<div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Peso</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">kg</div>
+									</div>
+									<div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Comidas/día</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">Nº de comidas</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Nivel de Actividad</p>
+									<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50 flex justify-between items-center">
+										<span>— Selecciona —</span>
+										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+									</div>
+								</div>
+								<div class="mb-5">
+									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Objetivo</p>
+									<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50 flex justify-between items-center">
+										<span>— Selecciona —</span>
+										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+									</div>
+								</div>
+								<div class="bg-green-600 text-white text-center text-sm font-semibold py-2.5 rounded-full cursor-default"><?php esc_html_e( 'Guardar y continuar', 'nutrition-info-woocommerce' ); ?></div>
+								<p class="text-center text-xs text-gray-400 mt-3 mb-0"><?php esc_html_e( 'Saltar por ahora', 'nutrition-info-woocommerce' ); ?></p>
+							</div>
+						</div>
+					</div>
+
 				</div>
 
 				<!-- Shortcode -->
@@ -290,6 +336,22 @@ class WooSettings {
 			</form>
 		</div>
 		</div>
+
+		<script>
+		( function() {
+			const toggle  = document.getElementById( 'niw_popup_toggle' );
+			const preview = document.getElementById( 'niw-popup-preview' );
+			if ( ! toggle || ! preview ) return;
+
+			toggle.addEventListener( 'change', function() {
+				if ( toggle.checked ) {
+					preview.classList.remove( 'hidden' );
+				} else {
+					preview.classList.add( 'hidden' );
+				}
+			} );
+		} )();
+		</script>
 		<?php
 	}
 
