@@ -16,13 +16,32 @@ defined( 'ABSPATH' ) || exit;
  * Class Settings
  */
 class WooSettings {
+
 	/**
 	 * Bootstraps the class and hooks required actions & filters.
 	 **/
 	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'add_submenu' ) );
 		add_action( 'admin_post_niw_save_settings', array( __CLASS__, 'handle_save' ) );
-		add_action( 'admin_head', array( __CLASS__, 'inline_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_tailwind' ) );
+	}
+
+	/**
+	 * Enqueue Tailwind CDN only on this plugin page.
+	 *
+	 * @param string $hook Current admin page hook.
+	 */
+	public static function enqueue_tailwind( string $hook ): void {
+		if ( 'woocommerce_page_niw-settings' !== $hook ) {
+			return;
+		}
+		wp_enqueue_script(
+			'tailwind-cdn',
+			'https://cdn.tailwindcss.com',
+			array(),
+			null,
+			false
+		);
 	}
 
 	/**
@@ -49,14 +68,14 @@ class WooSettings {
 
 		check_admin_referer( 'niw_save_settings' );
 
-		$fields = array(
-			'wc_nutrients_settings_tab_title'        => 'sanitize_text_field',
-			'wc_nutrients_settings_tab_per_volume_text' => 'sanitize_text_field',
-			'wc_nutrients_settings_tab_position'     => 'sanitize_text_field',
+		$text_fields = array(
+			'wc_nutrients_settings_tab_title',
+			'wc_nutrients_settings_tab_per_volume_text',
+			'wc_nutrients_settings_tab_position',
 		);
 
-		foreach ( $fields as $key => $cb ) {
-			$value = isset( $_POST[ $key ] ) ? $cb( wp_unslash( $_POST[ $key ] ) ) : '';
+		foreach ( $text_fields as $key ) {
+			$value = isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : '';
 			update_option( $key, $value );
 		}
 
@@ -74,238 +93,216 @@ class WooSettings {
 	}
 
 	/**
-	 * Render the full settings page.
+	 * Render the full settings page with Tailwind UI.
 	 */
 	public static function render_page(): void {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			return;
 		}
 
-		$saved = isset( $_GET['saved'] ) && '1' === $_GET['saved'];
+		$saved          = isset( $_GET['saved'] ) && '1' === $_GET['saved'];
+		$title          = get_option( 'wc_nutrients_settings_tab_title', __( 'Información Nutricional', 'nutrition-info-woocommerce' ) );
+		$per_volume     = get_option( 'wc_nutrients_settings_tab_per_volume_text', 'Por 100 g' );
+		$position       = get_option( 'wc_nutrients_settings_tab_position', 'tab' );
+		$styling        = 'yes' === get_option( 'wc_nutrients_settings_tab_styling', 'yes' );
+		$popup_enabled  = 'yes' === get_option( 'wc_nutrients_registration_popup', 'no' );
 
-		self::render_feature_overview();
-
-		if ( $saved ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Ajustes guardados.', 'nutrition-info-woocommerce' ) . '</p></div>';
-		}
+		$positions = array(
+			'tab'                => __( 'Pestaña independiente', 'nutrition-info-woocommerce' ),
+			'in_description_tab' => __( 'Dentro de la pestaña de descripción', 'nutrition-info-woocommerce' ),
+			'after_price'        => __( 'Tras el precio', 'nutrition-info-woocommerce' ),
+			'after_excerpt'      => __( 'Tras el resumen', 'nutrition-info-woocommerce' ),
+			'after_add_to_cart'  => __( 'Tras el botón "Añadir al carrito"', 'nutrition-info-woocommerce' ),
+			'after_meta'         => __( 'Tras los metadatos del producto', 'nutrition-info-woocommerce' ),
+			'hidden'             => __( 'Oculta — colocación manual con shortcode', 'nutrition-info-woocommerce' ),
+		);
 		?>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="niw_save_settings" />
-			<?php wp_nonce_field( 'niw_save_settings' ); ?>
-			<?php woocommerce_admin_fields( self::get_settings() ); ?>
-			<?php submit_button( __( 'Guardar ajustes', 'nutrition-info-woocommerce' ) ); ?>
-		</form>
-		<?php
-	}
+		<div class="wrap" style="font-family:inherit">
+		<div class="max-w-4xl mx-auto py-8 px-4">
 
-	/**
-	 * Output inline styles for the settings page.
-	 */
-	public static function inline_styles(): void {
-		$screen = get_current_screen();
-		if ( ! $screen || 'woocommerce_page_niw-settings' !== $screen->id ) {
-			return;
-		}
-		?>
-		<style>
-			.niw-feature-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 16px;
-				margin: 20px 0 30px;
-				max-width: 900px;
-			}
-			.niw-feature-card {
-				background: #fff;
-				border: 1px solid #e0e0e0;
-				border-radius: 8px;
-				padding: 18px 20px;
-			}
-			.niw-feature-card h4 {
-				margin: 0 0 6px;
-				font-size: 13px;
-				font-weight: 600;
-				display: flex;
-				align-items: center;
-				gap: 6px;
-			}
-			.niw-feature-card p {
-				margin: 0;
-				font-size: 12px;
-				color: #666;
-				line-height: 1.5;
-			}
-			.niw-feature-icon {
-				font-size: 16px;
-			}
-			.niw-badge {
-				display: inline-block;
-				background: #e8f5e9;
-				color: #2e7d32;
-				font-size: 10px;
-				font-weight: 600;
-				padding: 2px 7px;
-				border-radius: 20px;
-				text-transform: uppercase;
-				letter-spacing: .04em;
-				vertical-align: middle;
-				margin-left: 4px;
-			}
-			.niw-badge--new {
-				background: #e3f2fd;
-				color: #1565c0;
-			}
-			.niw-popup-toggle-wrap {
-				background: #f0fdf4;
-				border: 1.5px solid #bbf7d0;
-				border-radius: 8px;
-				padding: 16px 20px;
-				max-width: 700px;
-				margin-top: 8px;
-			}
-			.niw-popup-toggle-wrap p {
-				margin: 6px 0 0;
-				font-size: 12.5px;
-				color: #555;
-				line-height: 1.6;
-			}
-		</style>
-		<?php
-	}
-
-	/**
-	 * Render the feature overview cards at the top of the tab.
-	 */
-	private static function render_feature_overview(): void {
-		?>
-		<h2 style="margin-top:24px;"><?php esc_html_e( 'Nutrition Info for WooCommerce', 'nutrition-info-woocommerce' ); ?></h2>
-		<p style="color:#666;max-width:700px;margin-bottom:20px;">
-			<?php esc_html_e( 'Plugin para mostrar información nutricional y alérgenos en tus productos WooCommerce, y recopilar el perfil nutricional de tus clientes.', 'nutrition-info-woocommerce' ); ?>
-		</p>
-
-		<div class="niw-feature-grid">
-			<div class="niw-feature-card">
-				<h4>
-					<span class="niw-feature-icon">🥗</span>
-					<?php esc_html_e( 'Tabla Nutricional', 'nutrition-info-woocommerce' ); ?>
-				</h4>
-				<p><?php esc_html_e( 'Muestra calorías, proteínas, hidratos, grasas y más en la ficha de cada producto. Configura los valores desde el editor de producto.', 'nutrition-info-woocommerce' ); ?></p>
+			<!-- ── Header ── -->
+			<div class="flex items-center gap-4 mb-8">
+				<div class="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center text-2xl shadow">🥗</div>
+				<div>
+					<h1 class="text-2xl font-bold text-gray-900 m-0 leading-tight">Nutrition Info</h1>
+					<p class="text-sm text-gray-500 m-0"><?php esc_html_e( 'Gestiona la información nutricional y el perfil de tus clientes', 'nutrition-info-woocommerce' ); ?></p>
+				</div>
 			</div>
 
-			<div class="niw-feature-card">
-				<h4>
-					<span class="niw-feature-icon">⚠️</span>
-					<?php esc_html_e( 'Iconos de Alérgenos', 'nutrition-info-woocommerce' ); ?>
-				</h4>
-				<p><?php esc_html_e( 'Muestra iconos de los 14 alérgenos principales en la tienda y en la ficha de producto. Actívalos por producto desde el editor.', 'nutrition-info-woocommerce' ); ?></p>
+			<?php if ( $saved ) : ?>
+			<div class="flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 mb-6 text-sm font-medium">
+				<svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+				<?php esc_html_e( 'Ajustes guardados correctamente.', 'nutrition-info-woocommerce' ); ?>
+			</div>
+			<?php endif; ?>
+
+			<!-- ── Feature cards ── -->
+			<div class="grid grid-cols-3 gap-4 mb-8">
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+					<div class="text-2xl mb-3">📊</div>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Tabla Nutricional', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Calorías, proteínas, hidratos y grasas en la ficha de producto.', 'nutrition-info-woocommerce' ); ?></p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+					<div class="text-2xl mb-3">⚠️</div>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Iconos de Alérgenos', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( '14 alérgenos con iconos visuales en tienda y ficha de producto.', 'nutrition-info-woocommerce' ); ?></p>
+				</div>
+				<div class="bg-white rounded-2xl border border-blue-100 shadow-sm p-5 relative overflow-hidden">
+					<div class="absolute top-3 right-3">
+						<span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Nuevo</span>
+					</div>
+					<div class="text-2xl mb-3">👤</div>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Recoge datos del cliente al registrarse y calcula su TDEE.', 'nutrition-info-woocommerce' ); ?></p>
+				</div>
 			</div>
 
-			<div class="niw-feature-card">
-				<h4>
-					<span class="niw-feature-icon">👤</span>
-					<?php esc_html_e( 'Perfil Nutricional', 'nutrition-info-woocommerce' ); ?>
-					<span class="niw-badge niw-badge--new"><?php esc_html_e( 'Nuevo', 'nutrition-info-woocommerce' ); ?></span>
-				</h4>
-				<p><?php esc_html_e( 'Recoge edad, altura, peso, nivel de actividad, comidas diarias y objetivo de cada cliente al registrarse. Datos disponibles en su perfil.', 'nutrition-info-woocommerce' ); ?></p>
-			</div>
+			<!-- ── Form ── -->
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="niw_save_settings" />
+				<?php wp_nonce_field( 'niw_save_settings' ); ?>
+
+				<!-- Tabla Nutricional -->
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
+					<div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
+						<span class="text-lg">📊</span>
+						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Tabla Nutricional', 'nutrition-info-woocommerce' ); ?></h2>
+					</div>
+					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Configura cómo y dónde se muestra la tabla nutricional en las páginas de producto. Los valores por producto se editan desde el editor de producto.', 'nutrition-info-woocommerce' ); ?></p>
+
+					<div class="grid grid-cols-2 gap-5">
+						<div>
+							<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_title">
+								<?php esc_html_e( 'Título de la sección', 'nutrition-info-woocommerce' ); ?>
+							</label>
+							<input
+								type="text"
+								id="niw_title"
+								name="wc_nutrients_settings_tab_title"
+								value="<?php echo esc_attr( $title ); ?>"
+								class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+							/>
+							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'Texto del título del bloque o pestaña nutricional.', 'nutrition-info-woocommerce' ); ?></p>
+						</div>
+						<div>
+							<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_per_volume">
+								<?php esc_html_e( 'Texto de referencia', 'nutrition-info-woocommerce' ); ?>
+							</label>
+							<input
+								type="text"
+								id="niw_per_volume"
+								name="wc_nutrients_settings_tab_per_volume_text"
+								value="<?php echo esc_attr( $per_volume ); ?>"
+								class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+							/>
+							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'Ej: "Por 100 g" o "Por ración".', 'nutrition-info-woocommerce' ); ?></p>
+						</div>
+					</div>
+
+					<div class="mt-5">
+						<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_position">
+							<?php esc_html_e( 'Posición en la ficha de producto', 'nutrition-info-woocommerce' ); ?>
+						</label>
+						<select
+							id="niw_position"
+							name="wc_nutrients_settings_tab_position"
+							class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
+						>
+							<?php foreach ( $positions as $val => $label ) : ?>
+							<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $position, $val ); ?>>
+								<?php echo esc_html( $label ); ?>
+							</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="mt-5 flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+						<div>
+							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Cargar hoja de estilos', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Desactívalo si usas tus propios estilos CSS.', 'nutrition-info-woocommerce' ); ?></p>
+						</div>
+						<label class="relative inline-flex items-center cursor-pointer ml-4">
+							<input type="checkbox" name="wc_nutrients_settings_tab_styling" value="yes" class="sr-only peer" <?php checked( $styling ); ?> />
+							<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Popup Nutricional -->
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
+					<div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
+						<span class="text-lg">👤</span>
+						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Popup de Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h2>
+						<span class="ml-2 text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"><?php esc_html_e( 'Nuevo', 'nutrition-info-woocommerce' ); ?></span>
+					</div>
+
+					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Cuando está activo, tras el registro aparece un popup que recoge el perfil nutricional del nuevo usuario: edad, altura, peso, nivel de actividad, nº de comidas diarias y objetivo. Los datos se guardan en su perfil y se muestran en "Mi Cuenta".', 'nutrition-info-woocommerce' ); ?></p>
+
+					<div class="grid grid-cols-3 gap-3 mb-5 text-xs text-gray-500">
+						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
+							<span class="text-base">📅</span>
+							<span><?php esc_html_e( 'Edad, altura y peso', 'nutrition-info-woocommerce' ); ?></span>
+						</div>
+						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
+							<span class="text-base">🏃</span>
+							<span><?php esc_html_e( 'Nivel de actividad física', 'nutrition-info-woocommerce' ); ?></span>
+						</div>
+						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
+							<span class="text-base">🎯</span>
+							<span><?php esc_html_e( 'Objetivo: masa, mantenimiento o pérdida de grasa', 'nutrition-info-woocommerce' ); ?></span>
+						</div>
+					</div>
+
+					<div class="flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-4 py-3">
+						<div>
+							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Activar popup de bienvenida', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Se muestra una sola vez tras el primer registro del usuario.', 'nutrition-info-woocommerce' ); ?></p>
+						</div>
+						<label class="relative inline-flex items-center cursor-pointer ml-4">
+							<input type="checkbox" name="wc_nutrients_registration_popup" value="yes" class="sr-only peer" <?php checked( $popup_enabled ); ?> />
+							<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Shortcode -->
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-6">
+					<div class="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100">
+						<span class="text-lg">🔧</span>
+						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Shortcode', 'nutrition-info-woocommerce' ); ?></h2>
+					</div>
+					<p class="text-sm text-gray-500 m-0">
+						<?php esc_html_e( 'Usa el shortcode para colocar la tabla nutricional manualmente cuando la posición está en "Oculta":', 'nutrition-info-woocommerce' ); ?>
+					</p>
+					<div class="mt-3 flex items-center gap-3">
+						<code class="bg-gray-900 text-green-400 px-4 py-2 rounded-lg text-sm font-mono select-all">[nutritiontable]</code>
+						<span class="text-xs text-gray-400"><?php esc_html_e( 'Copiar y pegar en cualquier página o entrada.', 'nutrition-info-woocommerce' ); ?></span>
+					</div>
+				</div>
+
+				<!-- Save button -->
+				<div class="flex justify-end">
+					<button
+						type="submit"
+						class="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-2.5 rounded-full text-sm transition-colors cursor-pointer border-0"
+					>
+						<?php esc_html_e( 'Guardar ajustes', 'nutrition-info-woocommerce' ); ?>
+					</button>
+				</div>
+
+			</form>
+		</div>
 		</div>
 		<?php
 	}
 
 	/**
-	 * Get all settings definitions.
+	 * Get settings definitions (kept for filter compatibility).
 	 *
 	 * @return array
 	 */
 	public static function get_settings(): array {
-		$settings = array(
-
-			// ── Tabla Nutricional ─────────────────────────────────────────────
-			'nutrition_section_title' => array(
-				'name' => __( 'Tabla Nutricional', 'nutrition-info-woocommerce' ),
-				'type' => 'title',
-				'desc' => __( 'Configura cómo y dónde se muestra la tabla de información nutricional en las páginas de producto. Los valores por producto se editan desde el panel de cada producto.', 'nutrition-info-woocommerce' ),
-				'id'   => 'wc_nutrients_nutrition_section_title',
-			),
-			'title' => array(
-				'name'    => __( 'Título de la sección', 'nutrition-info-woocommerce' ),
-				'type'    => 'text',
-				'desc'    => __( 'Texto que aparece como título del bloque o pestaña nutricional.', 'nutrition-info-woocommerce' ),
-				'id'      => 'wc_nutrients_settings_tab_title',
-				'default' => __( 'Información Nutricional', 'nutrition-info-woocommerce' ),
-			),
-			'per_volume_text' => array(
-				'name'    => __( 'Texto de referencia', 'nutrition-info-woocommerce' ),
-				'type'    => 'text',
-				'desc'    => __( 'Ej: "Por 100 g" o "Por ración". Aparece junto a los valores nutricionales.', 'nutrition-info-woocommerce' ),
-				'id'      => 'wc_nutrients_settings_tab_per_volume_text',
-				'default' => __( 'Por 100 g', 'nutrition-info-woocommerce' ),
-			),
-			'position' => array(
-				'name'    => __( 'Posición en la ficha', 'nutrition-info-woocommerce' ),
-				'type'    => 'select',
-				'desc'    => __( 'Dónde mostrar la tabla nutricional dentro de la página de producto.', 'nutrition-info-woocommerce' ),
-				'id'      => 'wc_nutrients_settings_tab_position',
-				'options' => array(
-					'tab'                => __( 'Pestaña independiente', 'nutrition-info-woocommerce' ),
-					'in_description_tab' => __( 'Dentro de la pestaña de descripción', 'nutrition-info-woocommerce' ),
-					'after_price'        => __( 'Tras el precio', 'nutrition-info-woocommerce' ),
-					'after_excerpt'      => __( 'Tras el resumen', 'nutrition-info-woocommerce' ),
-					'after_add_to_cart'  => __( 'Tras el botón "Añadir al carrito"', 'nutrition-info-woocommerce' ),
-					'after_meta'         => __( 'Tras los metadatos del producto', 'nutrition-info-woocommerce' ),
-					'hidden'             => __( 'Oculta (colocación manual con shortcode)', 'nutrition-info-woocommerce' ),
-				),
-			),
-			'styling' => array(
-				'name'    => __( 'Estilos CSS', 'nutrition-info-woocommerce' ),
-				'type'    => 'checkbox',
-				'desc'    => __( 'Cargar la hoja de estilos del plugin. Desactívalo si usas tus propios estilos.', 'nutrition-info-woocommerce' ),
-				'id'      => 'wc_nutrients_settings_tab_styling',
-				'default' => 'yes',
-			),
-			'nutrition_section_end' => array(
-				'type' => 'sectionend',
-				'id'   => 'wc_nutrients_nutrition_section_end',
-			),
-
-			// ── Popup de Bienvenida ───────────────────────────────────────────
-			'popup_section_title' => array(
-				'name' => __( 'Popup de Perfil Nutricional', 'nutrition-info-woocommerce' ),
-				'type' => 'title',
-				'desc' => __( 'Cuando está activo, justo después de que un usuario se registre en tu web aparece un popup con un mini-formulario para recopilar su perfil nutricional: edad, altura, peso, nivel de actividad, nº de comidas diarias y objetivo (ganar masa, mantenimiento o perder grasa). Los datos se guardan en el perfil del usuario y están disponibles en "Mi Cuenta".', 'nutrition-info-woocommerce' ),
-				'id'   => 'wc_nutrients_popup_section_title',
-			),
-			'registration_popup' => array(
-				'name'              => __( 'Activar popup de bienvenida', 'nutrition-info-woocommerce' ),
-				'type'              => 'checkbox',
-				'desc'              => __( 'Mostrar el formulario nutricional tras el registro de nuevos usuarios.', 'nutrition-info-woocommerce' ),
-				'id'                => 'wc_nutrients_registration_popup',
-				'default'           => 'no',
-				'checkboxgroup'     => '',
-				'show_if_checked'   => 'option',
-			),
-			'popup_section_end' => array(
-				'type' => 'sectionend',
-				'id'   => 'wc_nutrients_popup_section_end',
-			),
-
-			// ── Shortcode ─────────────────────────────────────────────────────
-			'shortcode_section_title' => array(
-				'name' => __( 'Shortcode', 'nutrition-info-woocommerce' ),
-				'type' => 'title',
-				'desc' => sprintf(
-					/* translators: %s: shortcode */
-					__( 'Usa %s para mostrar la tabla nutricional manualmente en cualquier página o entrada cuando la posición está en "Oculta".', 'nutrition-info-woocommerce' ),
-					'<code>[nutritiontable]</code>'
-				),
-				'id'   => 'wc_nutrients_shortcode_section_title',
-			),
-			'shortcode_section_end' => array(
-				'type' => 'sectionend',
-				'id'   => 'wc_nutrients_shortcode_section_end',
-			),
-		);
-
-		return apply_filters( 'wc_nutrients_settings_tab_settings', $settings );
+		return apply_filters( 'wc_nutrients_settings_tab_settings', array() );
 	}
 }
