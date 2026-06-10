@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "CLOSE\\NutritionInfo\\": "includes/"
-        }
+        },
+        "classmap": [
+            "includes/"
+        ]
     },
     "config": {
         "allow-plugins": {

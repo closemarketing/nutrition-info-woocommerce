@@ -37,9 +37,11 @@ add_action(
 		require_once NIW_PLUGIN_PATH . 'includes/template.php';
 		require_once NIW_PLUGIN_PATH . 'includes/product-tab.php';
 		require_once NIW_PLUGIN_PATH . 'includes/shortcode.php';
+		require_once NIW_PLUGIN_PATH . 'includes/class-registration-popup.php';
 
 		\CLOSE\NutritionInfo\WooSettings::init();
 		new \CLOSE\NutritionInfo\MetaProducts();
 		new \CLOSE\NutritionInfo\Hooks();
+		new \CLOSE\NutritionInfo\RegistrationPopup();
 	}
 );
