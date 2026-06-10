@@ -21,6 +21,57 @@
 		}
 	}
 
+	const ACTIVITY_LABELS = {
+		sedentary: 'Sedentario',
+		light:     'Levemente activo',
+		moderate:  'Moderadamente activo',
+		very:      'Muy activo',
+		extra:     'Extremadamente activo',
+	};
+
+	const GOAL_LABELS = {
+		muscle:      'Ganar masa muscular',
+		maintenance: 'Mantenimiento',
+		fat_loss:    'Perder grasa',
+	};
+
+	/**
+	 * Updates the nutritional profile card in Mi Perfil (if present on the page).
+	 *
+	 * @param {FormData} formData
+	 */
+	function updateNiwView( formData ) {
+		var niwView = document.getElementById( 'masai-niw-view' );
+		if ( ! niwView ) return;
+
+		var map = {
+			age:      { raw: formData.get( 'niw_user_age' ),      format: function ( v ) { return v ? v + ' años' : ''; } },
+			height:   { raw: formData.get( 'niw_user_height' ),   format: function ( v ) { return v ? v + ' cm' : ''; } },
+			weight:   { raw: formData.get( 'niw_user_weight' ),   format: function ( v ) { return v ? v + ' kg' : ''; } },
+			meals:    { raw: formData.get( 'niw_user_meals' ),    format: function ( v ) { return v || ''; } },
+			activity: { raw: formData.get( 'niw_user_activity' ), format: function ( v ) { return ACTIVITY_LABELS[ v ] || ''; } },
+			goal:     { raw: formData.get( 'niw_user_goal' ),     format: function ( v ) { return GOAL_LABELS[ v ] || ''; } },
+		};
+
+		Object.keys( map ).forEach( function ( field ) {
+			var container = niwView.querySelector( '[data-niw-field="' + field + '"]' );
+			if ( ! container ) return;
+
+			var span    = container.querySelector( '.masai-perfil__field-value' );
+			var display = map[ field ].format( map[ field ].raw );
+
+			if ( ! span ) return;
+
+			if ( display ) {
+				span.textContent = display;
+				span.classList.remove( 'masai-perfil__field-value--empty' );
+			} else {
+				span.textContent = '';
+				span.classList.add( 'masai-perfil__field-value--empty' );
+			}
+		} );
+	}
+
 	/**
 	 * Sends a POST request to admin-ajax.php and resolves with the parsed JSON.
 	 *
@@ -67,6 +118,7 @@
 				ajaxPost( 'niw_save_onboarding', formData )
 					.then( function ( response ) {
 						if ( response.success ) {
+							updateNiwView( formData );
 							closeModal( overlay );
 						}
 					} )

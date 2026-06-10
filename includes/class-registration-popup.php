@@ -105,7 +105,7 @@ class RegistrationPopup {
 		<div id="niw-onboarding-overlay" class="niw-onboarding-overlay" role="dialog" aria-modal="true" aria-labelledby="niw-onboarding-title">
 			<div class="niw-onboarding-card">
 				<h2 id="niw-onboarding-title" class="niw-onboarding-title">
-					<?php esc_html_e( '¡Bienvenido/a!', 'nutrition-info-woocommerce' ); ?>
+					<?php esc_html_e( 'Bienvenido/a', 'nutrition-info-woocommerce' ); ?>
 				</h2>
 				<p class="niw-onboarding-subtitle">
 					<?php esc_html_e( 'Completa tu perfil nutricional para obtener recomendaciones personalizadas.', 'nutrition-info-woocommerce' ); ?>
