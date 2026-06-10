@@ -148,10 +148,7 @@ class WooSettings {
 					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Iconos de Alérgenos', 'nutrition-info-woocommerce' ); ?></h3>
 					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( '14 alérgenos con iconos visuales en tienda y ficha de producto.', 'nutrition-info-woocommerce' ); ?></p>
 				</div>
-				<div class="bg-white rounded-2xl border border-blue-100 shadow-sm p-5 relative overflow-hidden">
-					<div class="absolute top-3 right-3">
-						<span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Nuevo</span>
-					</div>
+				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 					<div class="text-2xl mb-3">👤</div>
 					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h3>
 					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Recoge datos del cliente al registrarse y calcula su TDEE.', 'nutrition-info-woocommerce' ); ?></p>
@@ -234,7 +231,6 @@ class WooSettings {
 					<div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
 						<span class="text-lg">👤</span>
 						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Popup de Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h2>
-						<span class="ml-2 text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"><?php esc_html_e( 'Nuevo', 'nutrition-info-woocommerce' ); ?></span>
 					</div>
 
 					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Cuando está activo, tras el registro aparece un popup que recoge el perfil nutricional del nuevo usuario: edad, altura, peso, nivel de actividad, nº de comidas diarias y objetivo. Los datos se guardan en su perfil y se muestran en "Mi Cuenta".', 'nutrition-info-woocommerce' ); ?></p>
