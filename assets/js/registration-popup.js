@@ -22,17 +22,17 @@
 	}
 
 	const ACTIVITY_LABELS = {
-		sedentary: 'Sedentario',
-		light:     'Levemente activo',
-		moderate:  'Moderadamente activo',
-		very:      'Muy activo',
-		extra:     'Extremadamente activo',
+		sedentary: 'Sedentary',
+		light:     'Lightly active',
+		moderate:  'Moderately active',
+		very:      'Very active',
+		extra:     'Extremely active',
 	};
 
 	const GOAL_LABELS = {
-		muscle:      'Ganar masa muscular',
-		maintenance: 'Mantenimiento',
-		fat_loss:    'Perder grasa',
+		muscle:      'Build muscle',
+		maintenance: 'Maintenance',
+		fat_loss:    'Lose fat',
 	};
 
 	/**

@@ -105,17 +105,17 @@ class RegistrationPopup {
 		<div id="niw-onboarding-overlay" class="niw-onboarding-overlay" role="dialog" aria-modal="true" aria-labelledby="niw-onboarding-title">
 			<div class="niw-onboarding-card">
 				<h2 id="niw-onboarding-title" class="niw-onboarding-title">
-					<?php esc_html_e( 'Bienvenido/a', 'nutrition-info-woocommerce' ); ?>
+					<?php esc_html_e( 'Welcome', 'nutrition-info-woocommerce' ); ?>
 				</h2>
 				<p class="niw-onboarding-subtitle">
-					<?php esc_html_e( 'Completa tu perfil nutricional para obtener recomendaciones personalizadas.', 'nutrition-info-woocommerce' ); ?>
+					<?php esc_html_e( 'Complete your nutritional profile to get personalised recommendations.', 'nutrition-info-woocommerce' ); ?>
 				</p>
 
 				<form id="niw-onboarding-form" novalidate>
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_age" class="niw-onboarding-label">
-							<?php esc_html_e( 'Edad', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Age', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<input
 							type="number"
@@ -124,13 +124,13 @@ class RegistrationPopup {
 							class="niw-onboarding-input"
 							min="1"
 							max="120"
-							placeholder="<?php esc_attr_e( 'Años', 'nutrition-info-woocommerce' ); ?>"
+							placeholder="<?php esc_attr_e( 'Years', 'nutrition-info-woocommerce' ); ?>"
 						/>
 					</div>
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_height" class="niw-onboarding-label">
-							<?php esc_html_e( 'Altura (cm)', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Height (cm)', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<input
 							type="number"
@@ -145,7 +145,7 @@ class RegistrationPopup {
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_weight" class="niw-onboarding-label">
-							<?php esc_html_e( 'Peso (kg)', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Weight (kg)', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<input
 							type="number"
@@ -160,21 +160,21 @@ class RegistrationPopup {
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_activity" class="niw-onboarding-label">
-							<?php esc_html_e( 'Nivel de Actividad', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Activity Level', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<select id="niw_user_activity" name="niw_user_activity" class="niw-onboarding-input niw-onboarding-select">
-							<option value=""><?php esc_html_e( '— Selecciona —', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="sedentary"><?php esc_html_e( 'Sedentario (sin ejercicio o muy poco)', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="light"><?php esc_html_e( 'Levemente activo (1–3 días/semana)', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="moderate"><?php esc_html_e( 'Moderadamente activo (3–5 días/semana)', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="very"><?php esc_html_e( 'Muy activo (6–7 días/semana)', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="extra"><?php esc_html_e( 'Extremadamente activo (trabajo físico intenso)', 'nutrition-info-woocommerce' ); ?></option>
+							<option value=""><?php esc_html_e( '— Select —', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="sedentary"><?php esc_html_e( 'Sedentary (little or no exercise)', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="light"><?php esc_html_e( 'Lightly active (1–3 days/week)', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="moderate"><?php esc_html_e( 'Moderately active (3–5 days/week)', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="very"><?php esc_html_e( 'Very active (6–7 days/week)', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="extra"><?php esc_html_e( 'Extremely active (intense physical work)', 'nutrition-info-woocommerce' ); ?></option>
 						</select>
 					</div>
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_meals" class="niw-onboarding-label">
-							<?php esc_html_e( 'Nº de comidas diarias', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Daily meals', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<input
 							type="number"
@@ -183,31 +183,31 @@ class RegistrationPopup {
 							class="niw-onboarding-input"
 							min="1"
 							max="10"
-							placeholder="<?php esc_attr_e( 'Comidas por día', 'nutrition-info-woocommerce' ); ?>"
+							placeholder="<?php esc_attr_e( 'Meals per day', 'nutrition-info-woocommerce' ); ?>"
 						/>
 					</div>
 
 					<div class="niw-onboarding-field">
 						<label for="niw_user_goal" class="niw-onboarding-label">
-							<?php esc_html_e( 'Objetivo', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Goal', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<select id="niw_user_goal" name="niw_user_goal" class="niw-onboarding-input niw-onboarding-select">
-							<option value=""><?php esc_html_e( '— Selecciona —', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="muscle"><?php esc_html_e( 'Ganar masa muscular', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="maintenance"><?php esc_html_e( 'Mantenimiento', 'nutrition-info-woocommerce' ); ?></option>
-							<option value="fat_loss"><?php esc_html_e( 'Perder grasa', 'nutrition-info-woocommerce' ); ?></option>
+							<option value=""><?php esc_html_e( '— Select —', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="muscle"><?php esc_html_e( 'Build muscle', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="maintenance"><?php esc_html_e( 'Maintenance', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="fat_loss"><?php esc_html_e( 'Lose fat', 'nutrition-info-woocommerce' ); ?></option>
 						</select>
 					</div>
 
 					<button type="submit" class="niw-onboarding-submit">
-						<?php esc_html_e( 'Guardar y continuar', 'nutrition-info-woocommerce' ); ?>
+						<?php esc_html_e( 'Save and continue', 'nutrition-info-woocommerce' ); ?>
 					</button>
 
 				</form>
 
 				<p class="niw-onboarding-skip">
 					<a href="#" id="niw-onboarding-skip" class="niw-onboarding-skip-link">
-						<?php esc_html_e( 'Saltar por ahora', 'nutrition-info-woocommerce' ); ?>
+						<?php esc_html_e( 'Skip for now', 'nutrition-info-woocommerce' ); ?>
 					</a>
 				</p>
 			</div>

@@ -101,20 +101,20 @@ class WooSettings {
 		}
 
 		$saved          = isset( $_GET['saved'] ) && '1' === $_GET['saved'];
-		$title          = get_option( 'wc_nutrients_settings_tab_title', __( 'Información Nutricional', 'nutrition-info-woocommerce' ) );
-		$per_volume     = get_option( 'wc_nutrients_settings_tab_per_volume_text', 'Por 100 g' );
+		$title          = get_option( 'wc_nutrients_settings_tab_title', __( 'Nutritional Information', 'nutrition-info-woocommerce' ) );
+		$per_volume     = get_option( 'wc_nutrients_settings_tab_per_volume_text', 'Per 100 g' );
 		$position       = get_option( 'wc_nutrients_settings_tab_position', 'tab' );
 		$styling        = 'yes' === get_option( 'wc_nutrients_settings_tab_styling', 'yes' );
 		$popup_enabled  = 'yes' === get_option( 'wc_nutrients_registration_popup', 'no' );
 
 		$positions = array(
-			'tab'                => __( 'Pestaña independiente', 'nutrition-info-woocommerce' ),
-			'in_description_tab' => __( 'Dentro de la pestaña de descripción', 'nutrition-info-woocommerce' ),
-			'after_price'        => __( 'Tras el precio', 'nutrition-info-woocommerce' ),
-			'after_excerpt'      => __( 'Tras el resumen', 'nutrition-info-woocommerce' ),
-			'after_add_to_cart'  => __( 'Tras el botón "Añadir al carrito"', 'nutrition-info-woocommerce' ),
-			'after_meta'         => __( 'Tras los metadatos del producto', 'nutrition-info-woocommerce' ),
-			'hidden'             => __( 'Oculta — colocación manual con shortcode', 'nutrition-info-woocommerce' ),
+			'tab'                => __( 'Standalone tab', 'nutrition-info-woocommerce' ),
+			'in_description_tab' => __( 'Inside the description tab', 'nutrition-info-woocommerce' ),
+			'after_price'        => __( 'After the price', 'nutrition-info-woocommerce' ),
+			'after_excerpt'      => __( 'After the excerpt', 'nutrition-info-woocommerce' ),
+			'after_add_to_cart'  => __( 'After the "Add to cart" button', 'nutrition-info-woocommerce' ),
+			'after_meta'         => __( 'After product meta', 'nutrition-info-woocommerce' ),
+			'hidden'             => __( 'Hidden — manual placement via shortcode', 'nutrition-info-woocommerce' ),
 		);
 		?>
 		<div class="wrap" style="font-family:inherit">
@@ -125,14 +125,14 @@ class WooSettings {
 				<div class="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center text-2xl shadow">🥗</div>
 				<div>
 					<h1 class="text-2xl font-bold text-gray-900 m-0 leading-tight">Nutrition Info</h1>
-					<p class="text-sm text-gray-500 m-0"><?php esc_html_e( 'Gestiona la información nutricional y el perfil de tus clientes', 'nutrition-info-woocommerce' ); ?></p>
+					<p class="text-sm text-gray-500 m-0"><?php esc_html_e( 'Manage nutritional information and customer profiles', 'nutrition-info-woocommerce' ); ?></p>
 				</div>
 			</div>
 
 			<?php if ( $saved ) : ?>
 			<div class="flex items-center gap-2 bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 mb-6 text-sm font-medium">
 				<svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-				<?php esc_html_e( 'Ajustes guardados correctamente.', 'nutrition-info-woocommerce' ); ?>
+				<?php esc_html_e( 'Settings saved successfully.', 'nutrition-info-woocommerce' ); ?>
 			</div>
 			<?php endif; ?>
 
@@ -140,18 +140,18 @@ class WooSettings {
 			<div class="grid grid-cols-3 gap-4 mb-8">
 				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 					<div class="text-2xl mb-3">📊</div>
-					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Tabla Nutricional', 'nutrition-info-woocommerce' ); ?></h3>
-					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Calorías, proteínas, hidratos y grasas en la ficha de producto.', 'nutrition-info-woocommerce' ); ?></p>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Nutrition Table', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Calories, protein, carbs and fat on the product page.', 'nutrition-info-woocommerce' ); ?></p>
 				</div>
 				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 					<div class="text-2xl mb-3">⚠️</div>
-					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Iconos de Alérgenos', 'nutrition-info-woocommerce' ); ?></h3>
-					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( '14 alérgenos con iconos visuales en tienda y ficha de producto.', 'nutrition-info-woocommerce' ); ?></p>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Allergen Icons', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( '14 allergens with visual icons in the shop and product pages.', 'nutrition-info-woocommerce' ); ?></p>
 				</div>
 				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
 					<div class="text-2xl mb-3">👤</div>
-					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h3>
-					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Recoge datos del cliente al registrarse y calcula su TDEE.', 'nutrition-info-woocommerce' ); ?></p>
+					<h3 class="font-semibold text-gray-800 text-sm m-0 mb-1"><?php esc_html_e( 'Nutritional Profile', 'nutrition-info-woocommerce' ); ?></h3>
+					<p class="text-xs text-gray-500 m-0 leading-relaxed"><?php esc_html_e( 'Collects customer data on registration and calculates their TDEE.', 'nutrition-info-woocommerce' ); ?></p>
 				</div>
 			</div>
 
@@ -164,14 +164,14 @@ class WooSettings {
 				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
 					<div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
 						<span class="text-lg">📊</span>
-						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Tabla Nutricional', 'nutrition-info-woocommerce' ); ?></h2>
+						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Nutrition Table', 'nutrition-info-woocommerce' ); ?></h2>
 					</div>
-					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Configura cómo y dónde se muestra la tabla nutricional en las páginas de producto. Los valores por producto se editan desde el editor de producto.', 'nutrition-info-woocommerce' ); ?></p>
+					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Configure how and where the nutrition table is displayed on product pages. Per-product values are edited from the product editor.', 'nutrition-info-woocommerce' ); ?></p>
 
 					<div class="grid grid-cols-2 gap-5">
 						<div>
 							<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_title">
-								<?php esc_html_e( 'Título de la sección', 'nutrition-info-woocommerce' ); ?>
+								<?php esc_html_e( 'Section title', 'nutrition-info-woocommerce' ); ?>
 							</label>
 							<input
 								type="text"
@@ -180,11 +180,11 @@ class WooSettings {
 								value="<?php echo esc_attr( $title ); ?>"
 								class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
 							/>
-							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'Texto del título del bloque o pestaña nutricional.', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'Title text for the nutritional block or tab.', 'nutrition-info-woocommerce' ); ?></p>
 						</div>
 						<div>
 							<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_per_volume">
-								<?php esc_html_e( 'Texto de referencia', 'nutrition-info-woocommerce' ); ?>
+								<?php esc_html_e( 'Reference text', 'nutrition-info-woocommerce' ); ?>
 							</label>
 							<input
 								type="text"
@@ -193,13 +193,13 @@ class WooSettings {
 								value="<?php echo esc_attr( $per_volume ); ?>"
 								class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
 							/>
-							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'Ej: "Por 100 g" o "Por ración".', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 mt-1"><?php esc_html_e( 'E.g. "Per 100 g" or "Per serving".', 'nutrition-info-woocommerce' ); ?></p>
 						</div>
 					</div>
 
 					<div class="mt-5">
 						<label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5" for="niw_position">
-							<?php esc_html_e( 'Posición en la ficha de producto', 'nutrition-info-woocommerce' ); ?>
+							<?php esc_html_e( 'Position on the product page', 'nutrition-info-woocommerce' ); ?>
 						</label>
 						<select
 							id="niw_position"
@@ -216,8 +216,8 @@ class WooSettings {
 
 					<div class="mt-5 flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
 						<div>
-							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Cargar hoja de estilos', 'nutrition-info-woocommerce' ); ?></p>
-							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Desactívalo si usas tus propios estilos CSS.', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Load stylesheet', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Disable if you use your own CSS styles.', 'nutrition-info-woocommerce' ); ?></p>
 						</div>
 						<label class="relative inline-flex items-center cursor-pointer ml-4">
 							<input type="checkbox" name="wc_nutrients_settings_tab_styling" value="yes" class="sr-only peer" <?php checked( $styling ); ?> />
@@ -230,30 +230,30 @@ class WooSettings {
 				<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-5">
 					<div class="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
 						<span class="text-lg">👤</span>
-						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Popup de Perfil Nutricional', 'nutrition-info-woocommerce' ); ?></h2>
+						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Nutritional Profile Popup', 'nutrition-info-woocommerce' ); ?></h2>
 					</div>
 
-					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'Cuando está activo, tras el registro aparece un popup que recoge el perfil nutricional del nuevo usuario: edad, altura, peso, nivel de actividad, nº de comidas diarias y objetivo. Los datos se guardan en su perfil y se muestran en "Mi Cuenta".', 'nutrition-info-woocommerce' ); ?></p>
+					<p class="text-sm text-gray-500 mb-5 m-0"><?php esc_html_e( 'When active, a popup appears after registration collecting the new user\'s nutritional profile: age, height, weight, activity level, daily meals and goal. Data is saved to their profile and shown in "My Account".', 'nutrition-info-woocommerce' ); ?></p>
 
 					<div class="grid grid-cols-3 gap-3 mb-5 text-xs text-gray-500">
 						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
 							<span class="text-base">📅</span>
-							<span><?php esc_html_e( 'Edad, altura y peso', 'nutrition-info-woocommerce' ); ?></span>
+							<span><?php esc_html_e( 'Age, height and weight', 'nutrition-info-woocommerce' ); ?></span>
 						</div>
 						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
 							<span class="text-base">🏃</span>
-							<span><?php esc_html_e( 'Nivel de actividad física', 'nutrition-info-woocommerce' ); ?></span>
+							<span><?php esc_html_e( 'Physical activity level', 'nutrition-info-woocommerce' ); ?></span>
 						</div>
 						<div class="flex items-start gap-2 bg-gray-50 rounded-xl p-3">
 							<span class="text-base">🎯</span>
-							<span><?php esc_html_e( 'Objetivo: masa, mantenimiento o pérdida de grasa', 'nutrition-info-woocommerce' ); ?></span>
+							<span><?php esc_html_e( 'Goal: muscle gain, maintenance or fat loss', 'nutrition-info-woocommerce' ); ?></span>
 						</div>
 					</div>
 
 					<div class="flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-4 py-3">
 						<div>
-							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Activar popup de bienvenida', 'nutrition-info-woocommerce' ); ?></p>
-							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Se muestra una sola vez tras el primer registro del usuario.', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-sm font-medium text-gray-700 m-0"><?php esc_html_e( 'Enable welcome popup', 'nutrition-info-woocommerce' ); ?></p>
+							<p class="text-xs text-gray-400 m-0"><?php esc_html_e( 'Shown once after the user\'s first registration.', 'nutrition-info-woocommerce' ); ?></p>
 						</div>
 						<label class="relative inline-flex items-center cursor-pointer ml-4">
 							<input type="checkbox" id="niw_popup_toggle" name="wc_nutrients_registration_popup" value="yes" class="sr-only peer" <?php checked( $popup_enabled ); ?> />
@@ -263,45 +263,45 @@ class WooSettings {
 
 					<!-- Preview del popup -->
 					<div id="niw-popup-preview" class="mt-4 <?php echo $popup_enabled ? '' : 'hidden'; ?>">
-						<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3"><?php esc_html_e( 'Vista previa del popup', 'nutrition-info-woocommerce' ); ?></p>
+						<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3"><?php esc_html_e( 'Popup preview', 'nutrition-info-woocommerce' ); ?></p>
 						<div class="bg-gray-100 rounded-2xl p-6 flex items-center justify-center" style="min-height:340px">
 							<div class="bg-white rounded-2xl shadow-xl p-7 w-full max-w-sm">
-								<h3 class="text-lg font-bold text-gray-900 m-0 mb-1">¡Bienvenido/a! 👋</h3>
-								<p class="text-xs text-gray-400 mb-5 m-0"><?php esc_html_e( 'Completa tu perfil para obtener recomendaciones personalizadas.', 'nutrition-info-woocommerce' ); ?></p>
+								<h3 class="text-lg font-bold text-gray-900 m-0 mb-1">Welcome 👋</h3>
+								<p class="text-xs text-gray-400 mb-5 m-0"><?php esc_html_e( 'Complete your profile to get personalised recommendations.', 'nutrition-info-woocommerce' ); ?></p>
 								<div class="grid grid-cols-2 gap-3 mb-3">
 									<div>
-										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Edad</p>
-										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">Años</div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Age</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">Years</div>
 									</div>
 									<div>
-										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Altura</p>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Height</p>
 										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">cm</div>
 									</div>
 									<div>
-										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Peso</p>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Weight</p>
 										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">kg</div>
 									</div>
 									<div>
-										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Comidas/día</p>
-										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">Nº de comidas</div>
+										<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Meals/day</p>
+										<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50">No. of meals</div>
 									</div>
 								</div>
 								<div class="mb-3">
-									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Nivel de Actividad</p>
+									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Activity Level</p>
 									<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50 flex justify-between items-center">
-										<span>— Selecciona —</span>
+										<span>— Select —</span>
 										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
 									</div>
 								</div>
 								<div class="mb-5">
-									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Objetivo</p>
+									<p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1 m-0">Goal</p>
 									<div class="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 bg-gray-50 flex justify-between items-center">
-										<span>— Selecciona —</span>
+										<span>— Select —</span>
 										<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
 									</div>
 								</div>
-								<div class="bg-green-600 text-white text-center text-sm font-semibold py-2.5 rounded-full cursor-default"><?php esc_html_e( 'Guardar y continuar', 'nutrition-info-woocommerce' ); ?></div>
-								<p class="text-center text-xs text-gray-400 mt-3 mb-0"><?php esc_html_e( 'Saltar por ahora', 'nutrition-info-woocommerce' ); ?></p>
+								<div class="bg-green-600 text-white text-center text-sm font-semibold py-2.5 rounded-full cursor-default"><?php esc_html_e( 'Save and continue', 'nutrition-info-woocommerce' ); ?></div>
+								<p class="text-center text-xs text-gray-400 mt-3 mb-0"><?php esc_html_e( 'Skip for now', 'nutrition-info-woocommerce' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -315,11 +315,11 @@ class WooSettings {
 						<h2 class="text-base font-semibold text-gray-800 m-0"><?php esc_html_e( 'Shortcode', 'nutrition-info-woocommerce' ); ?></h2>
 					</div>
 					<p class="text-sm text-gray-500 m-0">
-						<?php esc_html_e( 'Usa el shortcode para colocar la tabla nutricional manualmente cuando la posición está en "Oculta":', 'nutrition-info-woocommerce' ); ?>
+						<?php esc_html_e( 'Use the shortcode to place the nutrition table manually when position is set to "Hidden":', 'nutrition-info-woocommerce' ); ?>
 					</p>
 					<div class="mt-3 flex items-center gap-3">
 						<code class="bg-gray-900 text-green-400 px-4 py-2 rounded-lg text-sm font-mono select-all">[nutritiontable]</code>
-						<span class="text-xs text-gray-400"><?php esc_html_e( 'Copiar y pegar en cualquier página o entrada.', 'nutrition-info-woocommerce' ); ?></span>
+						<span class="text-xs text-gray-400"><?php esc_html_e( 'Copy and paste into any page or post.', 'nutrition-info-woocommerce' ); ?></span>
 					</div>
 				</div>
 
@@ -329,7 +329,7 @@ class WooSettings {
 						type="submit"
 						class="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-2.5 rounded-full text-sm transition-colors cursor-pointer border-0"
 					>
-						<?php esc_html_e( 'Guardar ajustes', 'nutrition-info-woocommerce' ); ?>
+						<?php esc_html_e( 'Save settings', 'nutrition-info-woocommerce' ); ?>
 					</button>
 				</div>
 
