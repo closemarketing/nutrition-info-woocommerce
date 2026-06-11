@@ -114,6 +114,17 @@ class RegistrationPopup {
 				<form id="niw-onboarding-form" novalidate>
 
 					<div class="niw-onboarding-field">
+						<label for="niw_user_gender" class="niw-onboarding-label">
+							<?php esc_html_e( 'Gender', 'nutrition-info-woocommerce' ); ?>
+						</label>
+						<select id="niw_user_gender" name="niw_user_gender" class="niw-onboarding-input niw-onboarding-select">
+							<option value=""><?php esc_html_e( '— Select —', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="male"><?php esc_html_e( 'Male', 'nutrition-info-woocommerce' ); ?></option>
+							<option value="female"><?php esc_html_e( 'Female', 'nutrition-info-woocommerce' ); ?></option>
+						</select>
+					</div>
+
+					<div class="niw-onboarding-field">
 						<label for="niw_user_age" class="niw-onboarding-label">
 							<?php esc_html_e( 'Age', 'nutrition-info-woocommerce' ); ?>
 						</label>
@@ -227,6 +238,12 @@ class RegistrationPopup {
 
 		$user_id = get_current_user_id();
 
+		$allowed_genders = array( 'male', 'female' );
+		$gender   = isset( $_POST['niw_user_gender'] ) ? sanitize_text_field( wp_unslash( $_POST['niw_user_gender'] ) ) : '';
+		if ( ! in_array( $gender, $allowed_genders, true ) ) {
+			$gender = '';
+		}
+
 		$age      = isset( $_POST['niw_user_age'] ) ? absint( $_POST['niw_user_age'] ) : 0;
 		$height   = isset( $_POST['niw_user_height'] ) ? absint( $_POST['niw_user_height'] ) : 0;
 		$weight   = isset( $_POST['niw_user_weight'] ) ? absint( $_POST['niw_user_weight'] ) : 0;
@@ -244,6 +261,9 @@ class RegistrationPopup {
 			$goal = '';
 		}
 
+		if ( $gender ) {
+			update_user_meta( $user_id, 'niw_user_gender', $gender );
+		}
 		if ( $age ) {
 			update_user_meta( $user_id, 'niw_user_age', $age );
 		}
