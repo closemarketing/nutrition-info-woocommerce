@@ -15,7 +15,7 @@ function niw_nutrition_info() {
 	$attr_products_nutrition = array(
 		array(
 			'key'   => 'energy',
-			'label' => __( 'Energi (KJ/kcal)', 'nutrition-info-woocommerce' ),
+			'label' => __( 'Energy (KJ/kcal)', 'nutrition-info-woocommerce' ),
 		),
 		array(
 			'key'   => 'fat',
@@ -74,7 +74,7 @@ function niw_nutrition_info() {
 			<thead>
 				<tr>
 					<th class="nutrition-table nutrition-table_nutrient-name"><?php esc_html_e( 'Nutritional Information', 'nutrition-info-woocommerce' ); ?></th>
-					<th class="nutrition-table nutrition-table_nutrient-amount"><?php esc_html_e( 'pr. 100 g', 'nutrition-info-woocommerce' ); ?></th>
+					<th class="nutrition-table nutrition-table_nutrient-amount"><?php esc_html_e( 'Per 100 g', 'nutrition-info-woocommerce' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>

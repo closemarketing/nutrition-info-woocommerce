@@ -16,63 +16,63 @@
 
 	/* Exact same groups + rows as HELPER::get_nutrients() in manage-menus */
 	var GROUPS = [
-		{ key: 'energy',   label: 'Energía',             rows: [
-			{ label: 'Valor energético', unit: 'kcal' },
-			{ label: 'Valor energético', unit: 'kJ' },
+		{ key: 'energy',   label: 'Energy',             rows: [
+			{ label: 'Energy', unit: 'kcal' },
+			{ label: 'Energy', unit: 'kJ' },
 		]},
-		{ key: 'fat',      label: 'Grasas',               rows: [
-			{ label: 'Grasas',                    unit: 'g' },
-			{ label: '— Ácidos grasos saturados',  unit: 'g',  sub: true },
-			{ label: '— Monoinsaturados',          unit: 'g',  sub: true },
-			{ label: '— Poliinsaturados',          unit: 'g',  sub: true },
-			{ label: '— Ácidos grasos trans',      unit: 'g',  sub: true },
-			{ label: 'Colesterol',                unit: 'mg' },
+		{ key: 'fat',      label: 'Fat',               rows: [
+			{ label: 'Fat',                          unit: 'g' },
+			{ label: '— Saturated fatty acids',      unit: 'g',  sub: true },
+			{ label: '— Monounsaturated fatty acids', unit: 'g',  sub: true },
+			{ label: '— Polyunsaturated fatty acids', unit: 'g',  sub: true },
+			{ label: '— Trans fatty acids',           unit: 'g',  sub: true },
+			{ label: 'Cholesterol',                  unit: 'mg' },
 		]},
-		{ key: 'carbs',    label: 'Hidratos de carbono',  rows: [
-			{ label: 'Hidratos de carbono',   unit: 'g' },
-			{ label: '— Azúcares',             unit: 'g', sub: true },
-			{ label: '— Azúcares añadidos',    unit: 'g', sub: true },
-			{ label: '— Polialcoholes',        unit: 'g', sub: true },
-			{ label: '— Almidón',              unit: 'g', sub: true },
-			{ label: 'Fibra alimentaria',     unit: 'g' },
-			{ label: '— Fibra soluble',        unit: 'g', sub: true },
-			{ label: '— Fibra insoluble',      unit: 'g', sub: true },
+		{ key: 'carbs',    label: 'Carbohydrate',  rows: [
+			{ label: 'Carbohydrate',   unit: 'g' },
+			{ label: '— Sugars',        unit: 'g', sub: true },
+			{ label: '— Added sugars',  unit: 'g', sub: true },
+			{ label: '— Polyols',       unit: 'g', sub: true },
+			{ label: '— Starch',        unit: 'g', sub: true },
+			{ label: 'Dietary fiber',  unit: 'g' },
+			{ label: '— Soluble fiber',   unit: 'g', sub: true },
+			{ label: '— Insoluble fiber', unit: 'g', sub: true },
 		]},
-		{ key: 'protein',  label: 'Proteínas y sal',      rows: [
-			{ label: 'Proteínas', unit: 'g' },
-			{ label: 'Sal',       unit: 'g' },
-			{ label: '— Sodio',   unit: 'mg', sub: true },
+		{ key: 'protein',  label: 'Protein and salt',      rows: [
+			{ label: 'Protein', unit: 'g' },
+			{ label: 'Salt',    unit: 'g' },
+			{ label: '— Sodium', unit: 'mg', sub: true },
 		]},
-		{ key: 'vitamins', label: 'Vitaminas',            rows: [
-			{ label: 'Vitamina A',             unit: 'μg' },
-			{ label: 'Tiamina (B1)',           unit: 'mg' },
-			{ label: 'Riboflavina (B2)',       unit: 'mg' },
-			{ label: 'Niacina (B3)',           unit: 'mg' },
-			{ label: 'Ácido pantoténico (B5)', unit: 'mg' },
-			{ label: 'Vitamina B6',            unit: 'mg' },
-			{ label: 'Biotina (B7)',           unit: 'μg' },
-			{ label: 'Ácido fólico (B9)',      unit: 'μg' },
-			{ label: 'Vitamina B12',           unit: 'μg' },
-			{ label: 'Vitamina C',             unit: 'mg' },
-			{ label: 'Vitamina D',             unit: 'μg' },
-			{ label: 'Vitamina E',             unit: 'mg' },
-			{ label: 'Vitamina K',             unit: 'μg' },
+		{ key: 'vitamins', label: 'Vitamins',            rows: [
+			{ label: 'Vitamin A',             unit: 'μg' },
+			{ label: 'Thiamine (B1)',          unit: 'mg' },
+			{ label: 'Riboflavin (B2)',        unit: 'mg' },
+			{ label: 'Niacin (B3)',            unit: 'mg' },
+			{ label: 'Pantothenic acid (B5)',  unit: 'mg' },
+			{ label: 'Vitamin B6',             unit: 'mg' },
+			{ label: 'Biotin (B7)',            unit: 'μg' },
+			{ label: 'Folic acid (B9)',        unit: 'μg' },
+			{ label: 'Vitamin B12',            unit: 'μg' },
+			{ label: 'Vitamin C',              unit: 'mg' },
+			{ label: 'Vitamin D',              unit: 'μg' },
+			{ label: 'Vitamin E',              unit: 'mg' },
+			{ label: 'Vitamin K',              unit: 'μg' },
 		]},
-		{ key: 'minerals', label: 'Minerales',            rows: [
-			{ label: 'Calcio',     unit: 'mg' },
-			{ label: 'Fósforo',   unit: 'mg' },
-			{ label: 'Hierro',    unit: 'mg' },
-			{ label: 'Magnesio',  unit: 'mg' },
-			{ label: 'Zinc',      unit: 'mg' },
-			{ label: 'Yodo',      unit: 'μg' },
-			{ label: 'Selenio',   unit: 'μg' },
-			{ label: 'Cobre',     unit: 'mg' },
-			{ label: 'Manganeso', unit: 'mg' },
-			{ label: 'Cromo',     unit: 'μg' },
-			{ label: 'Molibdeno', unit: 'μg' },
-			{ label: 'Potasio',   unit: 'mg' },
-			{ label: 'Flúor',     unit: 'mg' },
-			{ label: 'Cloruro',   unit: 'mg' },
+		{ key: 'minerals', label: 'Minerals',            rows: [
+			{ label: 'Calcium',    unit: 'mg' },
+			{ label: 'Phosphorus', unit: 'mg' },
+			{ label: 'Iron',       unit: 'mg' },
+			{ label: 'Magnesium',  unit: 'mg' },
+			{ label: 'Zinc',       unit: 'mg' },
+			{ label: 'Iodine',     unit: 'μg' },
+			{ label: 'Selenium',   unit: 'μg' },
+			{ label: 'Copper',     unit: 'mg' },
+			{ label: 'Manganese',  unit: 'mg' },
+			{ label: 'Chromium',   unit: 'μg' },
+			{ label: 'Molybdenum', unit: 'μg' },
+			{ label: 'Potassium',  unit: 'mg' },
+			{ label: 'Fluoride',   unit: 'mg' },
+			{ label: 'Chloride',   unit: 'mg' },
 		]},
 	];
 
@@ -107,7 +107,7 @@
 
 		return el( 'table', { style: sTable },
 			el( 'thead', null, el( 'tr', null, el( 'th', { colSpan: 2, style: sHeader },
-				__( 'Información nutricional', 'nutrition-info-woocommerce' ) + ' — ' + __( 'por 100 g', 'nutrition-info-woocommerce' )
+				__( 'Nutritional information', 'nutrition-info-woocommerce' ) + ' — ' + __( 'per 100 g', 'nutrition-info-woocommerce' )
 			) ) ),
 			el( 'tbody', null, tbodyRows )
 		);
@@ -154,7 +154,7 @@
 			return el( 'div', { style: { opacity: 0.55 } }, buildSkeletonTable( props ) );
 		}
 		if ( loadingValue ) {
-			return el( 'div', { style: { padding: '12px' } }, __( 'Cargando…', 'nutrition-info-woocommerce' ) );
+			return el( 'div', { style: { padding: '12px' } }, __( 'Loading…', 'nutrition-info-woocommerce' ) );
 		}
 		return el( 'div', { dangerouslySetInnerHTML: { __html: htmlValue } } );
 	}
@@ -168,50 +168,50 @@
 		return [
 			el( InspectorControls, { key: 'inspector' },
 
-				el( PanelBody, { title: __( 'Selección de producto', 'nutrition-info-woocommerce' ), initialOpen: true },
+				el( PanelBody, { title: __( 'Product selection', 'nutrition-info-woocommerce' ), initialOpen: true },
 					el( SelectControl, {
-						label: __( 'Producto', 'nutrition-info-woocommerce' ), value: productId, options: products,
+						label: __( 'Product', 'nutrition-info-woocommerce' ), value: productId, options: products,
 						__next40pxDefaultSize: true, __nextHasNoMarginBottom: true,
 						onChange: function ( v ) { set( { productId: parseInt( v, 10 ) || 0 } ); },
 					} )
 				),
 
-				el( PanelBody, { title: __( 'Cabecera', 'nutrition-info-woocommerce' ), initialOpen: false },
-					el( BaseControl, { label: __( 'Fondo de cabecera', 'nutrition-info-woocommerce' ), id: 'niw-n-hbg' },
+				el( PanelBody, { title: __( 'Header', 'nutrition-info-woocommerce' ), initialOpen: false },
+					el( BaseControl, { label: __( 'Header background', 'nutrition-info-woocommerce' ), id: 'niw-n-hbg' },
 						el( ColorPalette, { value: attrs.headerBgColor,   onChange: function ( v ) { set( { headerBgColor:   v || '#1e1e1e' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto de cabecera', 'nutrition-info-woocommerce' ), id: 'niw-n-htxt' },
+					el( BaseControl, { label: __( 'Header text', 'nutrition-info-woocommerce' ), id: 'niw-n-htxt' },
 						el( ColorPalette, { value: attrs.headerTextColor, onChange: function ( v ) { set( { headerTextColor: v || '#ffffff' } ); } } )
 					)
 				),
 
-				el( PanelBody, { title: __( 'Grupos', 'nutrition-info-woocommerce' ), initialOpen: false },
-					el( BaseControl, { label: __( 'Fondo de grupo', 'nutrition-info-woocommerce' ), id: 'niw-n-gbg' },
+				el( PanelBody, { title: __( 'Groups', 'nutrition-info-woocommerce' ), initialOpen: false },
+					el( BaseControl, { label: __( 'Group background', 'nutrition-info-woocommerce' ), id: 'niw-n-gbg' },
 						el( ColorPalette, { value: attrs.groupBgColor,   onChange: function ( v ) { set( { groupBgColor:   v || '#f0f0f0' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto de grupo', 'nutrition-info-woocommerce' ), id: 'niw-n-gtxt' },
+					el( BaseControl, { label: __( 'Group text', 'nutrition-info-woocommerce' ), id: 'niw-n-gtxt' },
 						el( ColorPalette, { value: attrs.groupTextColor, onChange: function ( v ) { set( { groupTextColor: v || '#555555' } ); } } )
 					)
 				),
 
-				el( PanelBody, { title: __( 'Filas de nutrientes', 'nutrition-info-woocommerce' ), initialOpen: false },
-					el( BaseControl, { label: __( 'Fondo de filas', 'nutrition-info-woocommerce' ), id: 'niw-n-rbg' },
+				el( PanelBody, { title: __( 'Nutrient rows', 'nutrition-info-woocommerce' ), initialOpen: false },
+					el( BaseControl, { label: __( 'Row background', 'nutrition-info-woocommerce' ), id: 'niw-n-rbg' },
 						el( ColorPalette, { value: attrs.rowBgColor,   onChange: function ( v ) { set( { rowBgColor:   v || '#ffffff' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto principal', 'nutrition-info-woocommerce' ), id: 'niw-n-rtxt' },
+					el( BaseControl, { label: __( 'Main text', 'nutrition-info-woocommerce' ), id: 'niw-n-rtxt' },
 						el( ColorPalette, { value: attrs.rowTextColor, onChange: function ( v ) { set( { rowTextColor: v || '#1e1e1e' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto sub-nutriente', 'nutrition-info-woocommerce' ), id: 'niw-n-stxt' },
+					el( BaseControl, { label: __( 'Sub-nutrient text', 'nutrition-info-woocommerce' ), id: 'niw-n-stxt' },
 						el( ColorPalette, { value: attrs.subTextColor, onChange: function ( v ) { set( { subTextColor: v || '#666666' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Color separadores', 'nutrition-info-woocommerce' ), id: 'niw-n-bdr' },
+					el( BaseControl, { label: __( 'Divider colour', 'nutrition-info-woocommerce' ), id: 'niw-n-bdr' },
 						el( ColorPalette, { value: attrs.borderColor,  onChange: function ( v ) { set( { borderColor:  v || '#e8e8e8' } ); } } )
 					)
 				),
 
-				el( PanelBody, { title: __( 'Tipografía', 'nutrition-info-woocommerce' ), initialOpen: false },
+				el( PanelBody, { title: __( 'Typography', 'nutrition-info-woocommerce' ), initialOpen: false },
 					el( RangeControl, {
-						label: __( 'Tamaño de fuente (px)', 'nutrition-info-woocommerce' ), value: attrs.fontSize,
+						label: __( 'Font size (px)', 'nutrition-info-woocommerce' ), value: attrs.fontSize,
 						min: 10, max: 20, step: 1,
 						__next40pxDefaultSize: true, __nextHasNoMarginBottom: true,
 						onChange: function ( v ) { set( { fontSize: v || 13 } ); },
@@ -238,11 +238,11 @@
 
 	blocks.registerBlockType( 'niw/nutrients', {
 		apiVersion:  3,
-		title:       __( 'Información nutricional del producto', 'nutrition-info-woocommerce' ),
-		description: __( 'Muestra la tabla completa de nutrientes de un producto WooCommerce.', 'nutrition-info-woocommerce' ),
+		title:       __( 'Product nutritional information', 'nutrition-info-woocommerce' ),
+		description: __( 'Displays the full nutrient table for a WooCommerce product.', 'nutrition-info-woocommerce' ),
 		icon:        'list-view',
 		category:    'niw-nutrition',
-		keywords:    [ 'nutrientes', 'nutrición', 'producto', 'calorías' ],
+		keywords:    [ 'nutrients', 'nutrition', 'product', 'calories' ],
 		supports: {
 			color:   { background: true, text: true },
 			spacing: { padding: true, margin: true },

@@ -81,7 +81,7 @@ class WooSettings {
 				'type'    => 'text',
 				'desc'    => __( 'This is some helper text', 'nutrition-info-woocommerce' ),
 				'id'      => 'wc_nutrients_settings_tab_per_volume_text',
-				'default' => __( 'Content pr. 100 g', 'nutrition-info-woocommerce' ),
+				'default' => __( 'Per 100 g', 'nutrition-info-woocommerce' ),
 			),
 			'position'        => array(
 				'name'    => __( 'Position', 'nutrition-info-woocommerce' ),

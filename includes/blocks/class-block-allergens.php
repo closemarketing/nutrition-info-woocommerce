@@ -181,7 +181,7 @@ class NIW_Block_Allergens {
 	public function render( $attributes ) {
 		$product_id = intval( $attributes['productId'] ?? 0 );
 		if ( ! $product_id ) {
-			return '<p>' . esc_html__( 'Selecciona un producto para mostrar sus alérgenos.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'Select a product to display its allergens.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 		$icon_size_raw = absint( $attributes['iconSize'] ?? 32 );
 		$opts          = array(
@@ -214,7 +214,7 @@ class NIW_Block_Allergens {
 		}
 
 		if ( empty( $active ) ) {
-			return '<p>' . esc_html__( 'Este producto no tiene alérgenos declarados.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'This product has no declared allergens.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 
 		$icon_size    = absint( $opts['icon_size'] );
@@ -222,7 +222,7 @@ class NIW_Block_Allergens {
 		$row_style    = 'background:' . esc_attr( $opts['row_bg'] ) . ';color:' . esc_attr( $opts['row_text'] ) . ';';
 
 		$html  = '<table class="manmen-allergens-table">';
-		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">' . esc_html__( 'Alérgenos', 'nutrition-info-woocommerce' ) . '</th></tr></thead>';
+		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</th></tr></thead>';
 		$html .= '<tbody>';
 
 		foreach ( $active as $key => $label ) {
@@ -279,7 +279,7 @@ class NIW_Block_Allergens {
 		$options = array(
 			array(
 				'value' => 0,
-				'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ),
+				'label' => __( '— Select a product —', 'nutrition-info-woocommerce' ),
 			),
 		);
 		foreach ( $posts as $post ) {
