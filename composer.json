@@ -16,9 +16,9 @@
         "phpstan": "phpstan analyse --memory-limit=2048M"
     },
     "autoload": {
-        "psr-4": {
-            "CLOSE\\NutritionInfo\\": "includes/"
-        }
+        "classmap": [
+            "includes/"
+        ]
     },
     "config": {
         "allow-plugins": {
