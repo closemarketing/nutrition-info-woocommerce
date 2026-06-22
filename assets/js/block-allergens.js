@@ -42,7 +42,7 @@
 		} );
 
 		return el( 'table', { style: { borderCollapse: 'collapse', width: '100%', opacity: 0.55 } },
-			el( 'thead', null, el( 'tr', null, el( 'th', { colSpan: 2, style: headerStyle }, __( 'Alérgenos', 'nutrition-info-woocommerce' ) ) ) ),
+			el( 'thead', null, el( 'tr', null, el( 'th', { colSpan: 2, style: headerStyle }, __( 'Allergens', 'nutrition-info-woocommerce' ) ) ) ),
 			el( 'tbody', null, rows )
 		);
 	}
@@ -83,7 +83,7 @@
 			return el( 'div', null, buildSkeletonPreview( props ) );
 		}
 		if ( loadingValue ) {
-			return el( 'div', { style: { padding: '12px' } }, __( 'Cargando…', 'nutrition-info-woocommerce' ) );
+			return el( 'div', { style: { padding: '12px' } }, __( 'Loading…', 'nutrition-info-woocommerce' ) );
 		}
 		return el( 'div', { dangerouslySetInnerHTML: { __html: htmlValue } } );
 	}
@@ -98,40 +98,40 @@
 		return [
 			el( InspectorControls, { key: 'inspector' },
 
-				el( PanelBody, { title: __( 'Selección de producto', 'nutrition-info-woocommerce' ), initialOpen: true },
+				el( PanelBody, { title: __( 'Product selection', 'nutrition-info-woocommerce' ), initialOpen: true },
 					el( SelectControl, {
-						label: __( 'Producto', 'nutrition-info-woocommerce' ), value: productId, options: products,
+						label: __( 'Product', 'nutrition-info-woocommerce' ), value: productId, options: products,
 						__next40pxDefaultSize: true, __nextHasNoMarginBottom: true,
 						onChange: function ( v ) { set( { productId: parseInt( v, 10 ) || 0 } ); },
 					} )
 				),
 
-				el( PanelBody, { title: __( 'Cabecera', 'nutrition-info-woocommerce' ), initialOpen: false },
-					el( BaseControl, { label: __( 'Fondo de cabecera', 'nutrition-info-woocommerce' ), id: 'niw-al-hbg' },
+				el( PanelBody, { title: __( 'Header', 'nutrition-info-woocommerce' ), initialOpen: false },
+					el( BaseControl, { label: __( 'Header background', 'nutrition-info-woocommerce' ), id: 'niw-al-hbg' },
 						el( ColorPalette, { value: attrs.headerBgColor,   onChange: function ( v ) { set( { headerBgColor:   v || '#1e1e1e' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto de cabecera', 'nutrition-info-woocommerce' ), id: 'niw-al-htxt' },
+					el( BaseControl, { label: __( 'Header text', 'nutrition-info-woocommerce' ), id: 'niw-al-htxt' },
 						el( ColorPalette, { value: attrs.headerTextColor, onChange: function ( v ) { set( { headerTextColor: v || '#ffffff' } ); } } )
 					)
 				),
 
-				el( PanelBody, { title: __( 'Filas', 'nutrition-info-woocommerce' ), initialOpen: false },
-					el( BaseControl, { label: __( 'Fondo de filas', 'nutrition-info-woocommerce' ), id: 'niw-al-rbg' },
+				el( PanelBody, { title: __( 'Rows', 'nutrition-info-woocommerce' ), initialOpen: false },
+					el( BaseControl, { label: __( 'Row background', 'nutrition-info-woocommerce' ), id: 'niw-al-rbg' },
 						el( ColorPalette, { value: attrs.rowBgColor,   onChange: function ( v ) { set( { rowBgColor:   v || '#ffffff' } ); } } )
 					),
-					el( BaseControl, { label: __( 'Texto de filas', 'nutrition-info-woocommerce' ), id: 'niw-al-rtxt' },
+					el( BaseControl, { label: __( 'Row text', 'nutrition-info-woocommerce' ), id: 'niw-al-rtxt' },
 						el( ColorPalette, { value: attrs.rowTextColor, onChange: function ( v ) { set( { rowTextColor: v || '#1e1e1e' } ); } } )
 					)
 				),
 
-				el( PanelBody, { title: __( 'Iconos', 'nutrition-info-woocommerce' ), initialOpen: false },
+				el( PanelBody, { title: __( 'Icons', 'nutrition-info-woocommerce' ), initialOpen: false },
 					el( ToggleControl, {
-						label: __( 'Mostrar iconos', 'nutrition-info-woocommerce' ), checked: attrs.showIcons,
+						label: __( 'Show icons', 'nutrition-info-woocommerce' ), checked: attrs.showIcons,
 						__nextHasNoMarginBottom: true,
 						onChange: function ( v ) { set( { showIcons: v } ); },
 					} ),
 					attrs.showIcons && el( RangeControl, {
-						label: __( 'Tamaño de iconos (px)', 'nutrition-info-woocommerce' ), value: attrs.iconSize,
+						label: __( 'Icon size (px)', 'nutrition-info-woocommerce' ), value: attrs.iconSize,
 						min: 16, max: 64, step: 4,
 						__next40pxDefaultSize: true, __nextHasNoMarginBottom: true,
 						onChange: function ( v ) { set( { iconSize: v || 32 } ); },
@@ -155,11 +155,11 @@
 
 	blocks.registerBlockType( 'niw/allergens', {
 		apiVersion:  3,
-		title:       __( 'Alérgenos del producto', 'nutrition-info-woocommerce' ),
-		description: __( 'Muestra los alérgenos declarados de un producto WooCommerce.', 'nutrition-info-woocommerce' ),
+		title:       __( 'Product allergens', 'nutrition-info-woocommerce' ),
+		description: __( 'Displays the declared allergens for a WooCommerce product.', 'nutrition-info-woocommerce' ),
 		icon:        'shield-alt',
 		category:    'niw-nutrition',
-		keywords:    [ 'alérgenos', 'nutrición', 'producto' ],
+		keywords:    [ 'allergens', 'nutrition', 'product' ],
 		supports: {
 			color:   { background: true, text: true },
 			spacing: { padding: true, margin: true },

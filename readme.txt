@@ -99,6 +99,8 @@ The icons are SVG files stored in `includes/assets/allergens/`. You can replace 
 5. Plugin settings under WooCommerce → Settings → Nutrients.
 
 == Changelog ==
+= 1.0.1 =
+* Fixed: Strings were not in English.
 
 = 1.0.0 =
 * Refactor: migrated to `CLOSE\NutritionInfo` namespace with Composer autoload (classmap).

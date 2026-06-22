@@ -60,6 +60,6 @@ function niw_nutritional_content_tab( $tabs ) {
  */
 function niw_nutritional_content_tab_content() {
 	// The new tab content.
-	echo '<h2>' . esc_html__( 'New Product Tab', 'nutrition-info-woocommerce' ) . '</h2>';
+	echo '<h2>' . esc_html__( 'Nutritional Information', 'nutrition-info-woocommerce' ) . '</h2>';
 	niw_nutrition_info();
 }

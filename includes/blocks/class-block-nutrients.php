@@ -186,7 +186,7 @@ class NIW_Block_Nutrients {
 	public function render( $attributes ) {
 		$product_id = intval( $attributes['productId'] ?? 0 );
 		if ( ! $product_id ) {
-			return '<p>' . esc_html__( 'Selecciona un producto para mostrar su información nutricional.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'Select a product to display its nutritional information.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 		$font_size_raw = absint( $attributes['fontSize'] ?? 13 );
 		$opts          = array(
@@ -233,7 +233,7 @@ class NIW_Block_Nutrients {
 		}
 
 		if ( empty( $rows_by_group ) ) {
-			return '<p>' . esc_html__( 'Este producto no tiene datos nutricionales registrados.', 'nutrition-info-woocommerce' ) . '</p>';
+			return '<p>' . esc_html__( 'This product has no nutritional data recorded.', 'nutrition-info-woocommerce' ) . '</p>';
 		}
 
 		$fs     = absint( $opts['font_size'] );
@@ -250,9 +250,9 @@ class NIW_Block_Nutrients {
 		$html  = '<div class="manmen-nutrients-table">';
 		$html .= '<table style="border-collapse:collapse;width:100%;font-size:' . $fs . 'px;">';
 		$html .= '<thead><tr><th colspan="2" style="' . $header_style . '">';
-		$html .= esc_html__( 'Información nutricional', 'nutrition-info-woocommerce' );
+		$html .= esc_html__( 'Nutritional information', 'nutrition-info-woocommerce' );
 		if ( $serving ) {
-			$html .= ' <span style="font-weight:400;">' . esc_html__( 'por', 'nutrition-info-woocommerce' ) . ' ' . esc_html( $serving ) . '</span>';
+			$html .= ' <span style="font-weight:400;">' . esc_html__( 'per', 'nutrition-info-woocommerce' ) . ' ' . esc_html( $serving ) . '</span>';
 		}
 		$html .= '</th></tr></thead><tbody>';
 
@@ -312,7 +312,7 @@ class NIW_Block_Nutrients {
 		$options = array(
 			array(
 				'value' => 0,
-				'label' => __( '— Selecciona un producto —', 'nutrition-info-woocommerce' ),
+				'label' => __( '— Select a product —', 'nutrition-info-woocommerce' ),
 			),
 		);
 		foreach ( $posts as $post ) {
