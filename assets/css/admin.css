@@ -1,0 +1,16 @@
+.niw-allergens-grid {
+	display: grid;
+	grid-template-columns: repeat( 3, 1fr );
+	gap: 4px 16px;
+}
+
+.woocommerce_options_panel .niw-allergens-grid .niw-allergens-grid__item.form-field {
+	margin: 0;
+	padding: 6px 0;
+}
+
+.woocommerce_options_panel .niw-allergens-grid .niw-allergens-grid__item.form-field label {
+	float: none;
+	width: auto;
+	display: inline;
+}
