@@ -27,7 +27,7 @@ class Hooks {
 	public function __construct() {
 		$kses_defaults = wp_kses_allowed_html( 'post' );
 		$svg_args      = array(
-			'svg'   => array(
+			'svg'      => array(
 				'class'           => true,
 				'aria-hidden'     => true,
 				'aria-labelledby' => true,
@@ -36,12 +36,46 @@ class Hooks {
 				'width'           => true,
 				'height'          => true,
 				'viewbox'         => true,
+				'fill'            => true,
 			),
-			'g'     => array( 'fill' => true ),
-			'title' => array( 'title' => true ),
-			'path'  => array(
-				'd'    => true,
+			'defs'     => array(),
+			'clippath' => array( 'id' => true ),
+			'mask'     => array(
+				'id'   => true,
 				'fill' => true,
+			),
+			'g'        => array(
+				'fill'      => true,
+				'clip-path' => true,
+				'mask'      => true,
+			),
+			'title'    => array( 'title' => true ),
+			'path'     => array(
+				'd'                  => true,
+				'fill'               => true,
+				'stroke'             => true,
+				'stroke-width'       => true,
+				'stroke-miterlimit'  => true,
+				'stroke-linecap'     => true,
+				'stroke-linejoin'    => true,
+				'clip-path'          => true,
+				'mask'               => true,
+			),
+			'rect'     => array(
+				'x'      => true,
+				'y'      => true,
+				'width'  => true,
+				'height' => true,
+				'fill'   => true,
+				'rx'     => true,
+				'ry'     => true,
+			),
+			'circle'   => array(
+				'cx'     => true,
+				'cy'     => true,
+				'r'      => true,
+				'fill'   => true,
+				'stroke' => true,
 			),
 		);
 

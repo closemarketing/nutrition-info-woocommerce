@@ -29,12 +29,25 @@ class MetaProducts {
 		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab2' ), 98, 1 );
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_custom_fields_to_product_composition' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'woocommerce_process_product_meta_fields_save' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 
 		// Meta Info.
 		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab' ), 99, 1 );
 
 		// This action will add custom fields to the added custom tabs under Products Data metabox.
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_my_custom_product_data_fields' ) );
+	}
+
+	/**
+	 * Enqueue admin stylesheet on product edit screens.
+	 *
+	 * @param string $hook Current admin page hook.
+	 */
+	public function enqueue_admin_styles( $hook ) {
+		if ( ( 'post.php' !== $hook && 'post-new.php' !== $hook ) || 'product' !== get_post_type() ) {
+			return;
+		}
+		wp_enqueue_style( 'niw-admin', NIW_PLUGIN_URL . 'assets/css/admin.css', array(), NIW_BUNDLE_VERSION );
 	}
 
 	/**
@@ -73,11 +86,12 @@ class MetaProducts {
 			);
 
 			echo '<h2>' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</h2>';
+			echo '<div class="niw-allergens-grid">';
 			foreach ( $array_allergens_name as $key => $value ) {
 				woocommerce_wp_checkbox(
 					array(
 						'id'            => 'niw_all_' . $key,
-						'wrapper_class' => '',
+						'wrapper_class' => 'niw-allergens-grid__item',
 						'label'         => '',
 						'description'   => esc_html( $value ),
 					)
@@ -86,11 +100,12 @@ class MetaProducts {
 			woocommerce_wp_checkbox(
 				array(
 					'id'            => 'niw_all_vegan',
-					'wrapper_class' => '',
+					'wrapper_class' => 'niw-allergens-grid__item',
 					'label'         => '',
 					'description'   => __( 'Vegan', 'nutrition-info-woocommerce' ),
 				)
 			);
+			echo '</div>';
 			?>
 		</div>
 		<?php
