@@ -86,11 +86,12 @@ class MetaProducts {
 			);
 
 			echo '<h2>' . esc_html__( 'Allergens', 'nutrition-info-woocommerce' ) . '</h2>';
+			echo '<div class="niw-allergens-grid">';
 			foreach ( $array_allergens_name as $key => $value ) {
 				woocommerce_wp_checkbox(
 					array(
 						'id'            => 'niw_all_' . $key,
-						'wrapper_class' => '',
+						'wrapper_class' => 'niw-allergens-grid__item',
 						'label'         => '',
 						'description'   => esc_html( $value ),
 					)
@@ -99,11 +100,12 @@ class MetaProducts {
 			woocommerce_wp_checkbox(
 				array(
 					'id'            => 'niw_all_vegan',
-					'wrapper_class' => '',
+					'wrapper_class' => 'niw-allergens-grid__item',
 					'label'         => '',
 					'description'   => __( 'Vegan', 'nutrition-info-woocommerce' ),
 				)
 			);
+			echo '</div>';
 			?>
 		</div>
 		<?php
