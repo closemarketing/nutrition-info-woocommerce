@@ -1,0 +1,35 @@
+/* Nutritional Info admin panel — product edit screen. */
+
+.niw-nutrition-note {
+	background: #f0f6fc;
+	border-left: 4px solid #2271b1;
+	padding: 8px 12px;
+	margin: 12px;
+}
+
+.niw-nutrition-admin-table {
+	border-collapse: collapse;
+	margin: 0 12px 12px;
+	width: calc(100% - 24px);
+}
+
+.niw-nutrition-admin-table th,
+.niw-nutrition-admin-table td {
+	padding: 6px 10px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.niw-nutrition-admin-table__input input {
+	width: 100%;
+	max-width: 140px;
+}
+
+.niw-nutrition-admin-table__unit {
+	color: #646970;
+}
+
+.niw-nutrition-admin-table__row--sub .niw-nutrition-admin-table__label {
+	padding-left: 24px;
+	color: #646970;
+}
