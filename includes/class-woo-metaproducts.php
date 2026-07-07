@@ -29,12 +29,25 @@ class MetaProducts {
 		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab2' ), 98, 1 );
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_custom_fields_to_product_composition' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'woocommerce_process_product_meta_fields_save' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 
 		// Meta Info.
 		add_filter( 'woocommerce_product_data_tabs', array( $this, 'add_my_custom_product_data_tab' ), 99, 1 );
 
 		// This action will add custom fields to the added custom tabs under Products Data metabox.
 		add_action( 'woocommerce_product_data_panels', array( $this, 'add_my_custom_product_data_fields' ) );
+	}
+
+	/**
+	 * Enqueue admin stylesheet on product edit screens.
+	 *
+	 * @param string $hook Current admin page hook.
+	 */
+	public function enqueue_admin_styles( $hook ) {
+		if ( ( 'post.php' !== $hook && 'post-new.php' !== $hook ) || 'product' !== get_post_type() ) {
+			return;
+		}
+		wp_enqueue_style( 'niw-admin', NIW_PLUGIN_URL . 'assets/css/admin.css', array(), NIW_BUNDLE_VERSION );
 	}
 
 	/**
@@ -121,7 +134,12 @@ class MetaProducts {
 			<p class="niw-nutrition-note">
 				<strong><?php esc_html_e( 'All values below are always per 100 g of product.', 'nutrition-info-woocommerce' ); ?></strong>
 			</p>
-			<table class="niw-nutrition-admin-table widefat">
+			<table class="niw-nutrition-admin-table">
+				<colgroup>
+					<col class="niw-nutrition-admin-table__col--label" />
+					<col class="niw-nutrition-admin-table__col--input" />
+					<col class="niw-nutrition-admin-table__col--unit" />
+				</colgroup>
 				<thead>
 					<tr>
 						<th><?php esc_html_e( 'Nutrient', 'nutrition-info-woocommerce' ); ?></th>
@@ -133,7 +151,7 @@ class MetaProducts {
 					<?php foreach ( niw_get_nutrition_fields() as $key => $field ) : ?>
 					<tr class="<?php echo $field['sub'] ? 'niw-nutrition-admin-table__row--sub' : ''; ?>">
 						<td class="niw-nutrition-admin-table__label">
-							<label for="niw_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( ( $field['sub'] ? '- ' : '' ) . $field['label'] ); ?></label>
+							<span id="niw_<?php echo esc_attr( $key ); ?>_label"><?php echo esc_html( ( $field['sub'] ? '- ' : '' ) . $field['label'] ); ?></span>
 						</td>
 						<td class="niw-nutrition-admin-table__input">
 							<input
@@ -146,6 +164,7 @@ class MetaProducts {
 								name="niw_<?php echo esc_attr( $key ); ?>"
 								value="<?php echo esc_attr( get_post_meta( $post->ID, 'niw_' . $key, true ) ); ?>"
 								placeholder="<?php echo 'vitamin_mineral' === $key ? esc_attr__( 'none', 'nutrition-info-woocommerce' ) : '0'; ?>"
+								aria-labelledby="niw_<?php echo esc_attr( $key ); ?>_label"
 							/>
 						</td>
 						<td class="niw-nutrition-admin-table__unit"><?php echo esc_html( $field['unit'] ); ?></td>

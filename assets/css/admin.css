@@ -5,28 +5,79 @@
 	border-left: 4px solid #2271b1;
 	padding: 8px 12px;
 	margin: 12px;
+	max-width: 720px;
+}
+
+/* #my_custom_product_data inherits WooCommerce's .woocommerce_options_panel
+ * (float: left; width: 80%) so the panel sits beside the vertical tab nav —
+ * that layout is standard WooCommerce and must stay. Center our own content
+ * within that 80% panel instead of touching the shared WooCommerce rule. */
+#my_custom_product_data {
+	overflow: hidden; /* Contain the floated panel so our content centers against its full width. */
+}
+
+.niw-nutrition-note,
+.niw-nutrition-admin-table {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .niw-nutrition-admin-table {
 	border-collapse: collapse;
-	margin: 0 12px 12px;
+	margin-bottom: 12px;
 	width: calc(100% - 24px);
+	max-width: 720px;
+	table-layout: auto;
+	border: 1px solid #dcdcde;
 }
 
 .niw-nutrition-admin-table th,
 .niw-nutrition-admin-table td {
-	padding: 6px 10px;
-	text-align: left;
+	padding: 8px 12px;
+	text-align: center;
 	vertical-align: middle;
+	border: 1px solid #dcdcde;
+}
+
+.niw-nutrition-admin-table thead th {
+	background: #f6f7f7;
+	font-weight: 600;
+}
+
+.niw-nutrition-admin-table td.niw-nutrition-admin-table__label {
+	text-align: left;
+}
+
+/* Label column: 70% of the table width. */
+.niw-nutrition-admin-table__col--label {
+	width: 70%;
+}
+
+/* Unit column: shrink to fit its content (classic table shrink-to-fit trick). */
+.niw-nutrition-admin-table__col--unit {
+	width: 1%;
+}
+
+.niw-nutrition-admin-table td.niw-nutrition-admin-table__label,
+.niw-nutrition-admin-table th:first-child {
+	float: none;
+}
+
+.niw-nutrition-admin-table__label span {
+	float: none;
+	width: auto;
 }
 
 .niw-nutrition-admin-table__input input {
 	width: 100%;
 	max-width: 140px;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .niw-nutrition-admin-table__unit {
 	color: #646970;
+	white-space: nowrap;
 }
 
 .niw-nutrition-admin-table__row--sub .niw-nutrition-admin-table__label {
