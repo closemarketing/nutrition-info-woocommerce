@@ -194,9 +194,9 @@ class MetaProducts {
 			if ( ! isset( $_POST[ $composition ] ) ) {
 				continue;
 			}
-			$value = wp_unslash( $_POST[ $composition ] );
+			$value = sanitize_text_field( wp_unslash( $_POST[ $composition ] ) );
 			if ( 'vitamin_mineral' === $key ) {
-				update_post_meta( $post_id, $composition, sanitize_text_field( $value ) );
+				update_post_meta( $post_id, $composition, $value );
 			} else {
 				update_post_meta( $post_id, $composition, '' === $value ? '' : wc_format_decimal( $value ) );
 			}
