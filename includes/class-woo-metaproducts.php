@@ -133,139 +133,47 @@ class MetaProducts {
 		?>
 		<!-- id below must match target registered in above add_my_custom_product_data_tab function -->
 		<div id="my_custom_product_data" class="panel woocommerce_options_panel">
-			<?php
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_energy',
-					'class'       => '',
-					'label'       => __( 'Energy', 'nutrition-info-woocommerce' ),
-					'description' => __( '(KJ/kcal)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 Kj / 0 kcal', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_fat',
-					'class'       => '',
-					'label'       => __( 'Fat', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_saturated_fat',
-					'class'       => '',
-					'label'       => __( 'Saturated fatty acids', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_monounsaturated_fat',
-					'class'       => '',
-					'label'       => __( 'Monounsaturated fatty acids', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_polyunsaturated_fat',
-					'class'       => '',
-					'label'       => __( 'Polyunsaturated fatty acids', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_carb',
-					'class'       => '',
-					'label'       => __( 'Carbohydrate', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_sugar',
-					'class'       => '',
-					'label'       => __( 'Sugar', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_polyol',
-					'class'       => '',
-					'label'       => __( 'Polyols', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_starch',
-					'class'       => '',
-					'label'       => __( 'Starch', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_fiber',
-					'class'       => '',
-					'label'       => __( 'Dietary fiber', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_protein',
-					'class'       => '',
-					'label'       => __( 'Protein', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_salt',
-					'class'       => '',
-					'label'       => __( 'Salt', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( '0 g', 'nutrition-info-woocommerce' ),
-				)
-			);
-			woocommerce_wp_text_input(
-				array(
-					'id'          => 'niw_vitamin_mineral',
-					'class'       => '',
-					'label'       => __( 'Vitamins and minerals', 'nutrition-info-woocommerce' ),
-					'description' => __( '(gram)', 'nutrition-info-woocommerce' ),
-					'desc_tip'    => false,
-					'placeholder' => __( 'none', 'nutrition-info-woocommerce' ),
-				)
-			);
-
-			?>
+			<p class="niw-nutrition-note">
+				<strong><?php esc_html_e( 'All values below are always per 100 g of product.', 'nutrition-info-woocommerce' ); ?></strong>
+			</p>
+			<table class="niw-nutrition-admin-table">
+				<colgroup>
+					<col class="niw-nutrition-admin-table__col--label" />
+					<col class="niw-nutrition-admin-table__col--input" />
+					<col class="niw-nutrition-admin-table__col--unit" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Nutrient', 'nutrition-info-woocommerce' ); ?></th>
+						<th><?php esc_html_e( 'Value per 100 g', 'nutrition-info-woocommerce' ); ?></th>
+						<th><?php esc_html_e( 'Unit', 'nutrition-info-woocommerce' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ( niw_get_nutrition_fields() as $key => $field ) : ?>
+					<tr class="<?php echo $field['sub'] ? 'niw-nutrition-admin-table__row--sub' : ''; ?>">
+						<td class="niw-nutrition-admin-table__label">
+							<span id="niw_<?php echo esc_attr( $key ); ?>_label"><?php echo esc_html( ( $field['sub'] ? '- ' : '' ) . $field['label'] ); ?></span>
+						</td>
+						<td class="niw-nutrition-admin-table__input">
+							<input
+								type="<?php echo 'vitamin_mineral' === $key ? 'text' : 'number'; ?>"
+								<?php if ( 'vitamin_mineral' !== $key ) : ?>
+								step="0.01"
+								min="0"
+								<?php endif; ?>
+								id="niw_<?php echo esc_attr( $key ); ?>"
+								name="niw_<?php echo esc_attr( $key ); ?>"
+								value="<?php echo esc_attr( get_post_meta( $post->ID, 'niw_' . $key, true ) ); ?>"
+								placeholder="<?php echo 'vitamin_mineral' === $key ? esc_attr__( 'none', 'nutrition-info-woocommerce' ) : '0'; ?>"
+								aria-labelledby="niw_<?php echo esc_attr( $key ); ?>_label"
+							/>
+						</td>
+						<td class="niw-nutrition-admin-table__unit"><?php echo esc_html( $field['unit'] ); ?></td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
 		</div>
 		<?php
 	}
@@ -280,27 +188,22 @@ class MetaProducts {
 			return;
 		}
 
-		$metas_composition = array(
-			'niw_energy',
-			'niw_fat',
-			'niw_saturated_fat',
-			'niw_monounsaturated_fat',
-			'niw_polyunsaturated_fat',
-			'niw_carb',
-			'niw_sugar',
-			'niw_polyol',
-			'niw_starch',
-			'niw_fiber',
-			'niw_protein',
-			'niw_salt',
-			'niw_vitamin_mineral',
-			'niw_ingredients',
-		);
-
-		foreach ( $metas_composition as $composition ) {
-			if ( isset( $_POST[ $composition ] ) ) {
-				update_post_meta( $post_id, $composition, sanitize_text_field( wp_unslash( $_POST[ $composition ] ) ) );
+		// Nutrition fields — numeric ones are always stored as a plain number per 100 g.
+		foreach ( array_keys( niw_get_nutrition_fields() ) as $key ) {
+			$composition = 'niw_' . $key;
+			if ( ! isset( $_POST[ $composition ] ) ) {
+				continue;
 			}
+			$value = sanitize_text_field( wp_unslash( $_POST[ $composition ] ) );
+			if ( 'vitamin_mineral' === $key ) {
+				update_post_meta( $post_id, $composition, $value );
+			} else {
+				update_post_meta( $post_id, $composition, '' === $value ? '' : wc_format_decimal( $value ) );
+			}
+		}
+
+		if ( isset( $_POST['niw_ingredients'] ) ) {
+			update_post_meta( $post_id, 'niw_ingredients', sanitize_text_field( wp_unslash( $_POST['niw_ingredients'] ) ) );
 		}
 
 		// Other tab.
