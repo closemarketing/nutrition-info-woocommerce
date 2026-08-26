@@ -3,7 +3,7 @@
  * Plugin Name: Nutrition Info for WooCommerce
  * Plugin URI:  https://www.closemarketing.net/plugin/nutrition-info-woocommerce
  * Description: Display nutritional information and allergen icons on your WooCommerce product pages.
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Closemarketing
  * Author URI:  https://www.closemarketing.es
  * License:     GPL2
