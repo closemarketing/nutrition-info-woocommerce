@@ -130,6 +130,10 @@ class Allergens {
 				'key'   => 'nuts',
 				'label' => __( 'Nuts', 'nutrition-info-woocommerce' ),
 			),
+			array(
+				'key'   => 'legumes',
+				'label' => __( 'Legumbres', 'nutrition-info-woocommerce' ),
+			),
 		);
 	}
 
