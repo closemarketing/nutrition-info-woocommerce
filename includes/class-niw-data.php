@@ -37,6 +37,7 @@ class NIW_Data {
 			'sulfite'    => __( 'Sulfite', 'nutrition-info-woocommerce' ),
 			'mollusk'    => __( 'Mollusk', 'nutrition-info-woocommerce' ),
 			'lupins'     => __( 'Lupins', 'nutrition-info-woocommerce' ),
+			'legume'     => __( 'Legumbres', 'nutrition-info-woocommerce' ),
 		);
 	}
 
