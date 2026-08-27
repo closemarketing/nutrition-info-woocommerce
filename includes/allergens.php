@@ -132,7 +132,7 @@ class Allergens {
 			),
 			array(
 				'key'   => 'legumes',
-				'label' => __( 'Legumbres', 'nutrition-info-woocommerce' ),
+				'label' => __( 'Legumes', 'nutrition-info-woocommerce' ),
 			),
 		);
 	}
