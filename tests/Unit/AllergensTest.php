@@ -30,6 +30,26 @@ class AllergensTest extends TestCase {
 		$this->assertStringStartsWith( '<svg', trim( $svg ), "Allergen '$key' did not load a valid SVG." );
 	}
 
+	/**
+	 * Regression guard: the frontend CSS rule that sizes these icons
+	 * (`.niw_svg_allergen { width: 32px; height: 32px; }` in
+	 * includes/assets/css/styles.css) targets a class baked into each SVG's
+	 * own root element — it isn't added by PHP. A replacement icon file that
+	 * drops this class renders at its raw intrinsic size instead (which has
+	 * shown up as icons 100+ px tall on the product page).
+	 *
+	 * @dataProvider provide_allergen_keys
+	 */
+	public function test_every_allergen_svg_carries_the_sizing_css_class( $key ) {
+		$svg = $this->allergens->show_allergen_svg( $key );
+
+		$this->assertStringContainsString( 'class="niw_svg_allergen"', $svg, "Allergen '$key' SVG is missing the niw_svg_allergen sizing class." );
+	}
+
+	public function test_vegan_svg_carries_the_sizing_css_class() {
+		$this->assertStringContainsString( 'class="niw_svg_allergen"', $this->allergens->show_allergen_svg_vegan() );
+	}
+
 	public function provide_allergen_keys() {
 		$allergens = new Allergens();
 		$cases     = array();
